@@ -1,0 +1,101 @@
+{
+  "id": "external_replication_2026-09-30",
+  "status": "fixed before any policy replay on these traces. Before fixing it, only pre-test data were inspected to choose demand signals and capacity units: Huawei relative days 0-7 (requests, pods, CPU) and Azure day 1 durations plus days 0-7 invocation means. No test-period policy outcome had been computed for Paper 1 on these traces. The companion Paper 2 had analysed the same traces with a different question (h=2 forecasts, day-scale windows); its results are not used here.",
+  "written_utc": "2026-09-30T15:57:51Z",
+  "question": "Do the Alibaba findings (strict-budget rank effect, conformal-plus-offset vs pre-test-selected reactive, resource-overload comparison) replicate on two further trace families from other providers?",
+  "families": {
+    "huawei2023": {
+      "source": "Huawei Cloud private dataset 2023 (Joosen et al., SoCC 2023), shared-data/huawei_2023/private/{requests,instances,cpu_usage}_minute/day_XXX.csv",
+      "unit": "function (serverless)",
+      "period": "longest contiguous run of days, 28-60 (33 days); relative day r = day - 28",
+      "selection": "relative days 0-7 only: requests present in >=99% of minutes, mean >=1 request/min, pods (instances>=1) recorded in >=99% of minutes; all eligible functions are used",
+      "demand": "requests per minute; empty request cells are 0 (the trace has no explicit zeros)",
+      "capacity_unit": "mu_s = median over relative days 0-7 of requests per pod per minute (minutes with >=1 pod); one unit = the median per-pod throughput observed before the test",
+      "mu_sensitivity": "mu_s from the 90th percentile of the same pre-test per-pod throughput",
+      "observed_capacity": "recorded pods (missing -> 0), reported as a secondary denominator only",
+      "splits": {
+        "history": [
+          0,
+          7
+        ],
+        "calibration_selection": [
+          8,
+          9
+        ],
+        "test": [
+          10,
+          32
+        ]
+      }
+    },
+    "azure2019": {
+      "source": "Azure Functions 2019 (Shahrad et al., USENIX ATC 2020), invocations_per_function_md.anon.dNN.csv",
+      "unit": "application (sum of its functions; the unit Azure Functions scales)",
+      "period": "14 days; relative day r = file index - 1",
+      "selection": "present in all 14 day files, mean >=1 invocation/min and >=50% non-zero minutes on days 0-7; all eligible applications are used; dominant trigger by invocation volume defines the descriptive group (http, timer, queue, other)",
+      "demand": "invocations per minute",
+      "capacity_unit": "the trace has no capacity metadata; mu_s = (mean invocations/min on days 0-7) / 10, i.e. the pre-test mean load corresponds to 10 capacity units. This is a surrogate granularity, not a physical calibration",
+      "mu_sensitivity": "K = 5 and K = 20 units at the pre-test mean",
+      "observed_capacity": "not available",
+      "splits": {
+        "history": [
+          0,
+          7
+        ],
+        "calibration_selection": [
+          8,
+          9
+        ],
+        "test": [
+          10,
+          13
+        ]
+      }
+    },
+    "alibaba_regression": "the same generic replay code is run on the verified Alibaba 200 series (mu=1, observed-capacity denominator) and must reproduce the stored rank-ablation, reactive-grid, and strict-budget rows exactly (atol 1e-12)"
+  },
+  "forecaster": "one-step persistence (causal)",
+  "controller": {
+    "W": 240,
+    "W_sensitivity": 1440,
+    "guard": {
+      "h": 2,
+      "rho": 0.7,
+      "gamma": 1
+    },
+    "capacity_rule": "max(1, ceil((forecast + margin)/mu_s))",
+    "costs": {
+      "c_res": 1,
+      "c_act": 0.05,
+      "c_vio": 10
+    }
+  },
+  "warm_start": "the last W positive persistence residuals of the pre-test period",
+  "budgets": [
+    0.01,
+    0.05
+  ],
+  "policies": {
+    "B2": "pure prediction",
+    "B7": "conformal rank ceil((W+1)(1-delta)), no offset",
+    "B6": "conformal + offset (primary)",
+    "B8": "offset only",
+    "invcdf_G": "rank ceil(W(1-delta)) + offset",
+    "B4": "Gaussian mean + z_(1-delta) std of signed residuals",
+    "B4G": "B4 + offset",
+    "conformal_W1440": "B7/B6 with W=1440 (sensitivity)",
+    "B1": "reactive: desired = max(1, ceil(previous demand / (u * mu_s))), thresholds {0.50,0.60,0.70,0.80,0.85,0.90,0.95,0.99} x cooldowns {1,3,5,10}; initial capacity = max(1, ceil(last pre-period demand / (0.8 mu_s))); per-service selection on calibration days as in the paper (lowest calibration relative cost with calibration overload <= delta; else lowest overload)",
+    "grids_for_resource_axis": "conformal alpha {1,1.25,1.5,2} at rank levels {0.01,0.05} with/without offset; Gaussian z {1.28,1.64,z_0.95,1.96,z_0.99,3,4} with/without offset; the 32 reactive configurations (fleet-uniform)"
+  },
+  "metrics": {
+    "compliance": "fraction of units with realised test overload fraction <= delta",
+    "mean_overload": "mean over units of realised test overload fraction",
+    "relative_cost": "C_replay(policy) / C_replay(clairvoyant), clairvoyant capacity max(1, ceil(d_t/mu_s)) with zero overload; the same denominator for all policies of a unit",
+    "normalised_resource": "C_res(policy) / C_res(clairvoyant)",
+    "secondary": "Huawei: C_res relative to recorded pods; floor fraction; guard activation",
+    "strata": "Huawei: halves by pre-test mean demand in units; Azure: dominant trigger group"
+  },
+  "inference": "exact paired compliance counts (conformal-only vs comparator-only compliant units) with two-sided binomial p-values, reported as unadjusted descriptive statistics; no new confirmatory claim",
+  "reporting": "all results are reported whatever their direction; no grid extension or selection after seeing test outcomes",
+  "scope": "trace replay with immediate actuation; no latency, no live cluster"
+}

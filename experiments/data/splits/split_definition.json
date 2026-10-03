@@ -1,0 +1,64 @@
+{
+  "timestamp_unit": "trace-relative milliseconds",
+  "timestamp_step": 60000,
+  "minutes_per_day": 1440,
+  "total_days": 13,
+  "expected_total_rows_per_service": 18720,
+  "split_policy": "Chronological day-boundary split: train days 0-7, calibration days 8-9, test days 10-12.",
+  "splits": [
+    {
+      "name": "train",
+      "day_start": 0,
+      "day_end_exclusive": 8,
+      "purpose": "Forecaster training history",
+      "timestamp_start": 0,
+      "timestamp_end_exclusive": 691200000,
+      "timestamp_end_inclusive": 691140000,
+      "expected_rows": 11520
+    },
+    {
+      "name": "calibration",
+      "day_start": 8,
+      "day_end_exclusive": 10,
+      "purpose": "Conformal residual calibration and tuning/warm-up",
+      "timestamp_start": 691200000,
+      "timestamp_end_exclusive": 864000000,
+      "timestamp_end_inclusive": 863940000,
+      "expected_rows": 2880
+    },
+    {
+      "name": "test",
+      "day_start": 10,
+      "day_end_exclusive": 13,
+      "purpose": "Held-out autoscaling replay evaluation",
+      "timestamp_start": 864000000,
+      "timestamp_end_exclusive": 1123200000,
+      "timestamp_end_inclusive": 1123140000,
+      "expected_rows": 4320
+    }
+  ],
+  "service_count": 20,
+  "services": [
+    "MS_12652",
+    "MS_14526",
+    "MS_18817",
+    "MS_2024",
+    "MS_24378",
+    "MS_25320",
+    "MS_26294",
+    "MS_29824",
+    "MS_31930",
+    "MS_345",
+    "MS_43669",
+    "MS_46033",
+    "MS_49699",
+    "MS_50707",
+    "MS_51028",
+    "MS_5201",
+    "MS_53955",
+    "MS_6102",
+    "MS_72093",
+    "MS_8908"
+  ],
+  "summary_csv": "experiments/data/splits/split_summary.csv"
+}

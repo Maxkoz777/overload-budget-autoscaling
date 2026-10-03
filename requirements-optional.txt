@@ -1,0 +1,5 @@
+# Optional packages (not pinned; not needed for the paper's results)
+numba        # speeds up analysis/audit/external_replication_2026_09_30.py; the pure-Python path gives identical results
+polars       # faster aggregation in pipeline/run_hourly_pipeline.py; pandas is used otherwise
+psutil       # memory guardrail in pipeline/run_hourly_pipeline.py; skipped if missing
+seaborn      # legacy exploratory figures in experiments/src/generate_figures.py

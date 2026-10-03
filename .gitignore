@@ -1,0 +1,59 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
+
+# Trace data and preprocessing outputs (download with the scripts, see docs/DATA.md)
+/shared-data/
+/processed/
+/work/
+/cache/
+/data/
+/pipeline/logs/
+pipeline/logs/
+
+# Generated series, forecasts, models and replay outputs
+experiments/data/*
+!experiments/data/splits/
+experiments/data/splits/eligibility_checkpoint.json
+experiments/data/splits/service_eligibility_full.csv
+experiments/results/
+experiments/models/
+experiments/figures/
+experiments/reports/
+
+# Generated analysis outputs (protocol files fixed before the runs are tracked)
+analysis/figures/
+analysis/audit/*_results/
+!analysis/audit/verified_results/
+analysis/audit/verified_results/*
+!analysis/audit/verified_results/final_extension_2026-09-29/
+analysis/audit/verified_results/final_extension_2026-09-29/*
+!analysis/audit/verified_results/final_extension_2026-09-29/protocol.json
+!analysis/audit/verified_results/external_replication_2026-09-30/
+analysis/audit/verified_results/external_replication_2026-09-30/*
+!analysis/audit/verified_results/external_replication_2026-09-30/protocol.json
+!analysis/audit/verified_results/revision_2026-10-02/
+analysis/audit/verified_results/revision_2026-10-02/*
+!analysis/audit/verified_results/revision_2026-10-02/protocol.json
+analysis/audit/*.csv
+analysis/review/*/
+
+# Large binary artefacts
+*.parquet
+*.npz
+*.pt
+*.pkl
+*.joblib
+*.tar.gz
+*.tar.xz
+
+# Canonical re-run outputs (revision_canonical_2026_10_03.py)
+analysis/audit/verified_results_canonical_*/

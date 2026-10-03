@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the article below."
+title: "How Much Headroom Is Enough? Overload Budgets for Predictive Autoscaling under Actuation Delay (code)"
+authors:
+  - family-names: Kozhinov
+    given-names: Maxim
+    affiliation: Innopolis University
+    email: m.kozhinov@innopolis.university
+  - family-names: Mazzara
+    given-names: Manuel
+    affiliation: Innopolis University
+    email: m.mazzara@innopolis.ru
+type: software
+license: MIT
+preferred-citation:
+  type: article
+  title: "How Much Headroom Is Enough? Overload Budgets for Predictive Autoscaling under Actuation Delay"
+  authors:
+    - family-names: Kozhinov
+      given-names: Maxim
+    - family-names: Mazzara
+      given-names: Manuel
+  journal: "Journal of Cloud Computing"
+  year: 2026
+  notes: "Submitted"

@@ -1,0 +1,224 @@
+{
+  "name": "revision_2026-10-02",
+  "written_utc": "2026-10-02T13:39:01Z",
+  "status": "written before either analysis below was run; the canonical results it builds on were already known, so both analyses are post hoc revision sensitivities, not confirmatory tests",
+  "canonical_results_not_overwritten": true,
+  "R1_delay_at_strict_budget": {
+    "question": "Does the ordering at delta=0.01 survive delayed actuation?",
+    "data": "200 verified Alibaba services, days 0-9 history, days 10-12 test",
+    "delta": 0.01,
+    "window": 240,
+    "corrected_rank": "min(W, ceil((W+1)(1-delta))) = 239",
+    "policies": {
+      "B6": "conformal margin + fixed +1 offset (h=2, rho=0.70), alpha in {1,1.25,1.5,2}",
+      "B7": "conformal margin only, alpha in {1,1.25,1.5,2} (alpha=1 primary)",
+      "reactive_cal1pct": "threshold/cooldown selected per service on days 8-9 at a 1% calibration budget (primary reactive comparator)",
+      "reactive_cal0.25pct": "same rule at a 0.25% calibration budget (retrospective comparator from Table 2)"
+    },
+    "delays_tau": [
+      0,
+      1,
+      2,
+      5
+    ],
+    "semantics": "closed-loop FIFO queue as in Additional file 1 Sect. S8: decision at t applied at t+tau; offset trigger uses realised overload/soft state under applied capacity; initial queue filled with the last observed capacity",
+    "metrics": [
+      "services with realised overload <= 0.01",
+      "mean and median relative replay cost vs observed capacity",
+      "median realised overload",
+      "same for the upper pre-test-size quartile (Q4, 50 services)"
+    ],
+    "regression_check": "tau=0 must reproduce Table 2: B6 alpha=1 199/200 at mean 0.4478; B7 alpha=1 197/200 at 0.4440; reactive_cal1pct 190/200 at 0.4355; reactive_cal0.25pct 197/200 at 0.4429. If not, stop and report the discrepancy."
+  },
+  "R2_extended_reactive_grid": {
+    "question": "Is the reactive comparator handicapped by the lower end of its threshold grid?",
+    "added_thresholds": [
+      0.2,
+      0.3,
+      0.4
+    ],
+    "original_thresholds": [
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.85,
+      0.9,
+      0.95,
+      0.99
+    ],
+    "cooldowns": [
+      1,
+      3,
+      5,
+      10
+    ],
+    "selection_rule": "unchanged: per unit, calibration-feasible minimum relative cost, ties by overload, decreasing threshold, increasing cooldown; if none feasible, minimum calibration overload then cost",
+    "budgets": [
+      0.01,
+      0.05
+    ],
+    "datasets": {
+      "alibaba200": "calibration = train -> days 8-9, test = days 0-9 -> days 10-12; relative cost vs observed capacity (recompute_reactive_baseline.reactive_capacity/metrics)",
+      "huawei2023_primary": "as external_replication_2026_09_30.replay_reactive; relative cost vs clairvoyant capacity",
+      "azure2019_primary": "as above"
+    },
+    "implementation_note": "the external reactive kernel is evaluated with a time-stepped NumPy vectorisation over units and configurations (numba unavailable); equivalence is checked by reproducing every original-grid row of per_unit_*_primary.csv.gz",
+    "metrics": [
+      "compliant units",
+      "mean relative cost",
+      "units with no calibration-feasible configuration",
+      "units selecting an added threshold"
+    ],
+    "regression_check": "original grid must reproduce: Alibaba 190/200 (1%) and 198/200 (5%); Huawei 47/64 and Azure 1123/2839 at 1%; 1562 Azure applications calibration-infeasible at 1%.",
+    "reporting_rule": "results are reported whatever their direction; the paper keeps the protocol-fixed original-grid comparator as primary and reports the extended grid as a sensitivity, revising claims if the extended comparator changes the ordering"
+  },
+  "R3_horizon_aligned_addendum": {
+    "written_utc": "2026-10-02T13:45:49Z",
+    "status": "added after the R1 results were seen (R1 showed that B6 at alpha=1 loses compliance under delay); written before R3 was run",
+    "question": "Does calibrating the margin on the residual of the horizon actually controlled restore the strict-budget behaviour under delay without inflating alpha?",
+    "policy": "with delay tau the decision made after observing d_{t-1} is applied at step t+tau, so the score is the (tau+1)-step persistence residual e^+_j = max(d_j - d_{j-tau-1}, 0); the margin is the corrected rank l_W(delta) of the last W such scores observable at decision time; nominal capacity ceil(d_{t-1} + margin); offset and queue semantics as in R1",
+    "variants": [
+      "B6-h (with offset)",
+      "B7-h (margin only)"
+    ],
+    "alpha": 1.0,
+    "delta": 0.01,
+    "window": 240,
+    "delays_tau": [
+      0,
+      1,
+      2,
+      5
+    ],
+    "regression_check": "tau=0 (h=1) must reproduce B6 199/200 at 0.4478 and B7 197/200 at 0.4440 exactly",
+    "theory_note": "Proposition 5.1 applies to the (tau+1)-step score under its exchangeability assumption; overlapping multi-step residuals are more strongly dependent, so the assumption is weaker in practice"
+  },
+  "R4_external_delay_addendum": {
+    "written_utc": "2026-10-02T14:05:37Z",
+    "status": "written after R1-R3 had been seen, before R4 was run; requested to test whether the strict-budget advantage on the two external traces survives actuation delay",
+    "data": "Huawei 2023 (64 functions, mu_p50) and Azure Functions 2019 (2,839 applications, K=10), primary capacity units, test days as in the external replication",
+    "budgets": [
+      0.01,
+      0.05
+    ],
+    "delays_tau": [
+      0,
+      1,
+      2,
+      5
+    ],
+    "policies": {
+      "B6": "conformal W=240 margin + offset (rho=0.70, gamma=1, h=2), alpha in {1, 2}",
+      "B7": "conformal margin only, alpha=1",
+      "B6-h / B7-h": "margin calibrated on the (tau+1)-step persistence residual max(d_j - d_{j-tau-1}, 0), alpha=1",
+      "reactive_cal_orig": "per-unit threshold/cooldown selected on days 8-9 at the same budget, original grid u>=0.5 (protocol comparator)",
+      "reactive_cal_ext": "same with the extended grid u>=0.2 (R2)",
+      "reactive_cal_ext_strict": "extended grid selected at a calibration budget of delta/4 (0.25% or 1.25%), the analogue of the retrospective strict reactive on Alibaba"
+    },
+    "semantics": "closed-loop FIFO queue: the decision computed after observing d_{t-1} is applied at step t+tau; the offset trigger uses soft-utilisation states under applied capacity, exactly as the canonical guarded() at tau=0. Margin policies start warm: the first tau applied capacities are the decisions the same rule makes on the last tau pre-test minutes. Reactive policies start with their canonical initial capacity max(1, ceil(d/(0.8 mu))) in the queue.",
+    "cost": "total replay cost relative to the clairvoyant capacity, as in the external replication",
+    "regression_check": "tau=0 must reproduce the stored B6 (alpha 1 and 2) and B7 overload counts and relative costs of per_unit_*_primary.csv.gz, and the stored R2 reactive test rows, exactly; otherwise stop",
+    "reporting_rule": "reported whatever the direction; primary contrast is B6 vs reactive_cal_orig and B6-h vs reactive_cal_ext_strict at tau=1"
+  },
+  "R5_alibaba_delay_symmetric_addendum": {
+    "written_utc": "2026-10-02T14:15:58Z",
+    "status": "written after R1-R4 had been seen, before R5 was run; completes the Alibaba delay design so that the three traces are reported with identical policies and budgets",
+    "data": "200 verified Alibaba services",
+    "budgets": [
+      0.01,
+      0.05
+    ],
+    "delays_tau": [
+      0,
+      1,
+      2,
+      5
+    ],
+    "policies": "B6 (alpha 1, 2), B7, B6-h, B7-h, reactive_cal_orig, reactive_cal_ext, reactive_cal_ext_strict (calibration budget delta/4), definitions as in R4; queue semantics as in R1",
+    "regression_check": "delta=0.01 rows must reproduce R1/R3; delta=0.05 B6 alpha 1 and 2 must reproduce the stored closed_loop_delay_per_service.csv of Additional file 1 Sect. S8 at all tau"
+  },
+  "R6_pac_rank_addendum": {
+    "written_utc": "2026-10-02T14:29:58Z",
+    "status": "written after R1-R5 had been seen, before R6 was run",
+    "question": "Does a training-conditional (PAC) rank, which targets per-window coverage rather than marginal coverage, give high per-unit compliance without the heuristic offset or alpha inflation, alone and combined with horizon-aligned scores?",
+    "rank_rule": "l_PAC(W, delta, eta) = smallest l with P(Bin(W, 1-delta) >= l) <= eta; under i.i.d. scores the conditional miscoverage of the l-th order statistic exceeds delta with probability at most eta (Vovk 2012); ties only make it conservative",
+    "eta": 0.05,
+    "window_rule": "primary W = smallest W in {240, 480, 960, 1440, 2880} for which an unsaturated PAC rank (l <= W-1) exists: W=480, l=479 at delta=1%; W=240, l=234 at delta=5%. Secondary: W=1440 at both budgets (l=1433 and l=1382). Fixed from (delta, eta) only, before any data are replayed.",
+    "policies": {
+      "B7-PAC": "PAC margin only (no offset, alpha=1), primary W; horizon-aligned (tau+1)-step scores when tau>0",
+      "B6-PAC": "same plus the standard offset (secondary)",
+      "B7-PAC-1440": "PAC margin only at W=1440 (secondary)"
+    },
+    "datasets": [
+      "alibaba200",
+      "huawei2023 primary",
+      "azure2019 primary"
+    ],
+    "budgets": [
+      0.01,
+      0.05
+    ],
+    "delays_tau": [
+      0,
+      1,
+      5
+    ],
+    "comparators": "B6, B6-h, B7, reactive B1 and the strict extended-grid reactive from R4/R5 (not re-run)",
+    "regression_check": "the generic simulator with the conformal rank at W=240 must reproduce stored B7 at tau=0 and B7-h at tau=1 exactly on every trace",
+    "reporting_rule": "reported whatever the direction"
+  },
+  "R7_round2_addendum": {
+    "written_utc": "2026-10-02T16:56:30Z",
+    "status": "written after R1-R6 and the second external review had been seen, before R7 was run",
+    "parts": {
+      "pac_grid": "B7-PAC (margin only, no offset) for W in {240,480,960,1440,2880} (only W with an unsaturated PAC rank are used), eta in {0.05,0.10,0.20}, delta in {1%,5%}, tau in {0,1,5}; for tau>0 both horizon-aligned (tau+1)-step scores and one-step scores (ablation for horizon alignment)",
+      "window_selection": "pre-test rule per trace and budget: replay B7-PAC (eta=0.05, tau=0, one-step scores) on calibration days 8-9 with the preceding days as history for every admissible W; choose the W with the most units within budget on the calibration days, ties broken by lower mean calibration cost; the choice is then evaluated once on the test days",
+      "conservativeness": "mean realised overload and budget utilisation (overload fraction / delta: mean and median) for B7-PAC, B6-h and the strict reactive comparator",
+      "martingales": "conformal test martingale per unit on the test-period one-step positive persistence residuals (and (tau+1)=2-step residuals): conformal p-values with random tie-breaking (seed 20261002), simple-mixture power martingale over epsilon in (0,1); reject exchangeability at level 0.01 when the running maximum reaches 100 (Ville). Reported for the full test sequence and for non-overlapping blocks of 240 steps"
+    },
+    "regression_check": "pac_grid rows with eta=0.05 and horizon-aligned scores at W in {480/240, 1440} must reproduce R6 exactly"
+  },
+  "R8_confirmatory": {
+    "written_utc": "2026-10-02T17:02:31Z",
+    "status": "frozen before any policy was replayed on these data; at freezing time the R7 grid and martingale runs were still in progress and their results had not been inspected",
+    "data": "Huawei Cloud 2023 private trace, contiguous runs not used by any earlier analysis: trace days 0-18 (run A), 147-165 (run B), 168-184 (run C). Per run: relative days 0-7 history, 8-9 calibration, the rest test (9, 9, 7 days). Units and capacity units selected on relative days 0-7 with the rule of the external replication (57, 67, 71 functions). The functions overlap with those of the earlier replication; the time periods do not.",
+    "proposed_method": "margin-only PAC rank, eta=0.05, horizon-aligned (tau+1)-step persistence scores, no offset, no alpha; W chosen per run and budget by the R7 pre-test rule on calibration days 8-9 (most units within budget at tau=0 with one-step scores, ties by lower mean cost) among admissible W in {240,480,960,1440,2880}",
+    "secondary": "the same with W=1440 fixed",
+    "comparators": "B6 and B6-h (W=240 conformal rank, offset), reactive B1 (original grid, calibration budget delta), strict reactive (grid u>=0.2, calibration budget delta/4), all selected on calibration days 8-9",
+    "budgets": [
+      0.01,
+      0.05
+    ],
+    "delays_tau": [
+      0,
+      1,
+      5
+    ],
+    "hypotheses": {
+      "H1_primary": "at delta=1% and tau=1, pooled over the three runs (unit x run), the proposed method keeps more units within budget than the strict reactive controller; exact one-sided paired sign test on discordant units, alpha=0.05",
+      "H2": "the proposed method keeps at least 95% of pooled units within budget at every (delta, tau) in the design",
+      "H3_descriptive": "ratio of mean relative replay cost, proposed over strict reactive, reported without a directional hypothesis"
+    },
+    "code_sha256": {
+      "revision_confirmatory_2026_10_02.py": "4cef601c5795728890fe236fdb7f03fc9e0f9be7c198de7962ec82feaa89225e",
+      "revision_round2_2026_10_02.py": "5a03e16eed5d64a4ecc91650154cb794812910a9f77ae0008f03694127182a7d",
+      "revision_external_delay_2026_10_02.py": "bc8d93fa6f1a01b798c2e3026d78b10eab0b297c8ee841210776661bbd89b568",
+      "revision_2026_10_02.py": "301695ad212f1d658cb068107383a5e204114e8cc6e8ce46c03e31efa9b3ba60",
+      "external_replication_2026_09_30.py": "ff43339aa25b9b08fd1b775d8e24257fd81d75916d821185e1644269e20e69af",
+      "prep_huawei_confirmatory_2026_10_02.py": "332185d9bbd5a9118d77938d3497a5b57e0d9dbc9d46e71703059667d1d5d50a"
+    },
+    "data_sha256": {
+      "A_days000_018": "7aa607a96796c606c3d6796b444d8f111bd93eabf967318b230bdb8c626d25cd",
+      "B_days147_165": "a12f9f0ff0d5613f7d4dfacbba5fe1e8118f238a5432e5917871f00703a9d0d3",
+      "C_days168_184": "1eada16b1799b4c3a0d731d9bb443245d3d7a5df0638534b37d491c947ddccea"
+    },
+    "reporting_rule": "all hypotheses and all cells are reported whatever their outcome; any deviation from this protocol is recorded in this entry"
+  },
+  "R9_round3_addendum": {
+    "written_utc": "2026-10-02T19:17:15Z",
+    "status": "written after the third external review, before R9 was run; sensitivity analyses only, the primary rule and the frozen R8 protocol are unchanged",
+    "stride_pac": "PAC rank applied to the stride-(tau+1) subsequence of the window: the W_eff = floor(W/(tau+1)) most recent non-overlapping (tau+1)-step scores (s = t, t-tau-1, ...), rank l_PAC(W_eff, delta, eta=0.05); with i.i.d. one-step increments these scores and the covered score are i.i.d., so Corollary 5.3 applies. Evaluated for W in {960,1440,2880}, tau in {1,5}, delta in {1%,5%}, only where an unsaturated rank exists, on the three main traces and the three confirmatory Huawei periods; compared with the overlapping-score PAC-h at the same W",
+    "cost_aware_window_rule": "sensitivity rule: among admissible W, choose the cheapest on calibration days 8-9 among those keeping at least 99% of units within budget there (eta=0.05, tau=0, one-step scores); evaluated on the test days at tau in {0,1,5}; requires overlapping PAC-h at all admissible W, which R7 provides for the main traces and R9 computes for the confirmatory periods"
+  }
+}

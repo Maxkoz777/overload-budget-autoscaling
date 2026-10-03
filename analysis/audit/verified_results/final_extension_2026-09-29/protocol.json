@@ -1,0 +1,112 @@
+{
+  "id": "final_extension_2026-09-29",
+  "status": "fixed before any extension result was computed; this is an analysis-fixation record, not a preregistration: the held-out days 10-12 were already inspected in earlier rounds",
+  "written_utc": "2026-09-29T05:17:05Z",
+  "inputs": {
+    "series": "experiments/data/service_timeseries_200_verified",
+    "selection": "experiments/data/splits/selected_services_200.csv",
+    "split": "experiments/data/splits/split_definition.json",
+    "pretest_quartiles": "audit/verified_results/external_validity/service_characteristics.csv (pretest_size_quartile, days 0-9 mean demand)",
+    "reactive_trajectories": "audit/verified_results/comparative/reactive_{calibration,test}_grid_per_service.csv (reused, same verified series and simulator)"
+  },
+  "forecaster": "one-step persistence, causal (forecast for t uses demand up to t-1)",
+  "mu": 1.0,
+  "window_W": 240,
+  "guard": {
+    "h": 2,
+    "rho": 0.7,
+    "gamma": 1,
+    "rule": "identical to audit/recompute_verified_rank_ablation.py for every margin family"
+  },
+  "cost": {
+    "c_res": 1.0,
+    "c_act": 0.05,
+    "c_vio": 10.0,
+    "note": "unchanged from the paper; not tuned"
+  },
+  "evaluation_budgets": [
+    0.01,
+    0.05
+  ],
+  "families": {
+    "conformal": {
+      "rank_delta": [
+        0.01,
+        0.05
+      ],
+      "alpha": [
+        1.0,
+        1.25,
+        1.5,
+        2.0
+      ],
+      "guard": [
+        false,
+        true
+      ]
+    },
+    "gaussian": {
+      "z": [
+        1.28,
+        1.64,
+        1.644854,
+        1.96,
+        2.326348,
+        3.0,
+        4.0
+      ],
+      "z_note": "fixed grid {1.28,1.64,1.96,2.3263,3,4} plus exact nominal z_0.95 and z_0.99; 2.3263 deduplicated into exact z_0.99",
+      "guard": [
+        false,
+        true
+      ]
+    },
+    "pure_predictive": {
+      "margin": 0.0,
+      "guard": [
+        false
+      ]
+    },
+    "reactive": {
+      "grid": "thresholds {0.50,0.60,0.70,0.80,0.85,0.90,0.95,0.99} x cooldowns {1,3,5,10}, existing simulator and saved trajectories",
+      "guard": "none (original controller)"
+    }
+  },
+  "cohorts": {
+    "all200": "fixed 200-service suite",
+    "Q3Q4": "upper half by days 0-9 mean demand (not floor-free)",
+    "Q4": "upper quarter by days 0-9 mean demand",
+    "focused20": "nested diagnostic cohort, supplementary only"
+  },
+  "metrics": {
+    "primary_x": "normalised resource cost r_s = C_res(policy,s) / C_res(observed,s); C_res(observed,s) = sum_t max(ceil(replica_count_t),1) over days 10-12; same denominator for every policy of service s",
+    "aggregation": "arithmetic mean over services of r_s (mean of ratios); secondary: pooled ratio sum_s C_res(policy,s)/sum_s C_res(observed,s)",
+    "churn": "C_act reported separately, normalised by the same C_res(observed,s)",
+    "y": "mean over services of the realised held-out overload fraction; service compliance at each evaluation budget is secondary",
+    "secondary_cost": "original relative replay cost C_replay(policy)/C_replay(observed), kept for comparability"
+  },
+  "pretest_selected_points": {
+    "rule": "per service, replay on days 8-9 with days 0-7 persistence warm start; choose minimum calibration relative replay cost among configurations with calibration overload <= evaluation budget; ties: lower overload, then smaller parameter; if none feasible: minimum overload, then cost, then larger parameter",
+    "conformal": "rank_delta equal to the evaluation budget; alpha grid; guard fixed per selected point (two points: off, on)",
+    "gaussian": "z grid; guard fixed per selected point (two points: off, on)",
+    "reactive": "existing B1 rule (cost, overload, threshold desc, cooldown asc; fallback overload, cost, threshold desc, cooldown asc) at the evaluation budget",
+    "test_use": "evaluated once on days 10-12; nothing selected on days 10-12"
+  },
+  "envelope": {
+    "type": "descriptive, test-selected; fleet-uniform configurations only (same parameters for every service of a cohort)",
+    "caps": "30 equally spaced caps on cohort-mean normalised resource cost between the minimum and maximum over all fleet-uniform configurations of all families in that cohort",
+    "statistic": "per family and cap: minimum mean overload and maximum compliance among configurations with mean normalised resource cost <= cap; missing if none; no interpolation",
+    "interpretation": "not a deployable optimum and not a proven Pareto frontier"
+  },
+  "inference": "descriptive only; no new hypothesis tests or significance claims",
+  "reproduction_checks": [
+    "alpha=1 conformal and nominal-z Gaussian rows reproduce audit/verified_results/rank_ablation/rank_ablation_per_service.csv (atol 1e-12)",
+    "reactive saved rows satisfy total_cost = c_res*mean_capacity*T + c_act*churn + c_vio*overload*T",
+    "reactive pre-test selection at 5% reproduces reactive_selected_parameters.csv; at 1% reproduces strict_budget_per_service.csv reactive rows",
+    "causality: forecast and window at t use only demand up to t-1"
+  ],
+  "not_changed": [
+    "forecasters, models, splits, demand proxy, mu, W=240 primary policy, original results"
+  ],
+  "grid_extension_after_results": "not permitted"
+}
