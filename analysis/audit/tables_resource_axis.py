@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Generate LaTeX table bodies for the 2026-09-29 revision from saved CSVs only."""
+"""Generate LaTeX table bodies for the resource-axis extension from saved CSVs only."""
 from pathlib import Path
 import pandas as pd
 
 PAPER = Path(__file__).resolve().parents[1]
-EXT = PAPER / "audit/verified_results/final_extension_2026-09-29"
+EXT = PAPER / "audit/verified_results/resource_axis_study"
 OUT = EXT / "tables"
 OUT.mkdir(exist_ok=True)
 per = pd.read_csv(EXT / "per_service.csv"); per = per[per.phase.eq("test")]

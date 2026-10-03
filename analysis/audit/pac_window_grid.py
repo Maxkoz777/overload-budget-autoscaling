@@ -2,8 +2,8 @@
 """R7 (round-2 review): PAC window/eta grid, one-step ablation, pre-test window selection,
 conservativeness, and conformal test martingales on three traces.
 
-Protocol: verified_results/revision_2026-10-02/protocol.json, key "R7_round2_addendum".
-Usage:  python3 audit/revision_round2_2026_10_02.py [grid] [martingale] [summary]
+Protocol: verified_results/delay_pac_study/protocol.json, key "R7_round2_addendum".
+Usage:  python3 audit/pac_window_grid.py [grid] [martingale] [summary]
 """
 from __future__ import annotations
 
@@ -19,8 +19,8 @@ from scipy.stats import binom
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
-import revision_2026_10_02 as rev  # noqa: E402
-import revision_external_delay_2026_10_02 as xd  # noqa: E402
+import delay_and_reactive_grid as rev  # noqa: E402
+import external_delay as xd  # noqa: E402
 g, ext = rev.g, xd.ext
 OUT = rev.OUT
 

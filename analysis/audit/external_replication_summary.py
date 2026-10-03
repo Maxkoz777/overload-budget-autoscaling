@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Summaries for the external replication (called by external_replication_2026_09_30.py summarise)."""
+"""Summaries for the external replication (called by external_replication.py summarise)."""
 from __future__ import annotations
 
 import hashlib
@@ -12,7 +12,7 @@ from scipy.stats import binomtest, norm
 
 PAPER = Path(__file__).resolve().parents[1]
 EXT = PAPER.parent / "experiments" / "data" / "external_traces"
-OUT = PAPER / "audit" / "verified_results" / "external_replication_2026-09-30"
+OUT = PAPER / "audit" / "verified_results" / "external_replication_study"
 BUDGETS = (0.01, 0.05)
 RUNS = (("huawei2023", "primary"), ("huawei2023", "p90"), ("azure2019", "primary"), ("azure2019", "K5"), ("azure2019", "K20"))
 

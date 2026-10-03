@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Bounded persistence extension of 2026-09-29.
+"""Bounded persistence extension: resource axis, scale strata, and cost decomposition.
 
 Implements exactly the analysis fixed in
-audit/verified_results/final_extension_2026-09-29/protocol.json:
+audit/verified_results/resource_axis_study/protocol.json:
 
 * margin families (conformal alpha grid, Gaussian z grid, pure prediction),
   each with and without the shared guard, replayed with the causal one-step
@@ -16,7 +16,7 @@ audit/verified_results/final_extension_2026-09-29/protocol.json:
 No forecaster is trained, no original result file is overwritten, and no
 hypothesis test is added.  Run from the paper repository:
 
-    python3 audit/final_extension_2026_09_29.py
+    python3 audit/resource_axis_extension.py
 """
 
 from __future__ import annotations
@@ -41,7 +41,7 @@ REACTIVE_CAL = PAPER / "audit/verified_results/comparative/reactive_calibration_
 REACTIVE_TEST = PAPER / "audit/verified_results/comparative/reactive_test_grid_per_service.csv"
 REACTIVE_SEL5 = PAPER / "audit/verified_results/comparative/reactive_selected_parameters.csv"
 STRICT = PAPER / "audit/verified_results/strict_budget/strict_budget_per_service.csv"
-OUT = PAPER / "audit/verified_results/final_extension_2026-09-29"
+OUT = PAPER / "audit/verified_results/resource_axis_study"
 PROTOCOL = OUT / "protocol.json"
 FIG = PAPER / "figures/verified"
 

@@ -12,7 +12,7 @@
 | Paired-effect bootstrap | 20260920 plus deterministic comparison offsets | `analysis/audit/recompute_verified_effects.py` |
 | Dependence-aware intervals | 20260920 | `analysis/audit/recompute_verified_dependence.py` |
 | Hierarchical moving-block bootstrap | 20260920 unless overridden by `--seed` | `analysis/audit/statistical_robustness.py` |
-| Random tie-breaking in conformal test martingales (R7) | 20261002 | `analysis/audit/revision_round2_2026_10_02.py` |
-| Unit tests | 0, 1, 20261003 | `experiments/tests/test_xgb_alignment.py`, `analysis/audit/test_canonical_inputs_2026_10_03.py` |
+| Random tie-breaking in conformal test martingales (R7) | 20261002 | `analysis/audit/pac_window_grid.py` |
+| Unit tests | 0, 1, 20261003 | `experiments/tests/test_xgb_alignment.py`, `analysis/audit/test_canonical_inputs.py` |
 
 The trace replays are deterministic and use no random numbers. Every stochastic analysis either uses the constant listed above or records its command-line seed in its `methodology*.json` output.

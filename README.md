@@ -82,14 +82,14 @@ overload-budget-autoscaling/
 
 Notes on the layout:
 
-- **The scripts keep the relative paths and file names of the original project.** Several analyses import each other, and the confirmatory protocol freezes six scripts by SHA-256 (see [below](#protocols-and-integrity-checks)). For this reason, `analysis/audit/` is one flat folder with dated file names; [`docs/SCRIPTS.md`](docs/SCRIPTS.md) groups its contents by stage.
+- **Folder structure.** The scripts keep the relative folder structure of the original project, because several analyses import each other and locate their inputs relative to their own position. `analysis/audit/` is therefore one flat folder; [`docs/SCRIPTS.md`](docs/SCRIPTS.md) groups its contents by stage.
 - **Working directory.** Run the commands for `pipeline/`, `experiments/`, and `scripts/` from the repository root, and the commands for `analysis/` from inside `analysis/`.
 - **Outputs.** Generated data and results are written next to the code and are excluded by `.gitignore`:
   - `processed/` — preprocessed Alibaba partitions;
   - `experiments/data/` — service series, apart from `splits/`;
   - `experiments/results/` and `experiments/figures/` — focused-tier outputs;
   - `analysis/audit/*_results/` and `analysis/audit/verified_results/` — analysis outputs, apart from the protocol files;
-  - `analysis/audit/verified_results_canonical_2026-10-03/` — re-run with the canonical capacity-unit rule (step 7b);
+  - `analysis/audit/verified_results_canonical/` — re-run with the canonical capacity-unit rule (step 7b);
   - `analysis/figures/` — figures.
 - **`experiments/data/splits/` is study configuration, not data.** It holds the day boundaries of the split and the list of the 200 selected service IDs with the summary statistics used to stratify and verify them. `experiments/src/select_services_200.py` regenerates the list from the trace (seed 42).
 
@@ -141,23 +141,23 @@ The steps follow the order in which the results were produced. Each step reads t
 
    ```bash
    cd analysis
-   python3 audit/prep_huawei_confirmatory_2026_10_02.py
-   python3 audit/verify_confirmatory_inputs_2026_10_03.py
-   python3 audit/run_canonical.py audit/revision_confirmatory_2026_10_02.py   # published (canonical) Table 2
+   python3 audit/prepare_confirmatory_periods.py
+   python3 audit/verify_confirmatory_inputs.py
+   python3 audit/run_canonical.py audit/confirmatory_replay.py   # published (canonical) Table 2
    ```
 
-   Running `python3 audit/revision_confirmatory_2026_10_02.py` without the wrapper reproduces the frozen run instead. It gives the same counts and differs in four cost entries by 0.01. Both variants write to `audit/verified_results/revision_2026-10-02/`, so use separate copies of the repository if you want to keep both.
+   Running `python3 audit/confirmatory_replay.py` without the wrapper reproduces the frozen run instead. It gives the same counts and differs in four cost entries by 0.01. Both variants write to `audit/verified_results/delay_pac_study/`, so use separate copies of the repository if you want to keep both.
 
 3. **Learned forecasters.** Steps 2 (`run_all.sh`) and 3 retrain ARIMA, XGBoost, and LSTM for the focused 20-service tier only. The canonical fits run on macOS and take about 7 hours.
 
 **Project-history checks.** A few scripts also compare their outputs with files from the project's own history, for example the earlier service series or superseded forecasts. These comparisons are provenance evidence for the article, not reproduction steps: `rebuild_verified_service_series.py` and `recompute_final_closure_downstream.py` skip them automatically when the historical files are absent.
 
-**Canonical capacity units.** The numbers in the article come from the canonical rule in `analysis/audit/canonical_inputs_2026_10_03.py`:
+**Canonical capacity units.** The numbers in the article come from the canonical rule in `analysis/audit/canonical_inputs.py`:
 
 - capacity units are read from `units.csv` at full precision;
 - a documented relative boundary tolerance of 1e-12 (each unit is scaled by 1 + 1e-12) makes exact ties, where demand equals a whole number of units, resolve as in exact arithmetic, consistently for every policy, the overload count, and the clairvoyant cost reference.
 
-Like any tolerance, the rule would also treat a strict inequality closer than a relative 1e-12 to the boundary as a tie. `python3 audit/test_canonical_inputs_2026_10_03.py` tests an exact tie, a value inside the tolerance, a value outside it, and the consistency of the capacity mapping. The rule also makes the results independent of the pandas version's default float parser.
+Like any tolerance, the rule would also treat a strict inequality closer than a relative 1e-12 to the boundary as a tie. `python3 audit/test_canonical_inputs.py` tests an exact tie, a value inside the tolerance, a value outside it, and the consistency of the capacity mapping. The rule also makes the results independent of the pandas version's default float parser.
 
 Step 7b re-runs every analysis on the Huawei and Azure traces with this rule and lists every number that changes. The frozen scripts are not modified: `analysis/audit/run_canonical.py <script>` runs any of them with the rule installed.
 
@@ -226,58 +226,58 @@ python3 audit/recompute_guardrail_actuation.py --verified
 python3 audit/recompute_external_validity.py --verified
 python3 audit/recompute_verified_dependence.py
 python3 audit/statistical_robustness.py
-python3 review/readiness_checks_2026_09_23.py
+python3 review/strict_budget_crosscheck.py
 python3 audit/strict_budget_summary.py
 python3 audit/budget_utilisation.py
-python3 audit/plot_verified_phase2.py
+python3 audit/plot_verified_suite.py
 ```
 
 ### 5. Resource axis and scale strata
 
-Protocol: `analysis/audit/verified_results/final_extension_2026-09-29/protocol.json`.
+Protocol: `analysis/audit/verified_results/resource_axis_study/protocol.json`.
 
 ```bash
 cd analysis
-python3 audit/final_extension_2026_09_29.py
-python3 audit/exact_envelope_2026_09_29.py
-python3 audit/plot_final_extension_2026_09_29.py
-python3 audit/tables_final_extension_2026_09_29.py
+python3 audit/resource_axis_extension.py
+python3 audit/resource_overload_envelope.py
+python3 audit/plot_resource_axis.py
+python3 audit/tables_resource_axis.py
 ```
 
 ### 6. External replication on Huawei Cloud 2023 and Azure Functions 2019
 
-Protocol: `analysis/audit/verified_results/external_replication_2026-09-30/protocol.json`.
+Protocol: `analysis/audit/verified_results/external_replication_study/protocol.json`.
 
 ```bash
 cd analysis
-python3 audit/prep_external_traces_2026_09_30.py --family huawei2023
-python3 audit/prep_external_traces_2026_09_30.py --family azure2019 --stage days --days 1-7
-python3 audit/prep_external_traces_2026_09_30.py --family azure2019 --stage days --days 8-14
-python3 audit/prep_external_traces_2026_09_30.py --family azure2019 --stage build
-python3 audit/external_replication_2026_09_30.py regress-alibaba
+python3 audit/prepare_external_traces.py --family huawei2023
+python3 audit/prepare_external_traces.py --family azure2019 --stage days --days 1-7
+python3 audit/prepare_external_traces.py --family azure2019 --stage days --days 8-14
+python3 audit/prepare_external_traces.py --family azure2019 --stage build
+python3 audit/external_replication.py regress-alibaba
 for r in "huawei2023 primary" "huawei2023 p90" "azure2019 primary" "azure2019 K5" "azure2019 K20"; do
-  set -- $r; python3 audit/external_replication_2026_09_30.py run --family $1 --mu $2; done
-(cd audit && python3 external_replication_2026_09_30.py summarise)
-python3 audit/plot_external_replication_2026_09_30.py
+  set -- $r; python3 audit/external_replication.py run --family $1 --mu $2; done
+(cd audit && python3 external_replication.py summarise)
+python3 audit/plot_external_replication.py
 ```
 
-`regress-alibaba` checks that the replication code reproduces the step-4 Alibaba results exactly. The Azure preparation writes per-day intermediates to `~/ext_cache_2026_09_30`; set `EXT_CACHE` to change the location.
+`regress-alibaba` checks that the replication code reproduces the step-4 Alibaba results exactly. The Azure preparation writes per-day intermediates to `~/ext_cache_overload_budget`; set `EXT_CACHE` to change the location.
 
 ### 7. Actuation delay, the proposed controller, and the confirmatory replay
 
-Protocol with addenda R1–R9: `analysis/audit/verified_results/revision_2026-10-02/protocol.json`. This step needs the outputs of steps 4–6.
+Protocol with addenda R1–R9: `analysis/audit/verified_results/delay_pac_study/protocol.json`. This step needs the outputs of steps 4–6.
 
 ```bash
 cd analysis
-python3 audit/revision_2026_10_02.py r1 r2 r3          # R1–R3: delay at 1%, extended reactive grid, horizon-aligned scores
-python3 audit/revision_subset_2026_10_02.py            # pre-test non-trivial subset (95 services)
-python3 audit/revision_external_delay_2026_10_02.py    # R4: delay on Huawei and Azure
-python3 audit/revision_alibaba_delay_2026_10_02.py     # R5: delay on Alibaba, same policies
-python3 audit/revision_pac_rank_2026_10_02.py          # R6: PAC rank on three traces
-python3 audit/revision_round2_2026_10_02.py            # R7: PAC-h window/eta grid, ablations, pre-test window rule, martingales
-python3 audit/prep_huawei_confirmatory_2026_10_02.py   # R8 data: three untouched Huawei periods
-python3 audit/revision_confirmatory_2026_10_02.py      # R8: confirmatory replay (frozen protocol)
-python3 audit/revision_round3_2026_10_02.py            # R9: stride PAC rank, cost-aware window rule
+python3 audit/delay_and_reactive_grid.py r1 r2 r3          # R1–R3: delay at 1%, extended reactive grid, horizon-aligned scores
+python3 audit/pretest_subset.py            # pre-test non-trivial subset (95 services)
+python3 audit/external_delay.py    # R4: delay on Huawei and Azure
+python3 audit/alibaba_delay.py     # R5: delay on Alibaba, same policies
+python3 audit/pac_rank_replay.py          # R6: PAC rank on three traces
+python3 audit/pac_window_grid.py            # R7: PAC-h window/eta grid, ablations, pre-test window rule, martingales
+python3 audit/prepare_confirmatory_periods.py   # R8 data: three untouched Huawei periods
+python3 audit/confirmatory_replay.py      # R8: confirmatory replay (frozen protocol)
+python3 audit/pac_stride_sensitivity.py            # R9: stride PAC rank, cost-aware window rule
 ```
 
 The figures are drawn after step 7b, from the canonical results.
@@ -286,7 +286,7 @@ The figures are drawn after step 7b, from the canonical results.
 
 ```bash
 cd analysis
-python3 audit/revision_canonical_2026_10_03.py          # all stages; outputs in audit/verified_results_canonical_2026-10-03/
+python3 audit/canonical_rerun.py          # all stages; outputs in audit/verified_results_canonical/
 ```
 
 The stages are:
@@ -295,12 +295,12 @@ The stages are:
 - **R11** is the matched-rank ablation: PAC-h with the standard conformal rank, the same window, and no offset.
 - **R12** gives the confirmatory sign test by period and with each function as one cluster.
 
-Run single stages by name, for example `... revision_canonical_2026_10_03.py r11 r12 compare`. Then draw Figs. 2 and 3; the plotting scripts read the canonical results when they are present:
+Run single stages by name, for example `... canonical_rerun.py r11 r12 compare`. Then draw Figs. 2 and 3; the plotting scripts read the canonical results when they are present:
 
 ```bash
-python3 audit/test_canonical_inputs_2026_10_03.py      # unit tests of the canonical rule
-python3 audit/plot_delay_three_traces_2026_10_02.py    # Fig. 2
-python3 audit/plot_cost_compliance_tau1_2026_10_02.py  # Fig. 3
+python3 audit/test_canonical_inputs.py      # unit tests of the canonical rule
+python3 audit/plot_delay_compliance.py    # Fig. 2
+python3 audit/plot_cost_vs_compliance.py  # Fig. 3
 ```
 
 ### 8. Supplementary analyses
@@ -309,11 +309,11 @@ python3 audit/plot_cost_compliance_tau1_2026_10_02.py  # Fig. 3
 python3 experiments/src/run_synthetic_dkw.py              # controlled i.i.d. DKW experiment
 python3 experiments/src/run_supplemental_experiments.py   # alpha sweep and other focused-tier sensitivities
 cd analysis
-python3 audit/plot_phase6_figures.py
-python3 audit/plot_phase7_dkw.py
+python3 audit/plot_focused_figures.py
+python3 audit/plot_dkw.py
 python3 audit/recompute_overhead_accounting.py
-python3 audit/phase8_focused_fill_sensitivity.py
-python3 audit/verify_phase8_upstream.py                   # 200 series against processed/final
+python3 audit/focused_fill_sensitivity.py
+python3 audit/verify_series_upstream.py                   # 200 series against processed/final
 ```
 
 ## Where each result in the article comes from
@@ -325,14 +325,14 @@ Script paths are relative to `analysis/audit/` unless noted.
 | Result | Script |
 |---|---|
 | Fig. 1, control loop of PAC-h | schematic, no data |
-| Fig. 2 and Table 1, actuation delay on three traces | `revision_2026_10_02.py` (r1, r3), `revision_external_delay_2026_10_02.py`, `revision_alibaba_delay_2026_10_02.py`, `revision_round2_2026_10_02.py`, `plot_delay_three_traces_2026_10_02.py` |
-| Fig. 3, cost against compliance at τ = 1 | `plot_cost_compliance_tau1_2026_10_02.py` (reads the outputs behind Table 1) |
-| Matched-rank ablation (Sect. 6.2, Sect. S10); canonical capacity units; clustered confirmatory sensitivity (Sect. 6.3) | `revision_canonical_2026_10_03.py` (R11, R10, R12) |
-| Sect. 6.2, window/η ablations, stride variant, cost-aware rule, exchangeability martingales | `revision_round2_2026_10_02.py`, `revision_round3_2026_10_02.py` |
-| Table 2, confirmatory replay | `prep_huawei_confirmatory_2026_10_02.py`, `revision_confirmatory_2026_10_02.py` |
+| Fig. 2 and Table 1, actuation delay on three traces | `delay_and_reactive_grid.py` (r1, r3), `external_delay.py`, `alibaba_delay.py`, `pac_window_grid.py`, `plot_delay_compliance.py` |
+| Fig. 3, cost against compliance at τ = 1 | `plot_cost_vs_compliance.py` (reads the outputs behind Table 1) |
+| Matched-rank ablation (Sect. 6.2, Sect. S10); canonical capacity units; clustered confirmatory sensitivity (Sect. 6.3) | `canonical_rerun.py` (R11, R10, R12) |
+| Sect. 6.2, window/η ablations, stride variant, cost-aware rule, exchangeability martingales | `pac_window_grid.py`, `pac_stride_sensitivity.py` |
+| Table 2, confirmatory replay | `prepare_confirmatory_periods.py`, `confirmatory_replay.py` |
 | Table 3, strict 1% budget on the 200-service suite | `strict_budget_summary.py` (inputs from step 4) |
-| Table 4, external replication | `external_replication_2026_09_30.py`, `plot_external_replication_2026_09_30.py` |
-| Sect. 6.6, forecasters, offset, resource use | `recompute_final_closure_downstream.py`, `final_extension_2026_09_29.py`, `exact_envelope_2026_09_29.py` |
+| Table 4, external replication | `external_replication.py`, `plot_external_replication.py` |
+| Sect. 6.6, forecasters, offset, resource use | `recompute_final_closure_downstream.py`, `resource_axis_extension.py`, `resource_overload_envelope.py` |
 
 **Additional file 1**
 
@@ -340,37 +340,33 @@ Script paths are relative to `analysis/audit/` unless noted.
 |---|---|
 | S5, adaptive conformal extensions | `experiments/src/run_c1_adaptive_conformal.py` |
 | S6.1, focused-tier protocol and tables; reactive frontier | `scripts/run_all.sh`, `recompute_final_closure_downstream.py`, `recompute_arima_causal.py`, `recompute_reactive_baseline.py` |
-| S6.2, design-parameter sensitivity (window, DKW localisation, α sweep) | `plot_phase6_figures.py`, `experiments/src/run_synthetic_dkw.py`, `plot_phase7_dkw.py`, `experiments/src/run_supplemental_experiments.py` (EXP-4) |
-| S6.3, contribution of each layer; guard characterisation | `experiments/src/run_supplemental_experiments.py` (EXP-5), `recompute_guardrail_actuation.py`, `plot_final_extension_2026_09_29.py` |
+| S6.2, design-parameter sensitivity (window, DKW localisation, α sweep) | `plot_focused_figures.py`, `experiments/src/run_synthetic_dkw.py`, `plot_dkw.py`, `experiments/src/run_supplemental_experiments.py` (EXP-4) |
+| S6.3, contribution of each layer; guard characterisation | `experiments/src/run_supplemental_experiments.py` (EXP-5), `recompute_guardrail_actuation.py`, `plot_resource_axis.py` |
 | S6.4, predictor agnosticism and overhead | `recompute_overhead_accounting.py` |
 | S6.5, violation clustering | `experiments/src/run_supplemental_experiments.py` (EXP-7) |
-| S6.6, matched margins, 200-service coverage and strata figures, strict-budget sensitivity, rank ablation | `recompute_margin_comparison.py`, `plot_verified_phase2.py`, `recompute_verified_rank_ablation.py`, `revision_2026_10_02.py` (r2), `revision_subset_2026_10_02.py` |
+| S6.6, matched margins, 200-service coverage and strata figures, strict-budget sensitivity, rank ablation | `recompute_margin_comparison.py`, `plot_verified_suite.py`, `recompute_verified_rank_ablation.py`, `delay_and_reactive_grid.py` (r2), `pretest_subset.py` |
 | S6.7, budget utilisation, cost-constrained comparisons | `budget_utilisation.py`, `recompute_verified_effects.py`, `recompute_verified_dependence.py`, `statistical_robustness.py` |
-| S6.8, resource axis, cost decomposition, scale strata | `final_extension_2026_09_29.py`, `tables_final_extension_2026_09_29.py`, `plot_final_extension_2026_09_29.py` |
-| S7, external replication | `prep_external_traces_2026_09_30.py`, `external_replication_2026_09_30.py`, `external_replication_summary_2026_09_30.py` |
-| S8, actuation delay and horizon-aligned calibration | `recompute_guardrail_actuation.py`, `experiments/src/run_ls_actuation_delay.py`, `revision_2026_10_02.py`, `revision_external_delay_2026_10_02.py`, `revision_alibaba_delay_2026_10_02.py`, `revision_pac_rank_2026_10_02.py` |
-| S9, residual exchangeability diagnostics | `experiments/src/run_c4_exchangeability.py`, `revision_round2_2026_10_02.py` |
-| S10, round-two analyses and moved figures (focused frontier and calibration, resource envelope, external replication) | `revision_round2_2026_10_02.py`, `revision_round3_2026_10_02.py`, `revision_confirmatory_2026_10_02.py`, `plot_phase6_figures.py`, `plot_final_extension_2026_09_29.py`, `plot_external_replication_2026_09_30.py` |
+| S6.8, resource axis, cost decomposition, scale strata | `resource_axis_extension.py`, `tables_resource_axis.py`, `plot_resource_axis.py` |
+| S7, external replication | `prepare_external_traces.py`, `external_replication.py`, `external_replication_summary.py` |
+| S8, actuation delay and horizon-aligned calibration | `recompute_guardrail_actuation.py`, `experiments/src/run_ls_actuation_delay.py`, `delay_and_reactive_grid.py`, `external_delay.py`, `alibaba_delay.py`, `pac_rank_replay.py` |
+| S9, residual exchangeability diagnostics | `experiments/src/run_c4_exchangeability.py`, `pac_window_grid.py` |
+| S10, round-two analyses and moved figures (focused frontier and calibration, resource envelope, external replication) | `pac_window_grid.py`, `pac_stride_sensitivity.py`, `confirmatory_replay.py`, `plot_focused_figures.py`, `plot_resource_axis.py`, `plot_external_replication.py` |
 
 ## Protocols and integrity checks
 
 - **Protocol files.** `analysis/audit/verified_results/*/protocol.json` record the hypotheses, parameters, and decision rules of the external replication, the resource-axis extension, and the revision analyses (addenda R1–R9). They are the only files that the repository keeps in `verified_results/`.
 - **Frozen confirmatory replay.** Addendum `R8_confirmatory` stores two sets of SHA-256 hashes, both written before the replay was run:
-  - the hashes of the six scripts it uses (`revision_confirmatory_2026_10_02.py`, `revision_round2_2026_10_02.py`, `revision_external_delay_2026_10_02.py`, `revision_2026_10_02.py`, `external_replication_2026_09_30.py`, `prep_huawei_confirmatory_2026_10_02.py`);
+  - the hashes of the six scripts it uses (`confirmatory_replay.py`, `pac_window_grid.py`, `external_delay.py`, `delay_and_reactive_grid.py`, `external_replication.py`, `prepare_confirmatory_periods.py`);
   - the hashes of the three prepared data periods.
 
-  The scripts in this repository match the stored code hashes byte for byte, which is why they are left unchanged. Check them with:
+  The protocol lists these scripts under the file names they had when it was frozen (for example `revision_confirmatory_2026_10_02.py` for `confirmatory_replay.py`). Release v1.0.0 ([10.5281/zenodo.23125235](https://doi.org/10.5281/zenodo.23125235)) preserves them byte for byte under those names. From v1.1.0 on, all scripts and protocol folders have descriptive names; in the six frozen scripts, the only edits are the module, file, and folder names in their text. `verify_confirmatory_inputs.py` maps the current names back to the frozen ones and checks that the reconstructed text has the stored hash:
 
 ```bash
-cd analysis/audit && python3 - <<'PY'
-import json, hashlib
-p = json.load(open("verified_results/revision_2026-10-02/protocol.json"))["R8_confirmatory"]
-for f, h in p["code_sha256"].items():
-    print(f, "OK" if hashlib.sha256(open(f, "rb").read()).hexdigest() == h else "MISMATCH")
-PY
+cd analysis
+python3 audit/verify_confirmatory_inputs.py      # code hashes; data hashes too once the periods are prepared
 ```
 
-- **Data hashes.** The protocol stores the SHA-256 of each period's `series.npz`. A `.npz` file is a zip archive, and its container bytes need not match across environments even when every array does. In our rebuild, all entries had the same CRC-32, compressed data, and timestamp; only local-header fields written by the zip library differed. After `prep_huawei_confirmatory_2026_10_02.py` has run, `python3 audit/verify_confirmatory_inputs_2026_10_03.py` checks three things:
+- **Data hashes.** The protocol stores the SHA-256 of each period's `series.npz`. A `.npz` file is a zip archive, and its container bytes need not match across environments even when every array does. In our rebuild, all entries had the same CRC-32, compressed data, and timestamp; only local-header fields written by the zip library differed. After `prepare_confirmatory_periods.py` has run, `python3 audit/verify_confirmatory_inputs.py` checks three things:
   - the frozen code hashes;
   - a content hash of the arrays in each period;
   - the SHA-256 of each `units.csv`.

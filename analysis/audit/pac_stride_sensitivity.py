@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """R9: stride-(tau+1) PAC rank and a cost-aware window rule (sensitivities).
 
-Protocol: verified_results/revision_2026-10-02/protocol.json, key "R9_round3_addendum".
-Usage:  python3 audit/revision_round3_2026_10_02.py
+Protocol: verified_results/delay_pac_study/protocol.json, key "R9_round3_addendum".
+Usage:  python3 audit/pac_stride_sensitivity.py
 """
 from __future__ import annotations
 
@@ -16,9 +16,9 @@ import pandas as pd
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
-import revision_2026_10_02 as rev  # noqa: E402
-import revision_round2_2026_10_02 as r7  # noqa: E402
-import revision_confirmatory_2026_10_02 as r8  # noqa: E402
+import delay_and_reactive_grid as rev  # noqa: E402
+import pac_window_grid as r7  # noqa: E402
+import confirmatory_replay as r8  # noqa: E402
 
 OUT = rev.OUT
 ETA = 0.05

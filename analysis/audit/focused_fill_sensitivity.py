@@ -8,7 +8,7 @@ affected service's causal one-step ARIMA using the verified input. This script
 does not retrain XGBoost or LSTM; the refit of those models on the past-only
 history is ``audit/refit_focused_causal_fill.py``.
 
-Run ``python3 audit/phase8_focused_fill_sensitivity.py``. The script is
+Run ``python3 audit/focused_fill_sensitivity.py``. The script is
 read-only and prints a JSON summary; pipe/capture it if a record is wanted.
 """
 

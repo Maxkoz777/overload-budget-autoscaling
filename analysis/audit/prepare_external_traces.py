@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
-"""Build minute series for the external replication (protocol 2026-09-30).
+"""Build minute series for the external replication (protocol in verified_results/external_replication_study/).
 
 Huawei Cloud 2023 (private): per-function requests and recorded pods,
 relative days 0-32 (= trace days 28-60).  Azure Functions 2019: per-application
 invocations, days 0-13.  Selection and capacity units use pre-test days 0-7
-only, exactly as fixed in audit/verified_results/external_replication_2026-09-30/protocol.json.
+only, exactly as fixed in audit/verified_results/external_replication_study/protocol.json.
 
 Usage (from the paper repository):
-    python3 audit/prep_external_traces_2026_09_30.py --family huawei2023
-    python3 audit/prep_external_traces_2026_09_30.py --family azure2019 --stage days --days 1-5
-    python3 audit/prep_external_traces_2026_09_30.py --family azure2019 --stage days --days 6-10
-    python3 audit/prep_external_traces_2026_09_30.py --family azure2019 --stage days --days 11-14
-    python3 audit/prep_external_traces_2026_09_30.py --family azure2019 --stage build
+    python3 audit/prepare_external_traces.py --family huawei2023
+    python3 audit/prepare_external_traces.py --family azure2019 --stage days --days 1-5
+    python3 audit/prepare_external_traces.py --family azure2019 --stage days --days 6-10
+    python3 audit/prepare_external_traces.py --family azure2019 --stage days --days 11-14
+    python3 audit/prepare_external_traces.py --family azure2019 --stage build
 """
 from __future__ import annotations
 
@@ -28,7 +28,7 @@ PAPER = Path(__file__).resolve().parents[1]
 RESEARCH = PAPER.parents[1]
 SHARED = RESEARCH / "shared-data"
 OUT = PAPER.parent / "experiments" / "data" / "external_traces"
-CACHE = Path(os.environ.get("EXT_CACHE", str(Path.home() / "ext_cache_2026_09_30")))
+CACHE = Path(os.environ.get("EXT_CACHE", str(Path.home() / "ext_cache_overload_budget")))
 M = 1440
 
 

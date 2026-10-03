@@ -45,8 +45,8 @@ The Huawei and Azure preparation scripts look for `shared-data/` in the folder t
 
   | Trace days | Purpose | Script |
   |---|---|---|
-  | 28–60 (the longest contiguous run) | external replication | `analysis/audit/prep_external_traces_2026_09_30.py --family huawei2023` |
-  | 0–18, 147–165, 168–184 | confirmatory replay, not touched by any earlier analysis | `analysis/audit/prep_huawei_confirmatory_2026_10_02.py` |
+  | 28–60 (the longest contiguous run) | external replication | `analysis/audit/prepare_external_traces.py --family huawei2023` |
+  | 0–18, 147–165, 168–184 | confirmatory replay, not touched by any earlier analysis | `analysis/audit/prepare_confirmatory_periods.py` |
 
 - **Expected layout.** `shared-data/huawei_2023/private/requests_minute/day_DDD.csv` and `shared-data/huawei_2023/private/instances_minute/day_DDD.csv`, with three-digit day numbers.
 
@@ -55,8 +55,8 @@ The Huawei and Azure preparation scripts look for `shared-data/` in the folder t
 - **Source.** Azure Public Dataset, Azure Functions Dataset 2019 (https://github.com/Azure/AzurePublicDataset/blob/master/AzureFunctionsDataset2019.md).
 - **Used.** Per-minute invocation counts per function for days 1–14, aggregated to applications.
 - **Expected layout.** After extracting the archive: `shared-data/azure_functions_2019/raw/invocations_per_function_md.anon.d01.csv` … `d14.csv`.
-- **Intermediate files.** `analysis/audit/prep_external_traces_2026_09_30.py` writes per-day aggregates to `~/ext_cache_2026_09_30` (override with the environment variable `EXT_CACHE`) and the final minute series to `experiments/data/external_traces/`.
+- **Intermediate files.** `analysis/audit/prepare_external_traces.py` writes per-day aggregates to `~/ext_cache_overload_budget` (override with the environment variable `EXT_CACHE`) and the final minute series to `experiments/data/external_traces/`.
 
 ## Integrity records
 
-The preparation scripts write an `inputs_sha256.json` (or an equivalent record) next to each prepared series. It lists the SHA-256 of every raw file read, by its path relative to the workspace folder. The confirmatory protocol (`analysis/audit/verified_results/revision_2026-10-02/protocol.json`, addendum `R8_confirmatory`) stores the hashes of the prepared periods used in the article.
+The preparation scripts write an `inputs_sha256.json` (or an equivalent record) next to each prepared series. It lists the SHA-256 of every raw file read, by its path relative to the workspace folder. The confirmatory protocol (`analysis/audit/verified_results/delay_pac_study/protocol.json`, addendum `R8_confirmatory`) stores the hashes of the prepared periods used in the article.

@@ -19,7 +19,7 @@ equals an integer multiple of ``mu`` in exact arithmetic (for example 85 request
    denominator, and the overload count. Like any tolerance, it would also treat a strict
    inequality closer than a relative 1e-12 to the boundary as a tie; demands here are
    integer counts and ``mu`` is a ratio of counts, so such near-ties are not expected.
-   ``test_canonical_inputs_2026_10_03.py`` pins down this behaviour.
+   ``test_canonical_inputs.py`` pins down this behaviour.
 
 The rule acts only on ``units.csv`` files and only on the capacity columns, so the frozen
 analysis scripts run unchanged: ``run_canonical.py`` installs it and then executes them.

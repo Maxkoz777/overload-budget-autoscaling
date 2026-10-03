@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Revision analyses of 2 October 2026 (protocol: verified_results/revision_2026-10-02/protocol.json).
+"""Revision analyses of 2 October 2026 (protocol: verified_results/delay_pac_study/protocol.json).
 
 R1  closed-loop delayed actuation at the strict budget delta = 0.01 (Alibaba, 200 services);
 R2  reactive baseline with an extended threshold grid {0.2, 0.3, 0.4} on Alibaba, Huawei and Azure;
@@ -9,7 +9,7 @@ Both reuse the canonical replay functions unchanged and write only to the new ou
 canonical results are never overwritten. Each part first reproduces the published numbers
 (regression checks) and stops if they do not match.
 
-Usage:  python3 audit/revision_2026_10_02.py [r1] [r2] [r3]
+Usage:  python3 audit/delay_and_reactive_grid.py [r1] [r2] [r3]
 """
 from __future__ import annotations
 
@@ -29,12 +29,12 @@ sys.path.insert(0, str(HERE))
 
 import recompute_guardrail_actuation as g  # noqa: E402
 import recompute_reactive_baseline as rb  # noqa: E402
-import external_replication_2026_09_30 as ext  # noqa: E402
+import external_replication as ext  # noqa: E402
 
 PAPER = HERE.parent
 EXP = PAPER.parent / "experiments"
 VER = PAPER / "audit" / "verified_results"
-OUT = VER / "revision_2026-10-02"
+OUT = VER / "delay_pac_study"
 DATA = EXP / "data" / "service_timeseries_200_verified"
 
 DELTA_STRICT = 0.01
@@ -251,7 +251,7 @@ def run_r2() -> None:
     grids = {"alibaba200": (ali, "service_id")}
     for fam in ("huawei2023", "azure2019"):
         eg = external_grid(fam)
-        ref = pd.read_csv(VER / "external_replication_2026-09-30" / f"per_unit_{fam}_primary.csv.gz")
+        ref = pd.read_csv(VER / "external_replication_study" / f"per_unit_{fam}_primary.csv.gz")
         ref = ref[ref.family == "reactive"]
         mrg = ref.merge(eg, on=["unit_id", "phase", "threshold", "cooldown"], suffixes=("_ref", ""), validate="one_to_one")
         check(f"{fam} grid rows", len(mrg), len(ref))
@@ -371,5 +371,5 @@ if __name__ == "__main__":
     if "r3" in todo:
         run_r3()
     meta = {"python": platform.python_version(), "numpy": np.__version__, "pandas": pd.__version__,
-            "parts_run": sorted(todo), "protocol": "verified_results/revision_2026-10-02/protocol.json"}
+            "parts_run": sorted(todo), "protocol": "verified_results/delay_pac_study/protocol.json"}
     (OUT / f"methodology_{'_'.join(sorted(todo))}.json").write_text(json.dumps(meta, indent=2) + "\n")

@@ -321,7 +321,7 @@ def producers() -> None:
     splice_timeline()
     splice_statistics()
     run([py, str(audit / "recompute_overhead_accounting.py"), "--write"], OUT / "log_overhead.txt")
-    run([py, str(audit / "plot_phase6_figures.py"), "--write"], OUT / "log_phase6.txt")
+    run([py, str(audit / "plot_focused_figures.py"), "--write"], OUT / "log_phase6.txt")
     run([py, str(audit / "recompute_arima_causal.py"), "--diagnostic-figure-only"], OUT / "log_c4_figure.txt")
 
 

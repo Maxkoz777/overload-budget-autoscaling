@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Unit tests for the canonical capacity-unit rule (canonical_inputs_2026_10_03.py).
+"""Unit tests for the canonical capacity-unit rule (canonical_inputs.py).
 
 The rule is a documented relative boundary tolerance, not exact rational arithmetic:
 mu is read at full precision and scaled by 1 + 1e-12. These tests pin down its behaviour
 at an exact tie, inside the tolerance, and clearly outside it, and check that the ceiling,
 the overload count, and the clairvoyant denominator use mu consistently.
 
-Usage:  python3 audit/test_canonical_inputs_2026_10_03.py      (or: pytest audit/...)
+Usage:  python3 audit/test_canonical_inputs.py      (or: pytest audit/...)
 """
 from __future__ import annotations
 
@@ -22,7 +22,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import pandas as pd  # noqa: E402
 
 ORIGINAL_READ_CSV = pd.read_csv
-from canonical_inputs_2026_10_03 import TIE_REL, install  # noqa: E402
+from canonical_inputs import TIE_REL, install  # noqa: E402
 
 install()
 

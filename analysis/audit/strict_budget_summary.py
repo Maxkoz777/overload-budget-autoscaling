@@ -17,12 +17,12 @@ from scipy.stats import binomtest
 
 
 ROOT = Path(__file__).resolve().parents[1]
-REPLAY = ROOT / "review/readiness_checks_2026_09_23/independent_replay.csv"
+REPLAY = ROOT / "review/strict_budget_crosscheck/independent_replay.csv"
 RANK = ROOT / "audit/verified_results/rank_ablation/rank_ablation_per_service.csv"
 CAL = ROOT / "audit/verified_results/comparative/reactive_calibration_grid_per_service.csv"
 TEST = ROOT / "audit/verified_results/comparative/reactive_test_grid_per_service.csv"
 META = ROOT / "audit/verified_results/external_validity/service_characteristics.csv"
-INDEPENDENT_REACTIVE = ROOT / "review/readiness_checks_2026_09_23/reactive_reselection.csv"
+INDEPENDENT_REACTIVE = ROOT / "review/strict_budget_crosscheck/reactive_reselection.csv"
 OUT = ROOT / "audit/verified_results/strict_budget"
 KEY = ["service_id", "policy", "W", "guard", "calibration_budget"]
 

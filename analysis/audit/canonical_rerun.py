@@ -3,9 +3,9 @@
 sensitivity of the confirmatory sign test.
 
 R10  Re-runs every analysis on the Huawei 2023 and Azure 2019 traces with the canonical
-     capacity-unit rule of ``canonical_inputs_2026_10_03.py`` (full-precision parsing of
+     capacity-unit rule of ``canonical_inputs.py`` (full-precision parsing of
      ``units.csv`` and exact-tie resolution). The frozen scripts are imported unchanged;
-     their outputs are redirected to ``verified_results_canonical_2026-10-03/`` so the frozen
+     their outputs are redirected to ``verified_results_canonical/`` so the frozen
      results stay untouched. Their built-in regression checks compare against earlier
      outputs computed without the rule, so mismatches are recorded instead of stopping
      the run (``r10_check_log.csv``) and every changed summary row is listed in
@@ -18,7 +18,7 @@ R12  Sensitivity of confirmatory hypothesis H1 to the unit of analysis: discorda
      together). The frozen test itself is unchanged.
 
 Usage (from the paper/analysis directory):
-    python3 audit/revision_canonical_2026_10_03.py [ext r2 r4 r6 r7 r8 r9 r11 r12 compare]
+    python3 audit/canonical_rerun.py [ext r2 r4 r6 r7 r8 r9 r11 r12 compare]
 """
 from __future__ import annotations
 
@@ -35,22 +35,22 @@ from scipy.stats import binomtest
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
-from canonical_inputs_2026_10_03 import install  # noqa: E402
+from canonical_inputs import install  # noqa: E402
 
 install()
 
-import external_replication_2026_09_30 as ext  # noqa: E402
-import external_replication_summary_2026_09_30 as exs  # noqa: E402
-import revision_2026_10_02 as rev  # noqa: E402
-import revision_external_delay_2026_10_02 as xd  # noqa: E402
-import revision_pac_rank_2026_10_02 as r6  # noqa: E402
-import revision_round2_2026_10_02 as r7  # noqa: E402
-import revision_confirmatory_2026_10_02 as r8  # noqa: E402
-import revision_round3_2026_10_02 as r9  # noqa: E402
+import external_replication as ext  # noqa: E402
+import external_replication_summary as exs  # noqa: E402
+import delay_and_reactive_grid as rev  # noqa: E402
+import external_delay as xd  # noqa: E402
+import pac_rank_replay as r6  # noqa: E402
+import pac_window_grid as r7  # noqa: E402
+import confirmatory_replay as r8  # noqa: E402
+import pac_stride_sensitivity as r9  # noqa: E402
 
 PAPER = HERE.parent
 OLD = HERE / "verified_results"
-NEW = HERE / "verified_results_canonical_2026-10-03"
+NEW = HERE / "verified_results_canonical"
 EXT_DATA = PAPER.parent / "experiments" / "data" / "external_traces"
 FAMILIES = ("huawei2023", "azure2019")
 EXT_RUNS = (("huawei2023", "primary"), ("huawei2023", "p90"), ("azure2019", "primary"), ("azure2019", "K5"), ("azure2019", "K20"))
@@ -61,8 +61,8 @@ CHECKS: list[dict] = []
 def redirect() -> None:
     if not NEW.exists():
         shutil.copytree(OLD, NEW)
-    rev_out = NEW / "revision_2026-10-02"
-    ext_out = NEW / "external_replication_2026-09-30"
+    rev_out = NEW / "delay_pac_study"
+    ext_out = NEW / "external_replication_study"
     rev.VER = xd.VER = NEW
     for mod in (rev, xd, r7, r8, r9):
         mod.OUT = rev_out
@@ -187,7 +187,7 @@ def stage_r11() -> None:
 # R12 clustered sign test
 def stage_r12() -> None:
     out = []
-    for label, folder in (("frozen", OLD / "revision_2026-10-02"), ("canonical", NEW / "revision_2026-10-02")):
+    for label, folder in (("frozen", OLD / "delay_pac_study"), ("canonical", NEW / "delay_pac_study")):
         per = pd.read_csv(folder / "r8_confirmatory_per_unit.csv.gz")
         for budget in r8.BUDGETS:
             for tau in r8.TAUS:
@@ -213,18 +213,18 @@ def stage_r12() -> None:
 
 # Comparison report
 SUMMARIES = [
-    ("external_replication_2026-09-30/summary_policies.csv", ["family", "mu", "budget", "policy"]),
-    ("revision_2026-10-02/r2_extended_grid_summary.csv", None),
-    ("revision_2026-10-02/r4_delay_external_summary.csv", None),
-    ("revision_2026-10-02/r6_pac_summary.csv", None),
-    ("revision_2026-10-02/r7_pac_grid_summary.csv", None),
-    ("revision_2026-10-02/r7_window_selection.csv", None),
-    ("revision_2026-10-02/r8_window_selection.csv", None),
-    ("revision_2026-10-02/r8_confirmatory_summary.csv", None),
-    ("revision_2026-10-02/r8_confirmatory_hypotheses.csv", None),
-    ("revision_2026-10-02/r9_stride_summary.csv", None),
-    ("revision_2026-10-02/r9_cost_rule_selection.csv", None),
-    ("revision_2026-10-02/r9_cost_rule_summary.csv", None),
+    ("external_replication_study/summary_policies.csv", ["family", "mu", "budget", "policy"]),
+    ("delay_pac_study/r2_extended_grid_summary.csv", None),
+    ("delay_pac_study/r4_delay_external_summary.csv", None),
+    ("delay_pac_study/r6_pac_summary.csv", None),
+    ("delay_pac_study/r7_pac_grid_summary.csv", None),
+    ("delay_pac_study/r7_window_selection.csv", None),
+    ("delay_pac_study/r8_window_selection.csv", None),
+    ("delay_pac_study/r8_confirmatory_summary.csv", None),
+    ("delay_pac_study/r8_confirmatory_hypotheses.csv", None),
+    ("delay_pac_study/r9_stride_summary.csv", None),
+    ("delay_pac_study/r9_cost_rule_selection.csv", None),
+    ("delay_pac_study/r9_cost_rule_summary.csv", None),
 ]
 
 
@@ -269,6 +269,6 @@ if __name__ == "__main__":
             pd.DataFrame(CHECKS).to_csv(NEW / "r10_check_log.csv", mode="a", header=not (NEW / "r10_check_log.csv").exists(), index=False)
             CHECKS.clear()
     meta = {"python": platform.python_version(), "numpy": np.__version__, "pandas": pd.__version__,
-            "stages": todo, "canonical_rule": "canonical_inputs_2026_10_03.py (round_trip parsing; mu *= 1 + 1e-12)",
+            "stages": todo, "canonical_rule": "canonical_inputs.py (round_trip parsing; mu *= 1 + 1e-12)",
             "inputs_sha256": manifest()}
     (NEW / f"methodology_r10_{'_'.join(todo)}.json").write_text(json.dumps(meta, indent=2) + "\n")

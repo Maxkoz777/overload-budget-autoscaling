@@ -14,9 +14,9 @@ Run from the repository root unless the path starts with `analysis/`.
 | `experiments/src/build_service_timeseries.py` | Builds regular one-minute series for the 20 focused services. |
 | `experiments/src/select_services_200.py` | Selects the fixed 200-service suite by burstiness stratum (seed 42). |
 | `analysis/audit/rebuild_verified_service_series.py` | Rebuilds the 200 service series from `processed/final/` and checks them against the selection file; compares with the project's historical series only if those files exist. |
-| `analysis/audit/verify_phase8_upstream.py` | Read-only check of the 200 series against `processed/final/`. |
-| `analysis/audit/prep_external_traces_2026_09_30.py` | Huawei 2023 (days 28–60) and Azure 2019 minute series and unit selection for the external replication. |
-| `analysis/audit/prep_huawei_confirmatory_2026_10_02.py` | Huawei 2023 series for the three untouched confirmatory periods (frozen by SHA-256). |
+| `analysis/audit/verify_series_upstream.py` | Read-only check of the 200 series against `processed/final/`. |
+| `analysis/audit/prepare_external_traces.py` | Huawei 2023 (days 28–60) and Azure 2019 minute series and unit selection for the external replication. |
+| `analysis/audit/prepare_confirmatory_periods.py` | Huawei 2023 series for the three untouched confirmatory periods (frozen by SHA-256). |
 
 ## Core library (`experiments/src/`)
 
@@ -71,7 +71,7 @@ Imported by the experiment and analysis scripts.
 | `experiments/src/run_synthetic_dkw.py` | Controlled i.i.d. experiment for the DKW localisation of the conformal quantile. |
 | `analysis/audit/recompute_final_closure_downstream.py` | Installs the canonical focused forecasts and recomputes every focused-tier result; history-only checks are skipped when their files are absent. |
 | `analysis/audit/recompute_focused_learned_downstream.py` | Installs one past-only refit and recomputes the focused outputs. |
-| `analysis/audit/phase8_focused_fill_sensitivity.py` | Imputation sensitivity of the focused series. |
+| `analysis/audit/focused_fill_sensitivity.py` | Imputation sensitivity of the focused series. |
 | `analysis/audit/recompute_overhead_accounting.py` | Predictor timing logs reconciled with replay-only costs. |
 | `analysis/audit/recompute_timeline_sensitivity.py` | Forecasting/calibration timeline and warm-start sensitivity. |
 
@@ -96,54 +96,54 @@ Imported by the experiment and analysis scripts.
 | `analysis/audit/recompute_preprocessing_sensitivity.py` | Sensitivity to gap filling in the 200 series. |
 | `analysis/audit/recompute_guardrail_actuation.py` | Offset mechanism, recovery, and closed-loop delay. |
 | `analysis/audit/recompute_external_validity.py` | Service characteristics used to scope external-validity claims. |
-| `analysis/review/readiness_checks_2026_09_23.py` | Independent re-implementation of the strict-budget replay rows. |
+| `analysis/review/strict_budget_crosscheck.py` | Independent re-implementation of the strict-budget replay rows. |
 | `analysis/audit/strict_budget_summary.py` | Strict 1% budget comparison (Table 3). |
 | `analysis/audit/budget_utilisation.py` | Budget utilisation of the frozen 1% replays. |
-| `analysis/audit/final_extension_2026_09_29.py` | Resource axis, scale strata, cost decomposition (protocol 2026-09-29). |
-| `analysis/audit/exact_envelope_2026_09_29.py` | Exact resource–overload envelope. |
+| `analysis/audit/resource_axis_extension.py` | Resource axis, scale strata, cost decomposition. |
+| `analysis/audit/resource_overload_envelope.py` | Exact resource–overload envelope. |
 
 ## External replication (Huawei 2023, Azure 2019)
 
 | Script | Purpose |
 |---|---|
-| `analysis/audit/external_replication_2026_09_30.py` | Replication under the protocol of 2026-09-30; `regress-alibaba` checks the Alibaba results first. |
-| `analysis/audit/external_replication_summary_2026_09_30.py` | Summaries, called by `external_replication_2026_09_30.py summarise`. |
+| `analysis/audit/external_replication.py` | External replication under its frozen protocol; `regress-alibaba` checks the Alibaba results first. |
+| `analysis/audit/external_replication_summary.py` | Summaries, called by `external_replication.py summarise`. |
 
-## Actuation delay, PAC-h, confirmatory replay (protocol 2026-10-02, addenda R1–R9)
-
-| Script | Purpose |
-|---|---|
-| `analysis/audit/revision_2026_10_02.py` | R1 delay at a strict budget, R2 extended reactive grid, R3 horizon-aligned scores; shared helpers. |
-| `analysis/audit/revision_subset_2026_10_02.py` | Pre-test non-trivial subset of 95 services. |
-| `analysis/audit/revision_external_delay_2026_10_02.py` | R4: closed-loop delay on Huawei and Azure. |
-| `analysis/audit/revision_alibaba_delay_2026_10_02.py` | R5: closed-loop delay on Alibaba with the same policies. |
-| `analysis/audit/revision_pac_rank_2026_10_02.py` | R6: PAC (training-conditional) rank on three traces. |
-| `analysis/audit/revision_round2_2026_10_02.py` | R7: PAC-h window and η grid, one-step ablation, pre-test window rule, conformal test martingales. |
-| `analysis/audit/revision_confirmatory_2026_10_02.py` | R8: confirmatory replay on the untouched Huawei periods (frozen by SHA-256). |
-| `analysis/audit/revision_round3_2026_10_02.py` | R9: stride-(τ+1) PAC rank and cost-aware window rule. |
-
-## Canonical capacity units, matched-rank ablation, clustered sensitivity (2026-10-03, R10–R12)
+## Actuation delay, PAC-h, confirmatory replay (addenda R1–R9)
 
 | Script | Purpose |
 |---|---|
-| `analysis/audit/canonical_inputs_2026_10_03.py` | Canonical reading of capacity units: full-precision parsing of `units.csv` and a documented relative boundary tolerance of 1e-12 for exact ties. |
-| `analysis/audit/test_canonical_inputs_2026_10_03.py` | Unit tests of the canonical rule: exact tie, value inside the tolerance, value outside it, consistency of the capacity mapping. |
+| `analysis/audit/delay_and_reactive_grid.py` | R1 delay at a strict budget, R2 extended reactive grid, R3 horizon-aligned scores; shared helpers. |
+| `analysis/audit/pretest_subset.py` | Pre-test non-trivial subset of 95 services. |
+| `analysis/audit/external_delay.py` | R4: closed-loop delay on Huawei and Azure. |
+| `analysis/audit/alibaba_delay.py` | R5: closed-loop delay on Alibaba with the same policies. |
+| `analysis/audit/pac_rank_replay.py` | R6: PAC (training-conditional) rank on three traces. |
+| `analysis/audit/pac_window_grid.py` | R7: PAC-h window and η grid, one-step ablation, pre-test window rule, conformal test martingales. |
+| `analysis/audit/confirmatory_replay.py` | R8: confirmatory replay on the untouched Huawei periods (frozen by SHA-256). |
+| `analysis/audit/pac_stride_sensitivity.py` | R9: stride-(τ+1) PAC rank and cost-aware window rule. |
+
+## Canonical capacity units, matched-rank ablation, clustered sensitivity (R10–R12)
+
+| Script | Purpose |
+|---|---|
+| `analysis/audit/canonical_inputs.py` | Canonical reading of capacity units: full-precision parsing of `units.csv` and a documented relative boundary tolerance of 1e-12 for exact ties. |
+| `analysis/audit/test_canonical_inputs.py` | Unit tests of the canonical rule: exact tie, value inside the tolerance, value outside it, consistency of the capacity mapping. |
 | `analysis/audit/run_canonical.py` | Runs any analysis script with the canonical rule installed, without modifying the script. |
-| `analysis/audit/revision_canonical_2026_10_03.py` | R10 re-run of all Huawei/Azure analyses under the canonical rule with a list of changed values; R11 matched-rank ablation; R12 function-clustered confirmatory sign test. |
-| `analysis/audit/verify_confirmatory_inputs_2026_10_03.py` | Checks the frozen code hashes and the content of the prepared confirmatory inputs. |
+| `analysis/audit/canonical_rerun.py` | R10 re-run of all Huawei/Azure analyses under the canonical rule with a list of changed values; R11 matched-rank ablation; R12 function-clustered confirmatory sign test. |
+| `analysis/audit/verify_confirmatory_inputs.py` | Checks the frozen code hashes and the content of the prepared confirmatory inputs. |
 
 ## Figures and table rows
 
 | Script | Purpose |
 |---|---|
-| `analysis/audit/plot_delay_three_traces_2026_10_02.py` | Fig. 2: compliance against actuation delay on three traces (reads the canonical results when present). |
-| `analysis/audit/plot_cost_compliance_tau1_2026_10_02.py` | Fig. 3: cost against compliance at τ = 1 (reads the canonical results when present). |
-| `analysis/audit/plot_external_replication_2026_09_30.py` | External-replication figure and LaTeX table rows. |
-| `analysis/audit/plot_final_extension_2026_09_29.py` | Resource-envelope and guard-characterisation figures. |
-| `analysis/audit/tables_final_extension_2026_09_29.py` | LaTeX rows: scale strata, cost decomposition, pre-test-selected points. |
-| `analysis/audit/plot_verified_phase2.py` | 200-service coverage, strata, margin-factorial, and percentile figures. |
-| `analysis/audit/plot_phase6_figures.py` | Focused frontier, calibration, and window-sensitivity figures. |
-| `analysis/audit/plot_phase7_dkw.py` | DKW localisation figures. |
+| `analysis/audit/plot_delay_compliance.py` | Fig. 2: compliance against actuation delay on three traces (reads the canonical results when present). |
+| `analysis/audit/plot_cost_vs_compliance.py` | Fig. 3: cost against compliance at τ = 1 (reads the canonical results when present). |
+| `analysis/audit/plot_external_replication.py` | External-replication figure and LaTeX table rows. |
+| `analysis/audit/plot_resource_axis.py` | Resource-envelope and guard-characterisation figures. |
+| `analysis/audit/tables_resource_axis.py` | LaTeX rows: scale strata, cost decomposition, pre-test-selected points. |
+| `analysis/audit/plot_verified_suite.py` | 200-service coverage, strata, margin-factorial, and percentile figures. |
+| `analysis/audit/plot_focused_figures.py` | Focused frontier, calibration, and window-sensitivity figures. |
+| `analysis/audit/plot_dkw.py` | DKW localisation figures. |
 | `experiments/src/generate_figures.py` | Original focused-tier figures (exploratory; needs seaborn). |
 | `experiments/src/generate_ls_figures.py` | Original 200-service figures and table fragments. |
 | `experiments/src/replot_exp3.py` | Re-plots EXP-3 from its saved CSV. |

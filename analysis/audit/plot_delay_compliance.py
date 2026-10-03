@@ -9,9 +9,9 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 HERE = Path(__file__).resolve().parent
-R = HERE / "verified_results" / "revision_2026-10-02"
-C = HERE / "verified_results_canonical_2026-10-03" / "revision_2026-10-02"
-if C.exists():  # canonical capacity units (revision_canonical_2026_10_03.py), as reported in the article
+R = HERE / "verified_results" / "delay_pac_study"
+C = HERE / "verified_results_canonical" / "delay_pac_study"
+if C.exists():  # canonical capacity units (canonical_rerun.py), as reported in the article
     R = C
 out = Path(sys.argv[1]) if len(sys.argv) > 1 else HERE.parent / "figures" / "verified" / "fig_delay_three_traces"
 ali = pd.read_csv(R / "r5_delay_alibaba_summary.csv").query("cohort == 'all200'").assign(dataset="alibaba200")

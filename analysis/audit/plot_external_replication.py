@@ -11,7 +11,7 @@ from matplotlib.lines import Line2D
 import pandas as pd
 
 PAPER = Path(__file__).resolve().parents[1]
-OUT = PAPER / "audit/verified_results/external_replication_2026-09-30"
+OUT = PAPER / "audit/verified_results/external_replication_study"
 FIG = PAPER / "figures/verified"
 FAM = {"conformal": ("#1f5fa8", "o", "Conformal margin family"),
        "gaussian": ("#d0781c", "s", "Gaussian margin family"),

@@ -17,7 +17,7 @@ import numpy as np
 import pandas as pd
 
 PAPER = Path(__file__).resolve().parents[1]
-EXT = PAPER / "audit/verified_results/final_extension_2026-09-29"
+EXT = PAPER / "audit/verified_results/resource_axis_study"
 FAMILIES = ("conformal", "gaussian", "reactive", "pure_predictive")
 
 

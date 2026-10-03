@@ -34,15 +34,15 @@ analysis/figures/
 analysis/audit/*_results/
 !analysis/audit/verified_results/
 analysis/audit/verified_results/*
-!analysis/audit/verified_results/final_extension_2026-09-29/
-analysis/audit/verified_results/final_extension_2026-09-29/*
-!analysis/audit/verified_results/final_extension_2026-09-29/protocol.json
-!analysis/audit/verified_results/external_replication_2026-09-30/
-analysis/audit/verified_results/external_replication_2026-09-30/*
-!analysis/audit/verified_results/external_replication_2026-09-30/protocol.json
-!analysis/audit/verified_results/revision_2026-10-02/
-analysis/audit/verified_results/revision_2026-10-02/*
-!analysis/audit/verified_results/revision_2026-10-02/protocol.json
+!analysis/audit/verified_results/resource_axis_study/
+analysis/audit/verified_results/resource_axis_study/*
+!analysis/audit/verified_results/resource_axis_study/protocol.json
+!analysis/audit/verified_results/external_replication_study/
+analysis/audit/verified_results/external_replication_study/*
+!analysis/audit/verified_results/external_replication_study/protocol.json
+!analysis/audit/verified_results/delay_pac_study/
+analysis/audit/verified_results/delay_pac_study/*
+!analysis/audit/verified_results/delay_pac_study/protocol.json
 analysis/audit/*.csv
 analysis/review/*/
 
@@ -55,5 +55,5 @@ analysis/review/*/
 *.tar.gz
 *.tar.xz
 
-# Canonical re-run outputs (revision_canonical_2026_10_03.py)
-analysis/audit/verified_results_canonical_*/
+# Canonical re-run outputs (canonical_rerun.py)
+analysis/audit/verified_results_canonical/

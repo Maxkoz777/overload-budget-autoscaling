@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """R4: closed-loop actuation delay on the Huawei 2023 and Azure Functions 2019 replication traces.
 
-Protocol: verified_results/revision_2026-10-02/protocol.json, key "R4_external_delay_addendum".
-Semantics follow the canonical external replay (external_replication_2026_09_30.py) exactly at
+Protocol: verified_results/delay_pac_study/protocol.json, key "R4_external_delay_addendum".
+Semantics follow the canonical external replay (external_replication.py) exactly at
 tau = 0, which is checked against the stored per-unit rows before anything is written.
 
-Usage:  python3 audit/revision_external_delay_2026_10_02.py [huawei2023] [azure2019]
+Usage:  python3 audit/external_delay.py [huawei2023] [azure2019]
 """
 from __future__ import annotations
 
@@ -20,11 +20,11 @@ import pandas as pd
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
-import external_replication_2026_09_30 as ext  # noqa: E402
+import external_replication as ext  # noqa: E402
 
 PAPER = HERE.parent
 VER = PAPER / "audit" / "verified_results"
-OUT = VER / "revision_2026-10-02"
+OUT = VER / "delay_pac_study"
 TAUS = (0, 1, 2, 5)
 BUDGETS = (0.01, 0.05)
 W = 240
@@ -182,7 +182,7 @@ def run(family: str) -> pd.DataFrame:
 
     per = pd.DataFrame(rows, columns=["dataset", "budget", "policy", "alpha", "tau", "unit_id", "overload_fraction", "relative_cost", "overload_count"])
     # regression of margin policies at tau = 0 against the stored external replay
-    ref = pd.read_csv(VER / "external_replication_2026-09-30" / f"per_unit_{family}_primary.csv.gz")
+    ref = pd.read_csv(VER / "external_replication_study" / f"per_unit_{family}_primary.csv.gz")
     for budget in BUDGETS:
         for policy, alpha, cid in (("B6", 1.0, f"conformal_W240_d{budget:g}_a1_g1"), ("B6", 2.0, f"conformal_W240_d{budget:g}_a2_g1"),
                                    ("B7", 1.0, f"conformal_W240_d{budget:g}_a1_g0"), ("B6-h", 1.0, f"conformal_W240_d{budget:g}_a1_g1")):

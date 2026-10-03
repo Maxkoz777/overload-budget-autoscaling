@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """R6: training-conditional (PAC) residual rank, alone and with horizon-aligned scores, on three traces.
 
-Protocol: verified_results/revision_2026-10-02/protocol.json, key "R6_pac_rank_addendum".
-Usage:  python3 audit/revision_pac_rank_2026_10_02.py [alibaba200] [huawei2023] [azure2019]
+Protocol: verified_results/delay_pac_study/protocol.json, key "R6_pac_rank_addendum".
+Usage:  python3 audit/pac_rank_replay.py [alibaba200] [huawei2023] [azure2019]
 """
 from __future__ import annotations
 
@@ -19,8 +19,8 @@ from scipy.stats import binom
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
-import revision_2026_10_02 as rev  # noqa: E402
-import revision_external_delay_2026_10_02 as xd  # noqa: E402
+import delay_and_reactive_grid as rev  # noqa: E402
+import external_delay as xd  # noqa: E402
 g, ext = rev.g, xd.ext
 
 ETA = 0.05

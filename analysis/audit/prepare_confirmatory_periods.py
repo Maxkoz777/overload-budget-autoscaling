@@ -3,7 +3,7 @@
 
 Contiguous runs of the private Huawei Cloud 2023 trace that no earlier analysis used
 (the external replication used trace days 28-60): days 0-18, 147-165, 168-184.
-Unit selection and capacity units follow prep_external_traces_2026_09_30.huawei() exactly,
+Unit selection and capacity units follow prepare_external_traces.huawei() exactly,
 applied to relative days 0-7 of each run.
 """
 from __future__ import annotations

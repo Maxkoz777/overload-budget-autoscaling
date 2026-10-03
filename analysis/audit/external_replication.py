@@ -7,14 +7,14 @@ with the shared offset (h=2, rho=0.70, gamma=1), overload d_t > mu * capacity_t,
 and cost C = sum k + 0.05 sum |dk| + 10 * #overload.
 
 Stages (each fits in a few minutes; outputs are written under
-audit/verified_results/external_replication_2026-09-30/):
-    python3 audit/external_replication_2026_09_30.py regress-alibaba
-    python3 audit/external_replication_2026_09_30.py run --family huawei2023 --mu primary
-    python3 audit/external_replication_2026_09_30.py run --family huawei2023 --mu p90
-    python3 audit/external_replication_2026_09_30.py run --family azure2019 --mu primary
-    python3 audit/external_replication_2026_09_30.py run --family azure2019 --mu K5
-    python3 audit/external_replication_2026_09_30.py run --family azure2019 --mu K20
-    python3 audit/external_replication_2026_09_30.py summarise
+audit/verified_results/external_replication_study/):
+    python3 audit/external_replication.py regress-alibaba
+    python3 audit/external_replication.py run --family huawei2023 --mu primary
+    python3 audit/external_replication.py run --family huawei2023 --mu p90
+    python3 audit/external_replication.py run --family azure2019 --mu primary
+    python3 audit/external_replication.py run --family azure2019 --mu K5
+    python3 audit/external_replication.py run --family azure2019 --mu K20
+    python3 audit/external_replication.py summarise
 Numba is used when available; the pure-Python fallback gives identical results.
 """
 from __future__ import annotations
@@ -39,7 +39,7 @@ except ImportError:  # pragma: no cover - identical semantics, slower
 PAPER = Path(__file__).resolve().parents[1]
 EXP = PAPER.parent / "experiments"
 EXT = EXP / "data" / "external_traces"
-OUT = PAPER / "audit" / "verified_results" / "external_replication_2026-09-30"
+OUT = PAPER / "audit" / "verified_results" / "external_replication_study"
 PROTOCOL = OUT / "protocol.json"
 M = 1440
 W, W_LONG = 240, 1440
@@ -328,5 +328,5 @@ if __name__ == "__main__":
     elif a.stage == "run":
         run_family(a.family, a.mu)
     else:
-        from external_replication_summary_2026_09_30 import summarise  # noqa: E402
+        from external_replication_summary import summarise  # noqa: E402
         summarise()

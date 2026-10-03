@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """R5: Alibaba delayed actuation at delta in {0.01, 0.05} with the same policy set as R4.
 
-Protocol: verified_results/revision_2026-10-02/protocol.json, key "R5_alibaba_delay_symmetric_addendum".
-Usage:  python3 audit/revision_alibaba_delay_2026_10_02.py
+Protocol: verified_results/delay_pac_study/protocol.json, key "R5_alibaba_delay_symmetric_addendum".
+Usage:  python3 audit/alibaba_delay.py
 """
 from __future__ import annotations
 
@@ -17,7 +17,7 @@ import pandas as pd
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
-import revision_2026_10_02 as rev  # noqa: E402
+import delay_and_reactive_grid as rev  # noqa: E402
 g = rev.g
 
 BUDGETS = (0.01, 0.05)

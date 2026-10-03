@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """R8: confirmatory replay on untouched Huawei 2023 runs (days 0-18, 147-165, 168-184).
 
-Protocol (frozen before the run, with this file's SHA-256): verified_results/revision_2026-10-02/protocol.json,
+Protocol (frozen before the run, with this file's SHA-256): verified_results/delay_pac_study/protocol.json,
 key "R8_confirmatory". Proposed method: margin-only PAC rank (eta = 0.05) with horizon-aligned scores, window
 chosen by the pre-test rule on calibration days 8-9. Comparators: B6, B6-h (W = 240, conformal rank, offset),
 pre-test-selected reactive B1 (original grid, budget delta) and the strict reactive controller (extended grid,
 calibration budget delta/4).
-Usage:  python3 audit/revision_confirmatory_2026_10_02.py
+Usage:  python3 audit/confirmatory_replay.py
 """
 from __future__ import annotations
 
@@ -22,9 +22,9 @@ from scipy.stats import binomtest
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
-import revision_2026_10_02 as rev  # noqa: E402
-import revision_external_delay_2026_10_02 as xd  # noqa: E402
-import revision_round2_2026_10_02 as r7  # noqa: E402
+import delay_and_reactive_grid as rev  # noqa: E402
+import external_delay as xd  # noqa: E402
+import pac_window_grid as r7  # noqa: E402
 ext = xd.ext
 
 M = 1440

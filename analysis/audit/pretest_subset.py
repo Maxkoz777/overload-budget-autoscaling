@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Pre-test 'non-trivial' subset (revision 2026-10-02): services whose maximum demand on the
+"""Pre-test 'non-trivial' subset services whose maximum demand on the
 calibration days 8-9 exceeds one capacity unit (mu = 1). Uses only canonical per-service rows."""
 import json
 from pathlib import Path
@@ -11,7 +11,7 @@ HERE = Path(__file__).resolve().parent
 PAPER = HERE.parent
 EXP = PAPER.parent / "experiments"
 VER = HERE / "verified_results"
-OUT = VER / "revision_2026-10-02"
+OUT = VER / "delay_pac_study"
 
 spec = {s["name"]: s for s in json.loads((EXP / "data/splits/split_definition.json").read_text())["splits"]}["calibration"]
 sel = pd.read_csv(EXP / "data/splits/selected_services_200.csv")

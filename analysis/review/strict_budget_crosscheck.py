@@ -1,6 +1,6 @@
 """Independent, read-only replay checks.
 
-Writes only review/readiness_checks_2026_09_23/.
+Writes only review/strict_budget_crosscheck/.
 Window 1440 is an explicitly retrospective sensitivity, not a new primary policy.
 """
 from pathlib import Path
@@ -12,7 +12,7 @@ from scipy.stats import norm
 
 ROOT = Path(__file__).resolve().parents[1]
 EXP = ROOT.parent / 'experiments'
-OUT = ROOT / 'review/readiness_checks_2026_09_23'
+OUT = ROOT / 'review/strict_budget_crosscheck'
 OUT.mkdir(exist_ok=True)
 selection = pd.read_csv(EXP / 'data/splits/selected_services_200.csv')
 split = {s['name']: s for s in json.loads((EXP / 'data/splits/split_definition.json').read_text())['splits']}
@@ -82,11 +82,14 @@ m=per[per.W.eq(240)&per.method.ne('gaussian_z4')].merge(canonical,on=['service_i
 assert len(m)==2400
 errors={'canonical_rows':len(m),'max_ol_error':float(abs(m.ol-m.overload_fraction).max()),'max_cost_error':float(abs(m.rc-m.relative_cost).max())}
 assert errors['max_ol_error']<1e-12 and errors['max_cost_error']<1e-12
-other=pd.read_csv(ROOT/'review/round2_checks_2026_09_23/frontier_all200.csv')
-other=other[other.method.eq('conformal')&other.knob.isin([.05,.01])].rename(columns={'svc':'service_id','knob':'delta','ol':'other_ol','rc':'other_rc'})
-m=per[per.method.eq('conformal')].merge(other,on=['service_id','W','delta','method','guard'],validate='one_to_one')
-errors.update(round2_rows=len(m),round2_max_ol_error=float(abs(m.ol-m.other_ol).max()),round2_max_cost_error=float(abs(m.rc-m.other_rc).max()))
-assert len(m)==1600 and errors['round2_max_ol_error']<1e-12 and errors['round2_max_cost_error']<1e-12
+# Optional comparison with an earlier saved implementation from the project history.
+earlier=ROOT/'review/round2_checks_2026_09_23/frontier_all200.csv'
+if earlier.exists():
+    other=pd.read_csv(earlier)
+    other=other[other.method.eq('conformal')&other.knob.isin([.05,.01])].rename(columns={'svc':'service_id','knob':'delta','ol':'other_ol','rc':'other_rc'})
+    m=per[per.method.eq('conformal')].merge(other,on=['service_id','W','delta','method','guard'],validate='one_to_one')
+    errors.update(round2_rows=len(m),round2_max_ol_error=float(abs(m.ol-m.other_ol).max()),round2_max_cost_error=float(abs(m.rc-m.other_rc).max()))
+    assert len(m)==1600 and errors['round2_max_ol_error']<1e-12 and errors['round2_max_cost_error']<1e-12
 
 # Reselect reactive parameters using only archived calibration outcomes.
 cal=pd.read_csv(ROOT/'audit/verified_results/comparative/reactive_calibration_grid_per_service.csv')

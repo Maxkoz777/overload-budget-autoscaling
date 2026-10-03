@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Figures for the 2026-09-29 final extension (read-only on result CSVs).
+"""Figures for the resource-axis extension (read-only on result CSVs).
 
 1. fig_resource_overload_envelope: mean held-out overload versus mean
    normalised resource cost for fleet-uniform configurations, the descriptive
@@ -22,7 +22,7 @@ import numpy as np
 import pandas as pd
 
 PAPER = Path(__file__).resolve().parents[1]
-EXT = PAPER / "audit/verified_results/final_extension_2026-09-29"
+EXT = PAPER / "audit/verified_results/resource_axis_study"
 GUARD = PAPER / "audit/verified_results/guardrail"
 FIG = PAPER / "figures/verified"
 STYLE = {"font.size": 9, "axes.spines.top": False, "axes.spines.right": False}
