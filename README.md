@@ -2,7 +2,7 @@
 
 Code for the article
 
-> M. Kozhinov, M. Mazzara. *How Much Headroom Is Enough? Overload Budgets for Predictive Autoscaling under Actuation Delay* Submitted to the *Journal of Cloud Computing* (2026).
+> M. Kozhinov, M. Mazzara. *How Much Headroom Is Enough? Overload Budgets for Predictive Autoscaling under Actuation Delay.* Submitted to the *Journal of Cloud Computing* (2026).
 
 This repository contains **scripts only**. It includes no trace data, no preprocessed series, and no precomputed results. All three traces used in the article are public. Download them from their owners ([`docs/DATA.md`](docs/DATA.md)), and the scripts rebuild every number, table, and figure from them.
 
