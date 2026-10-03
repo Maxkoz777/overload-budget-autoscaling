@@ -378,6 +378,6 @@ python3 audit/verify_confirmatory_inputs.py      # code hashes; data hashes too 
 
 ## Citation and licence
 
-- **Citation.** See [`CITATION.cff`](CITATION.cff) or the "Cite this repository" button. The code version used in the article is archived as v1.0.0 at https://doi.org/10.5281/zenodo.23125235; https://doi.org/10.5281/zenodo.23125234 always points to the latest version. The article's DOI will be added on publication.
+- **Citation.** See [`CITATION.cff`](CITATION.cff) or the "Cite this repository" button. The code version cited in the article is v1.1.0, archived at https://doi.org/10.5281/zenodo.23125637; v1.0.0 (https://doi.org/10.5281/zenodo.23125235) keeps the original file names, and https://doi.org/10.5281/zenodo.23125234 always points to the latest version. The article's DOI will be added on publication.
 - **Code licence.** The code is released under the MIT License ([`LICENSE`](LICENSE)).
 - **Trace data.** The traces are not covered by this licence: they are published by their owners under their own terms, and this repository redistributes none of them ([`docs/DATA.md`](docs/DATA.md)).

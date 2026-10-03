@@ -20,6 +20,9 @@ identifiers:
     value: 10.5281/zenodo.23125234
     description: "Concept DOI (all versions)"
   - type: doi
+    value: 10.5281/zenodo.23125637
+    description: "Version v1.1.0, cited in the article"
+  - type: doi
     value: 10.5281/zenodo.23125235
     description: "Version v1.0.0 (original file names; frozen confirmatory code byte for byte)"
 preferred-citation:
