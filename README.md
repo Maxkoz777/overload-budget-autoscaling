@@ -1,5 +1,7 @@
 # How Much Headroom Is Enough? Overload Budgets for Predictive Autoscaling under Actuation Delay (code)
 
+[![DOI](https://zenodo.org/badge/1403471325.svg)](https://doi.org/10.5281/zenodo.23125234)
+
 Code for the article
 
 > M. Kozhinov, M. Mazzara. *How Much Headroom Is Enough? Overload Budgets for Predictive Autoscaling under Actuation Delay.* Submitted to the *Journal of Cloud Computing* (2026).
@@ -380,6 +382,6 @@ PY
 
 ## Citation and licence
 
-- **Citation.** See [`CITATION.cff`](CITATION.cff). The DOIs of the article and of the archived release will be added on publication.
+- **Citation.** See [`CITATION.cff`](CITATION.cff) or the "Cite this repository" button. The code version used in the article is archived as v1.0.0 at https://doi.org/10.5281/zenodo.23125235; https://doi.org/10.5281/zenodo.23125234 always points to the latest version. The article's DOI will be added on publication.
 - **Code licence.** The code is released under the MIT License ([`LICENSE`](LICENSE)).
 - **Trace data.** The traces are not covered by this licence: they are published by their owners under their own terms, and this repository redistributes none of them ([`docs/DATA.md`](docs/DATA.md)).

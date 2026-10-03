@@ -12,6 +12,16 @@ authors:
     email: m.mazzara@innopolis.ru
 type: software
 license: MIT
+version: v1.0.0
+doi: 10.5281/zenodo.23125234
+repository-code: "https://github.com/Maxkoz777/overload-budget-autoscaling"
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.23125234
+    description: "Concept DOI (all versions)"
+  - type: doi
+    value: 10.5281/zenodo.23125235
+    description: "Version v1.0.0, used in the article"
 preferred-citation:
   type: article
   title: "How Much Headroom Is Enough? Overload Budgets for Predictive Autoscaling under Actuation Delay"
