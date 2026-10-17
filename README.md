@@ -100,7 +100,7 @@ Notes on the layout:
   - the canonical learned-forecaster fits record macOS 15.5 (Apple M1);
   - the revision analyses R1–R12 record Python 3.13.15, NumPy 2.5.3, and pandas 3.0.5.
 - **Verified for reproduction.** The clean-folder check below used Python 3.13.15, NumPy 2.5.3, and pandas 3.0.5. The unit tests of the canonical rule also pass with pandas 2.3.3 and NumPy 2.2.6.
-- **Operating system.** The replay and analysis scripts use NumPy, pandas, and SciPy only and do not depend on the operating system.
+- **Operating system.** The replay and analysis scripts use NumPy, pandas, and SciPy only and do not depend on the operating system. The three scripts that use `multiprocessing` hand their state to every worker explicitly, so they give the same results with the fork, spawn, and forkserver start methods: `pac_rank_replay.py`, `alibaba_delay.py`, and `run_delay_and_reactive_grid.py`, which runs the frozen `delay_and_reactive_grid.py` (step 7).
 - **Learned forecasters.** The canonical fits (`analysis/audit/final_closure_local_runs.py`) record the executing environment and refuse to run outside macOS; `--smoke` runs a short test on other systems.
 - **Randomness.** Seeds are listed in [`analysis/reproducibility/SEEDS.md`](analysis/reproducibility/SEEDS.md). Deterministic replays use no random numbers.
 
@@ -269,7 +269,7 @@ Protocol with addenda R1–R9: `analysis/audit/verified_results/delay_pac_study/
 
 ```bash
 cd analysis
-python3 audit/delay_and_reactive_grid.py r1 r2 r3          # R1–R3: delay at 1%, extended reactive grid, horizon-aligned scores
+python3 audit/run_delay_and_reactive_grid.py r1 r2 r3      # R1–R3: delay at 1%, extended reactive grid, horizon-aligned scores
 python3 audit/pretest_subset.py            # pre-test non-trivial subset (95 services)
 python3 audit/external_delay.py    # R4: delay on Huawei and Azure
 python3 audit/alibaba_delay.py     # R5: delay on Alibaba, same policies
@@ -279,6 +279,8 @@ python3 audit/prepare_confirmatory_periods.py   # R8 data: three untouched Huawe
 python3 audit/confirmatory_replay.py      # R8: confirmatory replay (frozen protocol)
 python3 audit/pac_stride_sensitivity.py            # R9: stride PAC rank, cost-aware window rule
 ```
+
+`delay_and_reactive_grid.py` is one of the six frozen confirmatory scripts and is kept byte for byte. Its workers read module state that the parent sets before it creates the pool, which only the fork start method passes on. `run_delay_and_reactive_grid.py` hands that state to every worker and runs the same parts with the same outputs. Use it on macOS and Windows, where spawn is the default, and with Python 3.14 or later on Linux, where the default is forkserver.
 
 The figures are drawn after step 7b, from the canonical results.
 
@@ -309,9 +311,9 @@ python3 audit/plot_cost_vs_compliance.py  # Fig. 3
 python3 experiments/src/run_synthetic_dkw.py              # controlled i.i.d. DKW experiment
 python3 experiments/src/run_supplemental_experiments.py   # alpha sweep and other focused-tier sensitivities
 cd analysis
-python3 audit/plot_focused_figures.py
-python3 audit/plot_dkw.py
-python3 audit/recompute_overhead_accounting.py
+python3 audit/plot_focused_figures.py --write
+python3 audit/plot_dkw.py --write
+python3 audit/recompute_overhead_accounting.py --write
 python3 audit/focused_fill_sensitivity.py
 python3 audit/verify_series_upstream.py                   # 200 series against processed/final
 ```
@@ -325,7 +327,7 @@ Script paths are relative to `analysis/audit/` unless noted.
 | Result | Script |
 |---|---|
 | Fig. 1, control loop of PAC-h | schematic, no data |
-| Fig. 2 and Table 1, actuation delay on three traces | `delay_and_reactive_grid.py` (r1, r3), `external_delay.py`, `alibaba_delay.py`, `pac_window_grid.py`, `plot_delay_compliance.py` |
+| Fig. 2 and Table 1, actuation delay on three traces | `run_delay_and_reactive_grid.py` (r1, r3), `external_delay.py`, `alibaba_delay.py`, `pac_window_grid.py`, `plot_delay_compliance.py` |
 | Fig. 3, cost against compliance at τ = 1 | `plot_cost_vs_compliance.py` (reads the outputs behind Table 1) |
 | Matched-rank ablation (Sect. 6.2, Sect. S10); canonical capacity units; clustered confirmatory sensitivity (Sect. 6.3) | `canonical_rerun.py` (R11, R10, R12) |
 | Sect. 6.2, window/η ablations, stride variant, cost-aware rule, exchangeability martingales | `pac_window_grid.py`, `pac_stride_sensitivity.py` |
@@ -376,8 +378,14 @@ python3 audit/verify_confirmatory_inputs.py      # code hashes; data hashes too 
   - the Alibaba pipeline, about 172 GB of downloads;
   - the macOS forecaster fits.
 
+- **Learned-forecaster sources.** The canonical XGBoost and LSTM fits record the SHA-256 of `experiments/src/train_xgb.py` and `train_lstm.py` as the files were when the fits ran. The public files differ from those versions only in comments and docstrings, so `final_closure_local_runs.py --stage verify` reports changed sources for the stored fits. `analysis/reproducibility/historical_trainers/` keeps the exact files of the runs, and the following check confirms both their recorded hashes and that the public files contain the same code:
+
+```bash
+python3 analysis/reproducibility/check_trainer_provenance.py
+```
+
 ## Citation and licence
 
-- **Citation.** See [`CITATION.cff`](CITATION.cff) or the "Cite this repository" button. The code version cited in the article is v1.1.0, archived at https://doi.org/10.5281/zenodo.23125637; v1.0.0 (https://doi.org/10.5281/zenodo.23125235) keeps the original file names, and https://doi.org/10.5281/zenodo.23125234 always points to the latest version. The article's DOI will be added on publication.
+- **Citation.** See [`CITATION.cff`](CITATION.cff) or the "Cite this repository" button. The code version cited in the article is v1.2.0; https://doi.org/10.5281/zenodo.23125234 always points to the latest version. v1.1.0 (https://doi.org/10.5281/zenodo.23125637) has the same replay code without the start-method fixes, and v1.0.0 (https://doi.org/10.5281/zenodo.23125235) keeps the original file names. The article's DOI will be added on publication.
 - **Code licence.** The code is released under the MIT License ([`LICENSE`](LICENSE)).
 - **Trace data.** The traces are not covered by this licence: they are published by their owners under their own terms, and this repository redistributes none of them ([`docs/DATA.md`](docs/DATA.md)).

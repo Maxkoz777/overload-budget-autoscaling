@@ -25,6 +25,11 @@ SERVICES: list[dict] = []
 PARAMS: dict = {}
 
 
+def _init_worker(services: list[dict], params: dict) -> None:
+    global SERVICES, PARAMS
+    SERVICES, PARAMS = services, params
+
+
 def _service(index: int) -> list[dict]:
     s = SERVICES[index]
     sid = s["service_id"]
@@ -59,7 +64,7 @@ def main() -> None:
             ch = rev.select(gg, "service_id", b).set_index("service_id")
             for s in SERVICES:
                 PARAMS.setdefault((s["service_id"], budget), {})[name] = (float(ch.loc[s["service_id"], "threshold"]), int(ch.loc[s["service_id"], "cooldown"]))
-    with Pool(2) as pool:
+    with Pool(2, initializer=_init_worker, initargs=(SERVICES, PARAMS)) as pool:
         parts = pool.map(_service, range(len(SERVICES)), chunksize=5)
     per = pd.DataFrame([r for p in parts for r in p])
     per["within"] = per.overload_fraction <= per.budget

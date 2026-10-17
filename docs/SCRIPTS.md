@@ -113,7 +113,8 @@ Imported by the experiment and analysis scripts.
 
 | Script | Purpose |
 |---|---|
-| `analysis/audit/delay_and_reactive_grid.py` | R1 delay at a strict budget, R2 extended reactive grid, R3 horizon-aligned scores; shared helpers. |
+| `analysis/audit/delay_and_reactive_grid.py` | R1 delay at a strict budget, R2 extended reactive grid, R3 horizon-aligned scores; shared helpers (frozen confirmatory code). |
+| `analysis/audit/run_delay_and_reactive_grid.py` | Runs R1–R3 of `delay_and_reactive_grid.py` with any multiprocessing start method. |
 | `analysis/audit/pretest_subset.py` | Pre-test non-trivial subset of 95 services. |
 | `analysis/audit/external_delay.py` | R4: closed-loop delay on Huawei and Azure. |
 | `analysis/audit/alibaba_delay.py` | R5: closed-loop delay on Alibaba with the same policies. |
@@ -154,3 +155,5 @@ Imported by the experiment and analysis scripts.
 |---|---|
 | `analysis/reproducibility/run_final_closure_compute.sh` | Resumable runner for the canonical focused-tier fits and their downstream recomputation. |
 | `analysis/reproducibility/SEEDS.md` | Every random seed and where it is set. |
+| `analysis/reproducibility/check_trainer_provenance.py` | Checks the recorded trainer hashes and that the public trainers contain the same code. |
+| `analysis/reproducibility/historical_trainers/` | `train_xgb.py` and `train_lstm.py` exactly as they were when the canonical fits ran. |

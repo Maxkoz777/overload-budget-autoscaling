@@ -87,6 +87,11 @@ def simulate(history: pd.DataFrame, evaluation: pd.DataFrame, *, W: int, level: 
 SERVICES: list[dict] = []
 
 
+def _init_worker(services: list[dict]) -> None:
+    global SERVICES
+    SERVICES = services
+
+
 def _service(i: int) -> list[dict]:
     s = SERVICES[i]
     rows = []
@@ -105,7 +110,7 @@ def run_alibaba() -> pd.DataFrame:
     global SERVICES
     g.DATA = rev.DATA
     _, SERVICES = g.load_services()
-    with Pool(2) as pool:
+    with Pool(2, initializer=_init_worker, initargs=(SERVICES,)) as pool:
         parts = pool.map(_service, range(len(SERVICES)), chunksize=4)
     per = pd.DataFrame([r for p in parts for r in p])
     ref = pd.read_csv(rev.OUT / "r5_delay_alibaba_per_service.csv.gz")
