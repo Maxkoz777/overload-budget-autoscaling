@@ -1,0 +1,1135 @@
+{
+ "mu_phys_per_minute": 240,
+ "rate_per_second": 4,
+ "cpu_utilisation_at_capacity": 0.3735,
+ "pod_cpu_millicores": 40,
+ "iter": 10400,
+ "verified": true,
+ "note": "",
+ "r_star": 6,
+ "measurements": {
+  "phase1": {
+   "r_star": 6,
+   "workers": {
+    "w1": {
+     "r1": 6,
+     "levels": [
+      {
+       "rate": 2,
+       "bad_fraction": 0.0,
+       "requests": 240
+      },
+      {
+       "rate": 4,
+       "bad_fraction": 0.0,
+       "requests": 480
+      },
+      {
+       "rate": 6,
+       "bad_fraction": 0.002777777777777778,
+       "requests": 720
+      },
+      {
+       "rate": 8,
+       "bad_fraction": 0.11145833333333334,
+       "requests": 960
+      },
+      {
+       "rate": 10,
+       "bad_fraction": 0.5608333333333333,
+       "requests": 1200
+      },
+      {
+       "rate": 12,
+       "bad_fraction": 0.8638888888888889,
+       "requests": 1440
+      },
+      {
+       "rate": 14,
+       "bad_fraction": 0.9267857142857143,
+       "requests": 1680
+      },
+      {
+       "rate": 16,
+       "bad_fraction": 0.9526041666666667,
+       "requests": 1920
+      },
+      {
+       "rate": 18,
+       "bad_fraction": 0.9703703703703703,
+       "requests": 2160
+      },
+      {
+       "rate": 20,
+       "bad_fraction": 0.9725,
+       "requests": 2400
+      },
+      {
+       "rate": 22,
+       "bad_fraction": 0.9704545454545455,
+       "requests": 2640
+      },
+      {
+       "rate": 24,
+       "bad_fraction": 0.975,
+       "requests": 2880
+      },
+      {
+       "rate": 26,
+       "bad_fraction": 0.9743589743589743,
+       "requests": 3120
+      },
+      {
+       "rate": 28,
+       "bad_fraction": 0.981845238095238,
+       "requests": 3360
+      },
+      {
+       "rate": 30,
+       "bad_fraction": 0.9861111111111112,
+       "requests": 3600
+      }
+     ]
+    },
+    "w2": {
+     "r1": 6,
+     "levels": [
+      {
+       "rate": 2,
+       "bad_fraction": 0.0,
+       "requests": 240
+      },
+      {
+       "rate": 4,
+       "bad_fraction": 0.0,
+       "requests": 480
+      },
+      {
+       "rate": 6,
+       "bad_fraction": 0.0,
+       "requests": 720
+      },
+      {
+       "rate": 8,
+       "bad_fraction": 0.040625,
+       "requests": 960
+      },
+      {
+       "rate": 10,
+       "bad_fraction": 0.24,
+       "requests": 1200
+      },
+      {
+       "rate": 12,
+       "bad_fraction": 0.5395833333333333,
+       "requests": 1440
+      },
+      {
+       "rate": 14,
+       "bad_fraction": 0.799404761904762,
+       "requests": 1680
+      },
+      {
+       "rate": 16,
+       "bad_fraction": 0.8708333333333333,
+       "requests": 1920
+      },
+      {
+       "rate": 18,
+       "bad_fraction": 0.913425925925926,
+       "requests": 2160
+      },
+      {
+       "rate": 20,
+       "bad_fraction": 0.925,
+       "requests": 2400
+      },
+      {
+       "rate": 22,
+       "bad_fraction": 0.9488636363636364,
+       "requests": 2640
+      },
+      {
+       "rate": 24,
+       "bad_fraction": 0.9527777777777777,
+       "requests": 2880
+      },
+      {
+       "rate": 26,
+       "bad_fraction": 0.9551282051282052,
+       "requests": 3120
+      },
+      {
+       "rate": 28,
+       "bad_fraction": 0.9645833333333333,
+       "requests": 3360
+      },
+      {
+       "rate": 30,
+       "bad_fraction": 0.9705555555555555,
+       "requests": 3600
+      }
+     ]
+    },
+    "w3": {
+     "r1": 6,
+     "levels": [
+      {
+       "rate": 2,
+       "bad_fraction": 0.0,
+       "requests": 240
+      },
+      {
+       "rate": 4,
+       "bad_fraction": 0.0,
+       "requests": 480
+      },
+      {
+       "rate": 6,
+       "bad_fraction": 0.0,
+       "requests": 720
+      },
+      {
+       "rate": 8,
+       "bad_fraction": 0.052083333333333336,
+       "requests": 960
+      },
+      {
+       "rate": 10,
+       "bad_fraction": 0.3975,
+       "requests": 1200
+      },
+      {
+       "rate": 12,
+       "bad_fraction": 0.6319444444444444,
+       "requests": 1440
+      },
+      {
+       "rate": 14,
+       "bad_fraction": 0.8809523809523809,
+       "requests": 1680
+      },
+      {
+       "rate": 16,
+       "bad_fraction": 0.9307291666666667,
+       "requests": 1920
+      },
+      {
+       "rate": 18,
+       "bad_fraction": 0.9592592592592593,
+       "requests": 2160
+      },
+      {
+       "rate": 20,
+       "bad_fraction": 0.9641666666666666,
+       "requests": 2400
+      },
+      {
+       "rate": 22,
+       "bad_fraction": 0.9670454545454545,
+       "requests": 2640
+      },
+      {
+       "rate": 24,
+       "bad_fraction": 0.9819444444444444,
+       "requests": 2880
+      },
+      {
+       "rate": 26,
+       "bad_fraction": 0.9849358974358975,
+       "requests": 3120
+      },
+      {
+       "rate": 28,
+       "bad_fraction": 0.9875,
+       "requests": 3360
+      },
+      {
+       "rate": 30,
+       "bad_fraction": 0.9813888888888889,
+       "requests": 3600
+      }
+     ]
+    },
+    "w4": {
+     "r1": 6,
+     "levels": [
+      {
+       "rate": 2,
+       "bad_fraction": 0.0,
+       "requests": 240
+      },
+      {
+       "rate": 4,
+       "bad_fraction": 0.0,
+       "requests": 480
+      },
+      {
+       "rate": 6,
+       "bad_fraction": 0.0,
+       "requests": 720
+      },
+      {
+       "rate": 8,
+       "bad_fraction": 0.027083333333333334,
+       "requests": 960
+      },
+      {
+       "rate": 10,
+       "bad_fraction": 0.23,
+       "requests": 1200
+      },
+      {
+       "rate": 12,
+       "bad_fraction": 0.4361111111111111,
+       "requests": 1440
+      },
+      {
+       "rate": 14,
+       "bad_fraction": 0.7541666666666667,
+       "requests": 1680
+      },
+      {
+       "rate": 16,
+       "bad_fraction": 0.8109375,
+       "requests": 1920
+      },
+      {
+       "rate": 18,
+       "bad_fraction": 0.9,
+       "requests": 2160
+      },
+      {
+       "rate": 20,
+       "bad_fraction": 0.9258333333333333,
+       "requests": 2400
+      },
+      {
+       "rate": 22,
+       "bad_fraction": 0.9431818181818182,
+       "requests": 2640
+      },
+      {
+       "rate": 24,
+       "bad_fraction": 0.9586805555555555,
+       "requests": 2880
+      },
+      {
+       "rate": 26,
+       "bad_fraction": 0.9647435897435898,
+       "requests": 3120
+      },
+      {
+       "rate": 28,
+       "bad_fraction": 0.9645833333333333,
+       "requests": 3360
+      },
+      {
+       "rate": 30,
+       "bad_fraction": 0.9697222222222223,
+       "requests": 3600
+      }
+     ]
+    }
+   }
+  },
+  "phase2": {
+   "w1": {
+    "mu_w": 5,
+    "repeats": [
+     {
+      "rate": 7,
+      "bad_fraction": 0.014285714285714285,
+      "requests": 840,
+      "cpu_millicores": 27.816125,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 6,
+      "bad_fraction": 0.001388888888888889,
+      "requests": 720,
+      "cpu_millicores": 24.377000000000002,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 4,
+      "bad_fraction": 0.0,
+      "requests": 480,
+      "cpu_millicores": 16.832,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 6,
+      "bad_fraction": 0.009722222222222222,
+      "requests": 720,
+      "cpu_millicores": 24.057625,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 7,
+      "bad_fraction": 0.04047619047619048,
+      "requests": 840,
+      "cpu_millicores": 29.216375,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 5,
+      "bad_fraction": 0.0033333333333333335,
+      "requests": 600,
+      "cpu_millicores": 20.750375,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 4,
+      "bad_fraction": 0.0,
+      "requests": 480,
+      "cpu_millicores": 16.285249999999998,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 7,
+      "bad_fraction": 0.03333333333333333,
+      "requests": 840,
+      "cpu_millicores": 27.649749999999997,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 4,
+      "bad_fraction": 0.0,
+      "requests": 480,
+      "cpu_millicores": 16.624375,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 5,
+      "bad_fraction": 0.0,
+      "requests": 600,
+      "cpu_millicores": 20.134124999999997,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 6,
+      "bad_fraction": 0.015277777777777777,
+      "requests": 720,
+      "cpu_millicores": 24.325,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 5,
+      "bad_fraction": 0.0,
+      "requests": 600,
+      "cpu_millicores": 19.81325,
+      "cpu_samples": 8
+     }
+    ]
+   },
+   "w2": {
+    "mu_w": 6,
+    "repeats": [
+     {
+      "rate": 7,
+      "bad_fraction": 0.004761904761904762,
+      "requests": 840,
+      "cpu_millicores": 25.133,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 6,
+      "bad_fraction": 0.001388888888888889,
+      "requests": 720,
+      "cpu_millicores": 21.655874999999998,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 4,
+      "bad_fraction": 0.0,
+      "requests": 480,
+      "cpu_millicores": 13.911375,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 6,
+      "bad_fraction": 0.0,
+      "requests": 720,
+      "cpu_millicores": 21.409375,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 7,
+      "bad_fraction": 0.010714285714285714,
+      "requests": 840,
+      "cpu_millicores": 24.849875,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 5,
+      "bad_fraction": 0.0016666666666666668,
+      "requests": 600,
+      "cpu_millicores": 17.39075,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 4,
+      "bad_fraction": 0.0,
+      "requests": 480,
+      "cpu_millicores": 13.562625,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 7,
+      "bad_fraction": 0.004761904761904762,
+      "requests": 840,
+      "cpu_millicores": 23.139375,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 4,
+      "bad_fraction": 0.0,
+      "requests": 480,
+      "cpu_millicores": 13.946,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 5,
+      "bad_fraction": 0.0,
+      "requests": 600,
+      "cpu_millicores": 16.801125,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 6,
+      "bad_fraction": 0.0,
+      "requests": 720,
+      "cpu_millicores": 19.925250000000002,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 5,
+      "bad_fraction": 0.0,
+      "requests": 600,
+      "cpu_millicores": 16.76825,
+      "cpu_samples": 8
+     }
+    ]
+   },
+   "w3": {
+    "mu_w": 5,
+    "repeats": [
+     {
+      "rate": 7,
+      "bad_fraction": 0.007142857142857143,
+      "requests": 840,
+      "cpu_millicores": 25.79775,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 6,
+      "bad_fraction": 0.001388888888888889,
+      "requests": 720,
+      "cpu_millicores": 23.5375,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 4,
+      "bad_fraction": 0.0,
+      "requests": 480,
+      "cpu_millicores": 16.01575,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 6,
+      "bad_fraction": 0.005555555555555556,
+      "requests": 720,
+      "cpu_millicores": 23.541249999999998,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 7,
+      "bad_fraction": 0.01904761904761905,
+      "requests": 840,
+      "cpu_millicores": 27.9335,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 5,
+      "bad_fraction": 0.0033333333333333335,
+      "requests": 600,
+      "cpu_millicores": 19.574125000000002,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 4,
+      "bad_fraction": 0.0,
+      "requests": 480,
+      "cpu_millicores": 15.083375,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 7,
+      "bad_fraction": 0.02857142857142857,
+      "requests": 840,
+      "cpu_millicores": 26.532875,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 4,
+      "bad_fraction": 0.0,
+      "requests": 480,
+      "cpu_millicores": 15.575875,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 5,
+      "bad_fraction": 0.0,
+      "requests": 600,
+      "cpu_millicores": 19.343249999999998,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 6,
+      "bad_fraction": 0.015277777777777777,
+      "requests": 720,
+      "cpu_millicores": 23.396,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 5,
+      "bad_fraction": 0.0,
+      "requests": 600,
+      "cpu_millicores": 19.01175,
+      "cpu_samples": 8
+     }
+    ]
+   },
+   "w4": {
+    "mu_w": 6,
+    "repeats": [
+     {
+      "rate": 7,
+      "bad_fraction": 0.002380952380952381,
+      "requests": 840,
+      "cpu_millicores": 24.57125,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 6,
+      "bad_fraction": 0.0,
+      "requests": 720,
+      "cpu_millicores": 20.981125,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 4,
+      "bad_fraction": 0.0,
+      "requests": 480,
+      "cpu_millicores": 14.099875,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 6,
+      "bad_fraction": 0.0,
+      "requests": 720,
+      "cpu_millicores": 20.9935,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 7,
+      "bad_fraction": 0.010714285714285714,
+      "requests": 840,
+      "cpu_millicores": 24.735999999999997,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 5,
+      "bad_fraction": 0.0,
+      "requests": 600,
+      "cpu_millicores": 17.86925,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 4,
+      "bad_fraction": 0.0,
+      "requests": 480,
+      "cpu_millicores": 13.863125,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 7,
+      "bad_fraction": 0.007142857142857143,
+      "requests": 840,
+      "cpu_millicores": 23.740125,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 4,
+      "bad_fraction": 0.0,
+      "requests": 480,
+      "cpu_millicores": 13.499625,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 5,
+      "bad_fraction": 0.0,
+      "requests": 600,
+      "cpu_millicores": 17.18,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 6,
+      "bad_fraction": 0.001388888888888889,
+      "requests": 720,
+      "cpu_millicores": 20.383625,
+      "cpu_samples": 8
+     },
+     {
+      "rate": 5,
+      "bad_fraction": 0.0,
+      "requests": 600,
+      "cpu_millicores": 17.437875000000002,
+      "cpu_samples": 8
+     }
+    ]
+   }
+  },
+  "phase3": [
+   {
+    "mu": 5,
+    "steps": [
+     {
+      "worker": "w1",
+      "step": "2 pods",
+      "pods": 2,
+      "bad_fraction": 0.009166666666666667,
+      "requests": 1200,
+      "cpu_millicores_per_pod": 20.617874999999998,
+      "pass": true
+     },
+     {
+      "worker": "w1",
+      "step": "4 pods",
+      "pods": 4,
+      "bad_fraction": 0.0004166666666666667,
+      "requests": 2400,
+      "cpu_millicores_per_pod": 20.4573125,
+      "pass": true
+     },
+     {
+      "worker": "w1",
+      "step": "8 pods",
+      "pods": 8,
+      "bad_fraction": 0.004791666666666666,
+      "requests": 4800,
+      "cpu_millicores_per_pod": 20.826984375000002,
+      "pass": true
+     },
+     {
+      "worker": "w1",
+      "step": "peak cohort",
+      "pods": 67,
+      "bad_fraction": 0.011840796019900497,
+      "requests": 40200,
+      "pass": false
+     },
+     {
+      "worker": "w2",
+      "step": "2 pods",
+      "pods": 2,
+      "bad_fraction": 0.0,
+      "requests": 1200,
+      "cpu_millicores_per_pod": 16.625125,
+      "pass": true
+     },
+     {
+      "worker": "w2",
+      "step": "4 pods",
+      "pods": 4,
+      "bad_fraction": 0.0,
+      "requests": 2400,
+      "cpu_millicores_per_pod": 16.71865625,
+      "pass": true
+     },
+     {
+      "worker": "w2",
+      "step": "8 pods",
+      "pods": 8,
+      "bad_fraction": 0.000625,
+      "requests": 4800,
+      "cpu_millicores_per_pod": 16.607046875,
+      "pass": true
+     },
+     {
+      "worker": "w2",
+      "step": "peak cohort",
+      "pods": 67,
+      "bad_fraction": 0.0003482587064676617,
+      "requests": 40200,
+      "pass": true
+     },
+     {
+      "worker": "w3",
+      "step": "2 pods",
+      "pods": 2,
+      "bad_fraction": 0.0025,
+      "requests": 1200,
+      "cpu_millicores_per_pod": 19.65825,
+      "pass": true
+     },
+     {
+      "worker": "w3",
+      "step": "4 pods",
+      "pods": 4,
+      "bad_fraction": 0.0004166666666666667,
+      "requests": 2400,
+      "cpu_millicores_per_pod": 19.61715625,
+      "pass": true
+     },
+     {
+      "worker": "w3",
+      "step": "8 pods",
+      "pods": 8,
+      "bad_fraction": 0.003125,
+      "requests": 4800,
+      "cpu_millicores_per_pod": 19.095265625,
+      "pass": true
+     },
+     {
+      "worker": "w3",
+      "step": "peak cohort",
+      "pods": 67,
+      "bad_fraction": 0.00736318407960199,
+      "requests": 40200,
+      "pass": true
+     },
+     {
+      "worker": "w4",
+      "step": "2 pods",
+      "pods": 2,
+      "bad_fraction": 0.0008333333333333334,
+      "requests": 1200,
+      "cpu_millicores_per_pod": 17.614124999999998,
+      "pass": true
+     },
+     {
+      "worker": "w4",
+      "step": "4 pods",
+      "pods": 4,
+      "bad_fraction": 0.0004166666666666667,
+      "requests": 2400,
+      "cpu_millicores_per_pod": 17.194625000000002,
+      "pass": true
+     },
+     {
+      "worker": "w4",
+      "step": "8 pods",
+      "pods": 8,
+      "bad_fraction": 0.004791666666666666,
+      "requests": 4800,
+      "cpu_millicores_per_pod": 17.233546875000002,
+      "pass": true
+     },
+     {
+      "worker": "w4",
+      "step": "peak cohort",
+      "pods": 67,
+      "bad_fraction": 0.00044776119402985075,
+      "requests": 40200,
+      "pass": true
+     }
+    ],
+    "pass": false
+   },
+   {
+    "mu": 4,
+    "steps": [
+     {
+      "worker": "w1",
+      "step": "2 pods",
+      "pods": 2,
+      "bad_fraction": 0.020833333333333332,
+      "requests": 960,
+      "cpu_millicores_per_pod": 16.6800625,
+      "pass": false
+     },
+     {
+      "worker": "w1",
+      "step": "4 pods",
+      "pods": 4,
+      "bad_fraction": 0.0005208333333333333,
+      "requests": 1920,
+      "cpu_millicores_per_pod": 17.231906249999998,
+      "pass": true
+     },
+     {
+      "worker": "w1",
+      "step": "8 pods",
+      "pods": 8,
+      "bad_fraction": 0.0,
+      "requests": 3840,
+      "cpu_millicores_per_pod": 16.491953125000002,
+      "pass": true
+     },
+     {
+      "worker": "w1",
+      "step": "peak cohort",
+      "pods": 66,
+      "bad_fraction": 0.004166666666666667,
+      "requests": 31680,
+      "pass": true
+     },
+     {
+      "worker": "w2",
+      "step": "2 pods",
+      "pods": 2,
+      "bad_fraction": 0.0,
+      "requests": 960,
+      "cpu_millicores_per_pod": 13.421812500000001,
+      "pass": true
+     },
+     {
+      "worker": "w2",
+      "step": "4 pods",
+      "pods": 4,
+      "bad_fraction": 0.0,
+      "requests": 1920,
+      "cpu_millicores_per_pod": 13.3254375,
+      "pass": true
+     },
+     {
+      "worker": "w2",
+      "step": "8 pods",
+      "pods": 8,
+      "bad_fraction": 0.0,
+      "requests": 3840,
+      "cpu_millicores_per_pod": 13.837765625,
+      "pass": true
+     },
+     {
+      "worker": "w2",
+      "step": "peak cohort",
+      "pods": 66,
+      "bad_fraction": 0.00615530303030303,
+      "requests": 31680,
+      "pass": true
+     },
+     {
+      "worker": "w3",
+      "step": "2 pods",
+      "pods": 2,
+      "bad_fraction": 0.0,
+      "requests": 960,
+      "cpu_millicores_per_pod": 15.58425,
+      "pass": true
+     },
+     {
+      "worker": "w3",
+      "step": "4 pods",
+      "pods": 4,
+      "bad_fraction": 0.0,
+      "requests": 1920,
+      "cpu_millicores_per_pod": 16.08046875,
+      "pass": true
+     },
+     {
+      "worker": "w3",
+      "step": "8 pods",
+      "pods": 8,
+      "bad_fraction": 0.00026041666666666666,
+      "requests": 3840,
+      "cpu_millicores_per_pod": 15.974906249999998,
+      "pass": true
+     },
+     {
+      "worker": "w3",
+      "step": "peak cohort",
+      "pods": 66,
+      "bad_fraction": 0.0016414141414141414,
+      "requests": 31680,
+      "pass": true
+     },
+     {
+      "worker": "w4",
+      "step": "2 pods",
+      "pods": 2,
+      "bad_fraction": 0.0,
+      "requests": 960,
+      "cpu_millicores_per_pod": 13.7854375,
+      "pass": true
+     },
+     {
+      "worker": "w4",
+      "step": "4 pods",
+      "pods": 4,
+      "bad_fraction": 0.0,
+      "requests": 1920,
+      "cpu_millicores_per_pod": 14.06709375,
+      "pass": true
+     },
+     {
+      "worker": "w4",
+      "step": "8 pods",
+      "pods": 8,
+      "bad_fraction": 0.00234375,
+      "requests": 3840,
+      "cpu_millicores_per_pod": 14.346812499999999,
+      "pass": true
+     },
+     {
+      "worker": "w4",
+      "step": "peak cohort",
+      "pods": 66,
+      "bad_fraction": 6.313131313131313e-05,
+      "requests": 31680,
+      "pass": true
+     }
+    ],
+    "pass": false
+   },
+   {
+    "mu": 4,
+    "steps": [
+     {
+      "worker": "w1",
+      "step": "2 pods",
+      "pods": 2,
+      "bad_fraction": 0.004166666666666667,
+      "requests": 960,
+      "cpu_millicores_per_pod": 17.2525625,
+      "pass": true
+     },
+     {
+      "worker": "w1",
+      "step": "4 pods",
+      "pods": 4,
+      "bad_fraction": 0.004166666666666667,
+      "requests": 1920,
+      "cpu_millicores_per_pod": 17.34846875,
+      "pass": true
+     },
+     {
+      "worker": "w1",
+      "step": "8 pods",
+      "pods": 8,
+      "bad_fraction": 0.0005208333333333333,
+      "requests": 3840,
+      "cpu_millicores_per_pod": 17.302328125,
+      "pass": true
+     },
+     {
+      "worker": "w1",
+      "step": "peak cohort",
+      "pods": 66,
+      "bad_fraction": 0.005492424242424242,
+      "requests": 31680,
+      "pass": true
+     },
+     {
+      "worker": "w2",
+      "step": "2 pods",
+      "pods": 2,
+      "bad_fraction": 0.0,
+      "requests": 960,
+      "cpu_millicores_per_pod": 13.726312499999999,
+      "pass": true
+     },
+     {
+      "worker": "w2",
+      "step": "4 pods",
+      "pods": 4,
+      "bad_fraction": 0.0,
+      "requests": 1920,
+      "cpu_millicores_per_pod": 14.19071875,
+      "pass": true
+     },
+     {
+      "worker": "w2",
+      "step": "8 pods",
+      "pods": 8,
+      "bad_fraction": 0.0,
+      "requests": 3840,
+      "cpu_millicores_per_pod": 13.87325,
+      "pass": true
+     },
+     {
+      "worker": "w2",
+      "step": "peak cohort",
+      "pods": 66,
+      "bad_fraction": 0.0011363636363636363,
+      "requests": 31680,
+      "pass": true
+     },
+     {
+      "worker": "w3",
+      "step": "2 pods",
+      "pods": 2,
+      "bad_fraction": 0.0,
+      "requests": 960,
+      "cpu_millicores_per_pod": 16.392875,
+      "pass": true
+     },
+     {
+      "worker": "w3",
+      "step": "4 pods",
+      "pods": 4,
+      "bad_fraction": 0.0005208333333333333,
+      "requests": 1920,
+      "cpu_millicores_per_pod": 16.83175,
+      "pass": true
+     },
+     {
+      "worker": "w3",
+      "step": "8 pods",
+      "pods": 8,
+      "bad_fraction": 0.00026041666666666666,
+      "requests": 3840,
+      "cpu_millicores_per_pod": 15.93575,
+      "pass": true
+     },
+     {
+      "worker": "w3",
+      "step": "peak cohort",
+      "pods": 66,
+      "bad_fraction": 0.003724747474747475,
+      "requests": 31680,
+      "pass": true
+     },
+     {
+      "worker": "w4",
+      "step": "2 pods",
+      "pods": 2,
+      "bad_fraction": 0.0,
+      "requests": 960,
+      "cpu_millicores_per_pod": 14.226624999999999,
+      "pass": true
+     },
+     {
+      "worker": "w4",
+      "step": "4 pods",
+      "pods": 4,
+      "bad_fraction": 0.0,
+      "requests": 1920,
+      "cpu_millicores_per_pod": 14.002749999999999,
+      "pass": true
+     },
+     {
+      "worker": "w4",
+      "step": "8 pods",
+      "pods": 8,
+      "bad_fraction": 0.0,
+      "requests": 3840,
+      "cpu_millicores_per_pod": 13.409765624999999,
+      "pass": true
+     },
+     {
+      "worker": "w4",
+      "step": "peak cohort",
+      "pods": 66,
+      "bad_fraction": 0.0002840909090909091,
+      "requests": 31680,
+      "pass": true
+     }
+    ],
+    "pass": true
+   }
+  ]
+ }
+}

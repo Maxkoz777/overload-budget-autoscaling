@@ -1,0 +1,5 @@
+go: not installed (images are built in Docker)
+python 3.14.7 numpy 2.3.5 pandas 2.3.3 scipy 1.18.1
+Client Version: v1.35.3
+docker 27.5.1
+github.com/docker/buildx v0.20.1-desktop.2 aaf7c2bc7f9ec3afee1cec77d671845a4b57a0c8

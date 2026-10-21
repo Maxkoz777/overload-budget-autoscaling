@@ -1,0 +1,30 @@
+{
+ "schedules": {
+  "single": "/plan/single.csv"
+ },
+ "targets": [
+  {
+   "name": "w1-single",
+   "function": "single",
+   "url": "http://single.cap-w1.svc.cluster.local/work"
+  },
+  {
+   "name": "w2-single",
+   "function": "single",
+   "url": "http://single.cap-w2.svc.cluster.local/work"
+  },
+  {
+   "name": "w3-single",
+   "function": "single",
+   "url": "http://single.cap-w3.svc.cluster.local/work"
+  },
+  {
+   "name": "w4-single",
+   "function": "single",
+   "url": "http://single.cap-w4.svc.cluster.local/work"
+  }
+ ],
+ "seed": 20261017,
+ "minutes": 36,
+ "interval_seconds": 60
+}

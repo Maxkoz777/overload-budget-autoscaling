@@ -1,0 +1,50 @@
+{
+ "peak_pods": 67,
+ "nodes": [
+  {
+   "name": "testbed-workers-0",
+   "label": "load",
+   "allocatable_m": 3920.0,
+   "requested_by_others_m": 80.0,
+   "needed_m": 3000,
+   "fits": true
+  },
+  {
+   "name": "testbed-workers-1",
+   "label": "w3",
+   "allocatable_m": 3920.0,
+   "requested_by_others_m": 80.0,
+   "needed_m": 3350.0,
+   "fits": true
+  },
+  {
+   "name": "testbed-workers-2",
+   "label": "w2",
+   "allocatable_m": 3920.0,
+   "requested_by_others_m": 80.0,
+   "needed_m": 3350.0,
+   "fits": true
+  },
+  {
+   "name": "testbed-workers-3",
+   "label": "w4",
+   "allocatable_m": 3920.0,
+   "requested_by_others_m": 80.0,
+   "needed_m": 3350.0,
+   "fits": true
+  },
+  {
+   "name": "testbed-workers-4",
+   "label": "w1",
+   "allocatable_m": 3920.0,
+   "requested_by_others_m": 80.0,
+   "needed_m": 3350.0,
+   "fits": true
+  }
+ ],
+ "metrics_api": true,
+ "default_storage_class": [
+  "csi-ceph-ssd"
+ ],
+ "ok": true
+}

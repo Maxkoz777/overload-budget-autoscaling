@@ -1,0 +1,808 @@
+{
+ "apiVersion": "v1",
+ "kind": "List",
+ "items": [
+  {
+   "apiVersion": "v1",
+   "kind": "Namespace",
+   "metadata": {
+    "name": "testbed"
+   }
+  },
+  {
+   "apiVersion": "v1",
+   "kind": "Namespace",
+   "metadata": {
+    "name": "cap-w1"
+   }
+  },
+  {
+   "apiVersion": "v1",
+   "kind": "Namespace",
+   "metadata": {
+    "name": "cap-w2"
+   }
+  },
+  {
+   "apiVersion": "v1",
+   "kind": "Namespace",
+   "metadata": {
+    "name": "cap-w3"
+   }
+  },
+  {
+   "apiVersion": "v1",
+   "kind": "Namespace",
+   "metadata": {
+    "name": "cap-w4"
+   }
+  },
+  {
+   "apiVersion": "apps/v1",
+   "kind": "Deployment",
+   "metadata": {
+    "name": "single",
+    "namespace": "cap-w1",
+    "labels": {
+     "app": "single",
+     "testbed": "worker"
+    }
+   },
+   "spec": {
+    "replicas": 1,
+    "selector": {
+     "matchLabels": {
+      "app": "single"
+     }
+    },
+    "template": {
+     "metadata": {
+      "labels": {
+       "app": "single",
+       "testbed": "worker"
+      }
+     },
+     "spec": {
+      "nodeSelector": {
+       "testbed-node": "w1"
+      },
+      "terminationGracePeriodSeconds": 5,
+      "containers": [
+       {
+        "name": "worker",
+        "image": "ghcr.io/maxkoz777/testbed-worker@sha256:157fd62347bdba85f2c7833e9e23a2ad17e248a7e8bafa876623060e7bb064b5",
+        "imagePullPolicy": "IfNotPresent",
+        "env": [
+         {
+          "name": "ITER",
+          "value": "10400"
+         },
+         {
+          "name": "WARMUP_SECONDS",
+          "value": "15"
+         },
+         {
+          "name": "MAX_INFLIGHT",
+          "value": "8"
+         }
+        ],
+        "ports": [
+         {
+          "containerPort": 8080
+         }
+        ],
+        "resources": {
+         "requests": {
+          "cpu": "40m",
+          "memory": "32Mi"
+         },
+         "limits": {
+          "cpu": "40m",
+          "memory": "64Mi"
+         }
+        },
+        "readinessProbe": {
+         "httpGet": {
+          "path": "/healthz",
+          "port": 8080
+         },
+         "periodSeconds": 2,
+         "timeoutSeconds": 2,
+         "failureThreshold": 3,
+         "successThreshold": 1
+        }
+       }
+      ],
+      "imagePullSecrets": [
+       {
+        "name": "testbed-pull"
+       }
+      ]
+     }
+    }
+   }
+  },
+  {
+   "apiVersion": "v1",
+   "kind": "Service",
+   "metadata": {
+    "name": "single",
+    "namespace": "cap-w1"
+   },
+   "spec": {
+    "selector": {
+     "app": "single"
+    },
+    "ports": [
+     {
+      "port": 80,
+      "targetPort": 8080
+     }
+    ]
+   }
+  },
+  {
+   "apiVersion": "apps/v1",
+   "kind": "Deployment",
+   "metadata": {
+    "name": "single",
+    "namespace": "cap-w2",
+    "labels": {
+     "app": "single",
+     "testbed": "worker"
+    }
+   },
+   "spec": {
+    "replicas": 1,
+    "selector": {
+     "matchLabels": {
+      "app": "single"
+     }
+    },
+    "template": {
+     "metadata": {
+      "labels": {
+       "app": "single",
+       "testbed": "worker"
+      }
+     },
+     "spec": {
+      "nodeSelector": {
+       "testbed-node": "w2"
+      },
+      "terminationGracePeriodSeconds": 5,
+      "containers": [
+       {
+        "name": "worker",
+        "image": "ghcr.io/maxkoz777/testbed-worker@sha256:157fd62347bdba85f2c7833e9e23a2ad17e248a7e8bafa876623060e7bb064b5",
+        "imagePullPolicy": "IfNotPresent",
+        "env": [
+         {
+          "name": "ITER",
+          "value": "10400"
+         },
+         {
+          "name": "WARMUP_SECONDS",
+          "value": "15"
+         },
+         {
+          "name": "MAX_INFLIGHT",
+          "value": "8"
+         }
+        ],
+        "ports": [
+         {
+          "containerPort": 8080
+         }
+        ],
+        "resources": {
+         "requests": {
+          "cpu": "40m",
+          "memory": "32Mi"
+         },
+         "limits": {
+          "cpu": "40m",
+          "memory": "64Mi"
+         }
+        },
+        "readinessProbe": {
+         "httpGet": {
+          "path": "/healthz",
+          "port": 8080
+         },
+         "periodSeconds": 2,
+         "timeoutSeconds": 2,
+         "failureThreshold": 3,
+         "successThreshold": 1
+        }
+       }
+      ],
+      "imagePullSecrets": [
+       {
+        "name": "testbed-pull"
+       }
+      ]
+     }
+    }
+   }
+  },
+  {
+   "apiVersion": "v1",
+   "kind": "Service",
+   "metadata": {
+    "name": "single",
+    "namespace": "cap-w2"
+   },
+   "spec": {
+    "selector": {
+     "app": "single"
+    },
+    "ports": [
+     {
+      "port": 80,
+      "targetPort": 8080
+     }
+    ]
+   }
+  },
+  {
+   "apiVersion": "apps/v1",
+   "kind": "Deployment",
+   "metadata": {
+    "name": "single",
+    "namespace": "cap-w3",
+    "labels": {
+     "app": "single",
+     "testbed": "worker"
+    }
+   },
+   "spec": {
+    "replicas": 1,
+    "selector": {
+     "matchLabels": {
+      "app": "single"
+     }
+    },
+    "template": {
+     "metadata": {
+      "labels": {
+       "app": "single",
+       "testbed": "worker"
+      }
+     },
+     "spec": {
+      "nodeSelector": {
+       "testbed-node": "w3"
+      },
+      "terminationGracePeriodSeconds": 5,
+      "containers": [
+       {
+        "name": "worker",
+        "image": "ghcr.io/maxkoz777/testbed-worker@sha256:157fd62347bdba85f2c7833e9e23a2ad17e248a7e8bafa876623060e7bb064b5",
+        "imagePullPolicy": "IfNotPresent",
+        "env": [
+         {
+          "name": "ITER",
+          "value": "10400"
+         },
+         {
+          "name": "WARMUP_SECONDS",
+          "value": "15"
+         },
+         {
+          "name": "MAX_INFLIGHT",
+          "value": "8"
+         }
+        ],
+        "ports": [
+         {
+          "containerPort": 8080
+         }
+        ],
+        "resources": {
+         "requests": {
+          "cpu": "40m",
+          "memory": "32Mi"
+         },
+         "limits": {
+          "cpu": "40m",
+          "memory": "64Mi"
+         }
+        },
+        "readinessProbe": {
+         "httpGet": {
+          "path": "/healthz",
+          "port": 8080
+         },
+         "periodSeconds": 2,
+         "timeoutSeconds": 2,
+         "failureThreshold": 3,
+         "successThreshold": 1
+        }
+       }
+      ],
+      "imagePullSecrets": [
+       {
+        "name": "testbed-pull"
+       }
+      ]
+     }
+    }
+   }
+  },
+  {
+   "apiVersion": "v1",
+   "kind": "Service",
+   "metadata": {
+    "name": "single",
+    "namespace": "cap-w3"
+   },
+   "spec": {
+    "selector": {
+     "app": "single"
+    },
+    "ports": [
+     {
+      "port": 80,
+      "targetPort": 8080
+     }
+    ]
+   }
+  },
+  {
+   "apiVersion": "apps/v1",
+   "kind": "Deployment",
+   "metadata": {
+    "name": "single",
+    "namespace": "cap-w4",
+    "labels": {
+     "app": "single",
+     "testbed": "worker"
+    }
+   },
+   "spec": {
+    "replicas": 1,
+    "selector": {
+     "matchLabels": {
+      "app": "single"
+     }
+    },
+    "template": {
+     "metadata": {
+      "labels": {
+       "app": "single",
+       "testbed": "worker"
+      }
+     },
+     "spec": {
+      "nodeSelector": {
+       "testbed-node": "w4"
+      },
+      "terminationGracePeriodSeconds": 5,
+      "containers": [
+       {
+        "name": "worker",
+        "image": "ghcr.io/maxkoz777/testbed-worker@sha256:157fd62347bdba85f2c7833e9e23a2ad17e248a7e8bafa876623060e7bb064b5",
+        "imagePullPolicy": "IfNotPresent",
+        "env": [
+         {
+          "name": "ITER",
+          "value": "10400"
+         },
+         {
+          "name": "WARMUP_SECONDS",
+          "value": "15"
+         },
+         {
+          "name": "MAX_INFLIGHT",
+          "value": "8"
+         }
+        ],
+        "ports": [
+         {
+          "containerPort": 8080
+         }
+        ],
+        "resources": {
+         "requests": {
+          "cpu": "40m",
+          "memory": "32Mi"
+         },
+         "limits": {
+          "cpu": "40m",
+          "memory": "64Mi"
+         }
+        },
+        "readinessProbe": {
+         "httpGet": {
+          "path": "/healthz",
+          "port": 8080
+         },
+         "periodSeconds": 2,
+         "timeoutSeconds": 2,
+         "failureThreshold": 3,
+         "successThreshold": 1
+        }
+       }
+      ],
+      "imagePullSecrets": [
+       {
+        "name": "testbed-pull"
+       }
+      ]
+     }
+    }
+   }
+  },
+  {
+   "apiVersion": "v1",
+   "kind": "Service",
+   "metadata": {
+    "name": "single",
+    "namespace": "cap-w4"
+   },
+   "spec": {
+    "selector": {
+     "app": "single"
+    },
+    "ports": [
+     {
+      "port": 80,
+      "targetPort": 8080
+     }
+    ]
+   }
+  },
+  {
+   "apiVersion": "v1",
+   "kind": "ServiceAccount",
+   "metadata": {
+    "name": "driver",
+    "namespace": "testbed"
+   }
+  },
+  {
+   "apiVersion": "rbac.authorization.k8s.io/v1",
+   "kind": "ClusterRole",
+   "metadata": {
+    "name": "testbed-driver"
+   },
+   "rules": [
+    {
+     "apiGroups": [
+      "apps"
+     ],
+     "resources": [
+      "deployments",
+      "deployments/scale"
+     ],
+     "verbs": [
+      "get",
+      "list",
+      "patch"
+     ]
+    },
+    {
+     "apiGroups": [
+      ""
+     ],
+     "resources": [
+      "pods"
+     ],
+     "verbs": [
+      "get",
+      "list"
+     ]
+    },
+    {
+     "apiGroups": [
+      "discovery.k8s.io"
+     ],
+     "resources": [
+      "endpointslices"
+     ],
+     "verbs": [
+      "list"
+     ]
+    },
+    {
+     "apiGroups": [
+      "autoscaling"
+     ],
+     "resources": [
+      "horizontalpodautoscalers"
+     ],
+     "verbs": [
+      "list"
+     ]
+    },
+    {
+     "apiGroups": [
+      "metrics.k8s.io"
+     ],
+     "resources": [
+      "pods"
+     ],
+     "verbs": [
+      "list"
+     ]
+    }
+   ]
+  },
+  {
+   "apiVersion": "rbac.authorization.k8s.io/v1",
+   "kind": "ClusterRole",
+   "metadata": {
+    "name": "testbed-nodes"
+   },
+   "rules": [
+    {
+     "apiGroups": [
+      ""
+     ],
+     "resources": [
+      "nodes"
+     ],
+     "verbs": [
+      "get",
+      "list"
+     ]
+    }
+   ]
+  },
+  {
+   "apiVersion": "rbac.authorization.k8s.io/v1",
+   "kind": "ClusterRoleBinding",
+   "metadata": {
+    "name": "testbed-nodes"
+   },
+   "roleRef": {
+    "apiGroup": "rbac.authorization.k8s.io",
+    "kind": "ClusterRole",
+    "name": "testbed-nodes"
+   },
+   "subjects": [
+    {
+     "kind": "ServiceAccount",
+     "name": "driver",
+     "namespace": "testbed"
+    }
+   ]
+  },
+  {
+   "apiVersion": "rbac.authorization.k8s.io/v1",
+   "kind": "RoleBinding",
+   "metadata": {
+    "name": "testbed-driver",
+    "namespace": "cap-w1"
+   },
+   "roleRef": {
+    "apiGroup": "rbac.authorization.k8s.io",
+    "kind": "ClusterRole",
+    "name": "testbed-driver"
+   },
+   "subjects": [
+    {
+     "kind": "ServiceAccount",
+     "name": "driver",
+     "namespace": "testbed"
+    }
+   ]
+  },
+  {
+   "apiVersion": "rbac.authorization.k8s.io/v1",
+   "kind": "RoleBinding",
+   "metadata": {
+    "name": "testbed-driver",
+    "namespace": "cap-w2"
+   },
+   "roleRef": {
+    "apiGroup": "rbac.authorization.k8s.io",
+    "kind": "ClusterRole",
+    "name": "testbed-driver"
+   },
+   "subjects": [
+    {
+     "kind": "ServiceAccount",
+     "name": "driver",
+     "namespace": "testbed"
+    }
+   ]
+  },
+  {
+   "apiVersion": "rbac.authorization.k8s.io/v1",
+   "kind": "RoleBinding",
+   "metadata": {
+    "name": "testbed-driver",
+    "namespace": "cap-w3"
+   },
+   "roleRef": {
+    "apiGroup": "rbac.authorization.k8s.io",
+    "kind": "ClusterRole",
+    "name": "testbed-driver"
+   },
+   "subjects": [
+    {
+     "kind": "ServiceAccount",
+     "name": "driver",
+     "namespace": "testbed"
+    }
+   ]
+  },
+  {
+   "apiVersion": "rbac.authorization.k8s.io/v1",
+   "kind": "RoleBinding",
+   "metadata": {
+    "name": "testbed-driver",
+    "namespace": "cap-w4"
+   },
+   "roleRef": {
+    "apiGroup": "rbac.authorization.k8s.io",
+    "kind": "ClusterRole",
+    "name": "testbed-driver"
+   },
+   "subjects": [
+    {
+     "kind": "ServiceAccount",
+     "name": "driver",
+     "namespace": "testbed"
+    }
+   ]
+  },
+  {
+   "apiVersion": "v1",
+   "kind": "ConfigMap",
+   "metadata": {
+    "name": "plan",
+    "namespace": "testbed"
+   },
+   "data": {
+    "loadgen.json": "{\n \"schedules\": {\n  \"single\": \"/plan/single.csv\"\n },\n \"targets\": [\n  {\n   \"name\": \"w1-single\",\n   \"function\": \"single\",\n   \"url\": \"http://single.cap-w1.svc.cluster.local/work\"\n  },\n  {\n   \"name\": \"w2-single\",\n   \"function\": \"single\",\n   \"url\": \"http://single.cap-w2.svc.cluster.local/work\"\n  },\n  {\n   \"name\": \"w3-single\",\n   \"function\": \"single\",\n   \"url\": \"http://single.cap-w3.svc.cluster.local/work\"\n  },\n  {\n   \"name\": \"w4-single\",\n   \"function\": \"single\",\n   \"url\": \"http://single.cap-w4.svc.cluster.local/work\"\n  }\n ],\n \"seed\": 20261017,\n \"minutes\": 45,\n \"interval_seconds\": 60\n}",
+    "single.csv": "demand\n120\n120\n120\n240\n240\n240\n360\n360\n360\n480\n480\n480\n600\n600\n600\n720\n720\n720\n840\n840\n840\n960\n960\n960\n1080\n1080\n1080\n1200\n1200\n1200\n1320\n1320\n1320\n1440\n1440\n1440\n1560\n1560\n1560\n1680\n1680\n1680\n1800\n1800\n1800\n"
+   }
+  },
+  {
+   "apiVersion": "v1",
+   "kind": "PersistentVolumeClaim",
+   "metadata": {
+    "name": "results",
+    "namespace": "testbed"
+   },
+   "spec": {
+    "accessModes": [
+     "ReadWriteOnce"
+    ],
+    "resources": {
+     "requests": {
+      "storage": "5Gi"
+     }
+    }
+   }
+  },
+  {
+   "apiVersion": "v1",
+   "kind": "Pod",
+   "metadata": {
+    "name": "driver",
+    "namespace": "testbed"
+   },
+   "spec": {
+    "serviceAccountName": "driver",
+    "restartPolicy": "Never",
+    "nodeSelector": {
+     "testbed-node": "load"
+    },
+    "containers": [
+     {
+      "name": "loadgen",
+      "image": "ghcr.io/maxkoz777/testbed-loadgen@sha256:2829b90dc51cf453759b3f6920a6cf9a54d81b8258b661d33bc81a422b227d92",
+      "args": [
+       "-config",
+       "/plan/loadgen.json",
+       "-start",
+       "1792574880",
+       "-out",
+       "/results/load.csv",
+       "-served",
+       "/results/served.csv"
+      ],
+      "resources": {
+       "requests": {
+        "cpu": "2",
+        "memory": "1Gi"
+       }
+      },
+      "imagePullPolicy": "IfNotPresent",
+      "volumeMounts": [
+       {
+        "name": "plan",
+        "mountPath": "/plan"
+       },
+       {
+        "name": "results",
+        "mountPath": "/results"
+       }
+      ]
+     },
+     {
+      "name": "collector",
+      "image": "ghcr.io/maxkoz777/testbed-tools@sha256:ac049f4d051637811c7d5881700cf159810402bb1d967bdd33459a1331587ae4",
+      "command": [
+       "python3",
+       "/tools/collector.py",
+       "--namespaces",
+       "cap-w1,cap-w2,cap-w3,cap-w4",
+       "--until",
+       "1792577880",
+       "--outdir",
+       "/results",
+       "--t0",
+       "1792574880"
+      ],
+      "imagePullPolicy": "IfNotPresent",
+      "volumeMounts": [
+       {
+        "name": "plan",
+        "mountPath": "/plan"
+       },
+       {
+        "name": "results",
+        "mountPath": "/results"
+       }
+      ],
+      "resources": {
+       "requests": {
+        "cpu": "200m",
+        "memory": "128Mi"
+       }
+      }
+     },
+     {
+      "name": "results",
+      "image": "ghcr.io/maxkoz777/testbed-tools@sha256:ac049f4d051637811c7d5881700cf159810402bb1d967bdd33459a1331587ae4",
+      "command": [
+       "sleep",
+       "infinity"
+      ],
+      "imagePullPolicy": "IfNotPresent",
+      "volumeMounts": [
+       {
+        "name": "plan",
+        "mountPath": "/plan"
+       },
+       {
+        "name": "results",
+        "mountPath": "/results"
+       }
+      ],
+      "resources": {
+       "requests": {
+        "cpu": "200m",
+        "memory": "128Mi"
+       }
+      }
+     }
+    ],
+    "volumes": [
+     {
+      "name": "plan",
+      "configMap": {
+       "name": "plan"
+      }
+     },
+     {
+      "name": "results",
+      "persistentVolumeClaim": {
+       "claimName": "results"
+      }
+     }
+    ],
+    "imagePullSecrets": [
+     {
+      "name": "testbed-pull"
+     }
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,199 @@
+{
+ "version": {
+  "clientVersion": {
+   "major": "1",
+   "minor": "35",
+   "gitVersion": "v1.35.3",
+   "gitCommit": "6c1cd99aef09161ddb07b8ade6c9564e9b9bfe27",
+   "gitTreeState": "clean",
+   "buildDate": "2026-03-18T18:32:54Z",
+   "goVersion": "go1.25.7",
+   "compiler": "gc",
+   "platform": "darwin/arm64"
+  },
+  "kustomizeVersion": "v5.7.1",
+  "serverVersion": {
+   "major": "1",
+   "minor": "35",
+   "emulationMajor": "1",
+   "emulationMinor": "35",
+   "minCompatibilityMajor": "1",
+   "minCompatibilityMinor": "34",
+   "gitVersion": "v1.35.6",
+   "gitCommit": "bd68def68f141e25b320f443404d178f4d3feb63",
+   "gitTreeState": "clean",
+   "buildDate": "2026-08-04T09:00:05Z",
+   "goVersion": "go1.25.12",
+   "compiler": "gc",
+   "platform": "linux/amd64"
+  }
+ },
+ "metrics_server_image": "",
+ "nodes": [
+  {
+   "name": "testbed-workers-0",
+   "testbed-node": "load",
+   "instance_type": "STD3-4-8",
+   "capacity": {
+    "cpu": "4",
+    "ephemeral-storage": "30136300Ki",
+    "hugepages-1Gi": "0",
+    "hugepages-2Mi": "0",
+    "memory": "8125260Ki",
+    "pods": "110"
+   },
+   "allocatable": {
+    "cpu": "3920m",
+    "ephemeral-storage": "30550975495",
+    "hugepages-1Gi": "0",
+    "hugepages-2Mi": "0",
+    "memory": "5925708Ki",
+    "pods": "110"
+   },
+   "nodeInfo": {
+    "architecture": "amd64",
+    "bootID": "c961c0f0-17e6-4205-bdc5-634c472d8fe2",
+    "containerRuntimeVersion": "cri-o://1.35.5",
+    "kernelVersion": "5.14.0-611.55.1.el9_7.x86_64",
+    "kubeProxyVersion": "",
+    "kubeletVersion": "v1.35.6",
+    "machineID": "d3950a5a5adf4f23a842d79f5cb85a02",
+    "operatingSystem": "linux",
+    "osImage": "AlmaLinux 9.7 (Moss Jungle Cat)",
+    "systemUUID": "d3950a5a-5adf-4f23-a842-d79f5cb85a02"
+   }
+  },
+  {
+   "name": "testbed-workers-1",
+   "testbed-node": "w3",
+   "instance_type": "STD3-4-8",
+   "capacity": {
+    "cpu": "4",
+    "ephemeral-storage": "30136300Ki",
+    "hugepages-1Gi": "0",
+    "hugepages-2Mi": "0",
+    "memory": "8125260Ki",
+    "pods": "110"
+   },
+   "allocatable": {
+    "cpu": "3920m",
+    "ephemeral-storage": "30550975495",
+    "hugepages-1Gi": "0",
+    "hugepages-2Mi": "0",
+    "memory": "5925708Ki",
+    "pods": "110"
+   },
+   "nodeInfo": {
+    "architecture": "amd64",
+    "bootID": "a89eab59-b731-40f8-a541-147e29e9818a",
+    "containerRuntimeVersion": "cri-o://1.35.5",
+    "kernelVersion": "5.14.0-611.55.1.el9_7.x86_64",
+    "kubeProxyVersion": "",
+    "kubeletVersion": "v1.35.6",
+    "machineID": "8926316ef44048e98e69316f5803324c",
+    "operatingSystem": "linux",
+    "osImage": "AlmaLinux 9.7 (Moss Jungle Cat)",
+    "systemUUID": "8926316e-f440-48e9-8e69-316f5803324c"
+   }
+  },
+  {
+   "name": "testbed-workers-2",
+   "testbed-node": "w2",
+   "instance_type": "STD3-4-8",
+   "capacity": {
+    "cpu": "4",
+    "ephemeral-storage": "30136300Ki",
+    "hugepages-1Gi": "0",
+    "hugepages-2Mi": "0",
+    "memory": "8125260Ki",
+    "pods": "110"
+   },
+   "allocatable": {
+    "cpu": "3920m",
+    "ephemeral-storage": "30550975495",
+    "hugepages-1Gi": "0",
+    "hugepages-2Mi": "0",
+    "memory": "5925708Ki",
+    "pods": "110"
+   },
+   "nodeInfo": {
+    "architecture": "amd64",
+    "bootID": "1562e26c-6c6a-4ee6-8a9a-d6e7a464d25c",
+    "containerRuntimeVersion": "cri-o://1.35.5",
+    "kernelVersion": "5.14.0-611.55.1.el9_7.x86_64",
+    "kubeProxyVersion": "",
+    "kubeletVersion": "v1.35.6",
+    "machineID": "e9bcd07a20984418b5e1b200e532e391",
+    "operatingSystem": "linux",
+    "osImage": "AlmaLinux 9.7 (Moss Jungle Cat)",
+    "systemUUID": "e9bcd07a-2098-4418-b5e1-b200e532e391"
+   }
+  },
+  {
+   "name": "testbed-workers-3",
+   "testbed-node": "w4",
+   "instance_type": "STD3-4-8",
+   "capacity": {
+    "cpu": "4",
+    "ephemeral-storage": "30136300Ki",
+    "hugepages-1Gi": "0",
+    "hugepages-2Mi": "0",
+    "memory": "8125248Ki",
+    "pods": "110"
+   },
+   "allocatable": {
+    "cpu": "3920m",
+    "ephemeral-storage": "30550975495",
+    "hugepages-1Gi": "0",
+    "hugepages-2Mi": "0",
+    "memory": "5925696Ki",
+    "pods": "110"
+   },
+   "nodeInfo": {
+    "architecture": "amd64",
+    "bootID": "d3ea9c90-d9dd-477b-b5d1-45c26e9e16f9",
+    "containerRuntimeVersion": "cri-o://1.35.5",
+    "kernelVersion": "5.14.0-611.55.1.el9_7.x86_64",
+    "kubeProxyVersion": "",
+    "kubeletVersion": "v1.35.6",
+    "machineID": "c6d08e4cf3c6482bb29f0afbb14e1cec",
+    "operatingSystem": "linux",
+    "osImage": "AlmaLinux 9.7 (Moss Jungle Cat)",
+    "systemUUID": "c6d08e4c-f3c6-482b-b29f-0afbb14e1cec"
+   }
+  },
+  {
+   "name": "testbed-workers-4",
+   "testbed-node": "w1",
+   "instance_type": "STD3-4-8",
+   "capacity": {
+    "cpu": "4",
+    "ephemeral-storage": "30136300Ki",
+    "hugepages-1Gi": "0",
+    "hugepages-2Mi": "0",
+    "memory": "8125272Ki",
+    "pods": "110"
+   },
+   "allocatable": {
+    "cpu": "3920m",
+    "ephemeral-storage": "30550975495",
+    "hugepages-1Gi": "0",
+    "hugepages-2Mi": "0",
+    "memory": "5925720Ki",
+    "pods": "110"
+   },
+   "nodeInfo": {
+    "architecture": "amd64",
+    "bootID": "c17f1761-d870-476b-bffa-ab8796dde5d6",
+    "containerRuntimeVersion": "cri-o://1.35.5",
+    "kernelVersion": "5.14.0-611.55.1.el9_7.x86_64",
+    "kubeProxyVersion": "",
+    "kubeletVersion": "v1.35.6",
+    "machineID": "d722c03a8d2c497a9889baab532f9a06",
+    "operatingSystem": "linux",
+    "osImage": "AlmaLinux 9.7 (Moss Jungle Cat)",
+    "systemUUID": "d722c03a-8d2c-497a-9889-baab532f9a06"
+   }
+  }
+ ]
+}

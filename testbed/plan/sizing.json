@@ -1,0 +1,23 @@
+{
+  "days": "3-9",
+  "mu_phys_per_minute": 240.0,
+  "pod_cpu_millicores": 40,
+  "margin": 1.25,
+  "policies": {
+    "pach": {
+      "peak_pods": 66,
+      "mean_pods": 40.91,
+      "required_millicores_without_daemonsets": 3300
+    },
+    "conf": {
+      "peak_pods": 66,
+      "mean_pods": 39.72,
+      "required_millicores_without_daemonsets": 3300
+    },
+    "b1": {
+      "peak_pods": 66,
+      "mean_pods": 36.87,
+      "required_millicores_without_daemonsets": 3300
+    }
+  }
+}

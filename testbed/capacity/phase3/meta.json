@@ -1,0 +1,16 @@
+{
+ "mu": 4,
+ "peak_pods": 66,
+ "minutes_per_step": 5,
+ "linear_pods": [
+  2,
+  4,
+  8
+ ],
+ "deployments": {
+  "pods2": 2,
+  "pods4": 4,
+  "pods8": 8,
+  "rest": 52
+ }
+}

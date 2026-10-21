@@ -1,0 +1,31 @@
+{
+ "d_up_s": 18.038505017757416,
+ "d_down_s": 0.5327130556106567,
+ "n_up": 160,
+ "n_down": 190,
+ "d_up_interval_medians_s": [
+  17.5362206697464,
+  18.534737467765808
+ ],
+ "d_down_interval_medians_s": [
+  0.0,
+  1.050227165222168
+ ],
+ "up_quantiles": {
+  "0.1": 16.89739284515381,
+  "0.5": 18.038505017757416,
+  "0.9": 20.354896450042723
+ },
+ "attribution": {
+  "up_requested": 160,
+  "down_requested": 190,
+  "pods_created_in_test": 160,
+  "pods_removed_in_test": 190,
+  "up_attributed": 160,
+  "up_censored": 0,
+  "down_attributed": 190,
+  "down_censored": 0
+ },
+ "rule": "scale-up: new pods become ready endpoints d_up_s after the scale call; scale-down: pending pods are cancelled first (latest first), other pods leave the endpoints d_down_s after the call; each delay is the midpoint of the interval between the last observation before and the first observation after the change",
+ "source": "/Users/maximkozhinov/Documents/Research/paper1-risk-aware-autoscaling/overload-budget-autoscaling/testbed/results/pilot"
+}

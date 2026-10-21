@@ -1,0 +1,93 @@
+{
+ "schedules": {
+  "pods2": "/plan/pods2.csv",
+  "pods4": "/plan/pods4.csv",
+  "pods8": "/plan/pods8.csv",
+  "rest": "/plan/rest.csv"
+ },
+ "targets": [
+  {
+   "name": "w1-pods2",
+   "function": "pods2",
+   "url": "http://pods2.cap-w1.svc.cluster.local/work"
+  },
+  {
+   "name": "w1-pods4",
+   "function": "pods4",
+   "url": "http://pods4.cap-w1.svc.cluster.local/work"
+  },
+  {
+   "name": "w1-pods8",
+   "function": "pods8",
+   "url": "http://pods8.cap-w1.svc.cluster.local/work"
+  },
+  {
+   "name": "w1-rest",
+   "function": "rest",
+   "url": "http://rest.cap-w1.svc.cluster.local/work"
+  },
+  {
+   "name": "w2-pods2",
+   "function": "pods2",
+   "url": "http://pods2.cap-w2.svc.cluster.local/work"
+  },
+  {
+   "name": "w2-pods4",
+   "function": "pods4",
+   "url": "http://pods4.cap-w2.svc.cluster.local/work"
+  },
+  {
+   "name": "w2-pods8",
+   "function": "pods8",
+   "url": "http://pods8.cap-w2.svc.cluster.local/work"
+  },
+  {
+   "name": "w2-rest",
+   "function": "rest",
+   "url": "http://rest.cap-w2.svc.cluster.local/work"
+  },
+  {
+   "name": "w3-pods2",
+   "function": "pods2",
+   "url": "http://pods2.cap-w3.svc.cluster.local/work"
+  },
+  {
+   "name": "w3-pods4",
+   "function": "pods4",
+   "url": "http://pods4.cap-w3.svc.cluster.local/work"
+  },
+  {
+   "name": "w3-pods8",
+   "function": "pods8",
+   "url": "http://pods8.cap-w3.svc.cluster.local/work"
+  },
+  {
+   "name": "w3-rest",
+   "function": "rest",
+   "url": "http://rest.cap-w3.svc.cluster.local/work"
+  },
+  {
+   "name": "w4-pods2",
+   "function": "pods2",
+   "url": "http://pods2.cap-w4.svc.cluster.local/work"
+  },
+  {
+   "name": "w4-pods4",
+   "function": "pods4",
+   "url": "http://pods4.cap-w4.svc.cluster.local/work"
+  },
+  {
+   "name": "w4-pods8",
+   "function": "pods8",
+   "url": "http://pods8.cap-w4.svc.cluster.local/work"
+  },
+  {
+   "name": "w4-rest",
+   "function": "rest",
+   "url": "http://rest.cap-w4.svc.cluster.local/work"
+  }
+ ],
+ "seed": 20261017,
+ "minutes": 20,
+ "interval_seconds": 60
+}
