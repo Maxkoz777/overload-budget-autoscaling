@@ -157,3 +157,35 @@ Imported by the experiment and analysis scripts.
 | `analysis/reproducibility/SEEDS.md` | Every random seed and where it is set. |
 | `analysis/reproducibility/check_trainer_provenance.py` | Checks the recorded trainer hashes and that the public trainers contain the same code. |
 | `analysis/reproducibility/historical_trainers/` | `train_xgb.py` and `train_lstm.py` exactly as they were when the canonical fits ran. |
+
+## Kubernetes testbed
+
+The scripts in `testbed/` are frozen (`testbed/FREEZE.json`); [`testbed/README.md`](../testbed/README.md) gives the order in which they run.
+
+| Script | Purpose |
+|---|---|
+| `testbed/policies.py` | PAC-h (PAC or standard rank) and B1 as step-by-step controllers. |
+| `testbed/check_equivalence.py` | Checks `policies.py` against the article's replay code, minute by minute. |
+| `testbed/capacity.py` | Calibration of the common pod capacity μ and CPU utilisation c (phases 1–3). |
+| `testbed/prepare.py` | Function selection, plan, causal histories, sizing. |
+| `testbed/render.py` | Manifests of a run, the pilot, or a capacity phase. |
+| `testbed/label_nodes.py` | Seeded node labels `testbed-node=w1..w4` and `load`. |
+| `testbed/ops/cloud_stage.sh` | Operator script for the cloud: calibration, pilot, freeze, runs. |
+| `testbed/check_cluster.py` | Labels, sizing against allocatable CPU, metrics API, storage class. |
+| `testbed/record_cluster.sh` | Image digests, cluster and toolchain versions for the freeze. |
+| `testbed/freeze.py` | Records (`FREEZE.json`) or verifies (`--verify`) the SHA-256 of all inputs. |
+| `testbed/analyze.py` | One run: validity, overload intervals, actuator model, budget, users, delays. |
+| `testbed/combine.py` | Four valid runs: hypothesis criteria, sign tests on overload intervals, repeatability. |
+| `testbed/tests/run_tests.py` | Synthetic negative and positive tests of the analysis. |
+| `testbed/app/`, `testbed/loadgen/`, `testbed/tools/` | Worker service, load generator, controller and collector images. |
+
+After the freeze (`analysis/testbed/`, [README](../analysis/testbed/README.md)):
+
+| Script | Purpose |
+|---|---|
+| `analysis/testbed/extract.py` | Reduces the raw run files to derived data. |
+| `analysis/testbed/attribution_fix.py` | Non-overlapping attribution of removed pods to scale-down calls. |
+| `analysis/testbed/build_tables.py` | Tables T01–T14 (protocol) and X01–X06 (post hoc). |
+| `analysis/testbed/build_figures.py` | Figures F01–F11; `PAPER=1` writes the article's versions. |
+| `analysis/testbed/ops/finish_fetch.sh` | Recovery of a run whose result copy failed, with per-file SHA-256 verification. |
+| `analysis/testbed/ops/node_snapshot.sh` | Post hoc snapshot of the nodes: CPU model, steal time, benchmark. |

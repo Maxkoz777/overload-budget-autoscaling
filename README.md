@@ -4,9 +4,11 @@
 
 Code for the article
 
-> M. Kozhinov, M. Mazzara. *How Much Headroom Is Enough? Overload Budgets for Predictive Autoscaling under Actuation Delay.* Submitted to the *Journal of Cloud Computing* (2026).
+> M. Kozhinov, M. Mazzara. *How Much Headroom Is Enough? Overload Budgets for Predictive Autoscaling under Actuation Delay.* Manuscript, 2026.
 
-This repository contains **scripts only**. It includes no trace data, no preprocessed series, and no precomputed results. All three traces used in the article are public. Download them from their owners ([`docs/DATA.md`](docs/DATA.md)), and the scripts rebuild every number, table, and figure from them.
+This repository contains the replay and analysis scripts and the Kubernetes testbed. It includes no raw traces, no preprocessed series, and no precomputed replay results. All three traces used in the article are public. Download them from their owners ([`docs/DATA.md`](docs/DATA.md)), and the scripts rebuild every number, table, and figure of the trace-driven evaluation from them.
+
+The testbed (Sect. 7 of the article) keeps its frozen inputs in [`testbed/`](testbed/README.md), including scaled per-minute request counts of 12 Huawei Cloud functions. Its raw run data are archived separately ([`analysis/testbed/README.md`](analysis/testbed/README.md)).
 
 ## Contents
 
@@ -16,6 +18,7 @@ This repository contains **scripts only**. It includes no trace data, no preproc
 - [Where to put the data](#where-to-put-the-data)
 - [Reproducing the results](#reproducing-the-results)
 - [Where each result in the article comes from](#where-each-result-in-the-article-comes-from)
+- [Kubernetes testbed](#kubernetes-testbed)
 - [Protocols and integrity checks](#protocols-and-integrity-checks)
 - [Citation and licence](#citation-and-licence)
 
@@ -41,7 +44,7 @@ The code replays this controller and its comparators against three public produc
 - fixed, Gaussian, and empirical-percentile margins;
 - the standard conformal margin with and without an offset.
 
-For each policy, the replay measures realised overload, the number of services within budget, and relative replay cost.
+For each policy, the replay measures realised overload, the number of services within budget, and relative replay cost. The testbed runs PAC-h, its standard-rank ablation, the reactive controller, and the Kubernetes HPA as live controllers of a Kubernetes cluster.
 
 | Trace | Units | Role in the article |
 |---|---|---|
@@ -75,9 +78,11 @@ overload-budget-autoscaling/
 │   ├── audit/                    canonical replays, statistics, revision analyses, figures, table rows
 │   │   └── verified_results/     protocol files written before the corresponding runs
 │   ├── review/                   independent re-implementation used by one summary step
-│   └── reproducibility/          random seeds; runner for the canonical learned-forecaster fits
-└── scripts/
-    └── run_all.sh                focused-tier pipeline: series → forecasters → replay
+│   ├── reproducibility/          random seeds; runner for the canonical learned-forecaster fits
+│   └── testbed/                  Kubernetes testbed after the freeze: analysis, deviations, data checksums
+├── scripts/
+│   └── run_all.sh                focused-tier pipeline: series → forecasters → replay
+└── testbed/                      Kubernetes testbed: code, protocol, plan, calibration (frozen, FREEZE.json)
 ```
 
 Notes on the layout:
@@ -90,7 +95,9 @@ Notes on the layout:
   - `experiments/results/` and `experiments/figures/` — focused-tier outputs;
   - `analysis/audit/*_results/` and `analysis/audit/verified_results/` — analysis outputs, apart from the protocol files;
   - `analysis/audit/verified_results_canonical/` — re-run with the canonical capacity-unit rule (step 7b);
-  - `analysis/figures/` — figures.
+  - `analysis/figures/` — figures;
+  - `testbed/results/` — raw testbed data, unpacked from the data archive;
+  - `analysis/testbed/output/` — testbed tables, figures, and derived data.
 - **`experiments/data/splits/` is study configuration, not data.** It holds the day boundaries of the split and the list of the 200 selected service IDs with the summary statistics used to stratify and verify them. `experiments/src/select_services_200.py` regenerates the list from the trace (seed 42).
 
 ## Environment
@@ -102,6 +109,7 @@ Notes on the layout:
 - **Verified for reproduction.** The clean-folder check below used Python 3.13.15, NumPy 2.5.3, and pandas 3.0.5. The unit tests of the canonical rule also pass with pandas 2.3.3 and NumPy 2.2.6.
 - **Operating system.** The replay and analysis scripts use NumPy, pandas, and SciPy only and do not depend on the operating system. The three scripts that use `multiprocessing` hand their state to every worker explicitly, so they give the same results with the fork, spawn, and forkserver start methods: `pac_rank_replay.py`, `alibaba_delay.py`, and `run_delay_and_reactive_grid.py`, which runs the frozen `delay_and_reactive_grid.py` (step 7).
 - **Learned forecasters.** The canonical fits (`analysis/audit/final_closure_local_runs.py`) record the executing environment and refuse to run outside macOS; `--smoke` runs a short test on other systems.
+- **Testbed.** Building and running the testbed needs Docker and a Kubernetes cluster; the versions used are recorded in `testbed/cluster/`. Its analysis needs only NumPy, pandas, and Matplotlib.
 - **Randomness.** Seeds are listed in [`analysis/reproducibility/SEEDS.md`](analysis/reproducibility/SEEDS.md). Deterministic replays use no random numbers.
 
 ```bash
@@ -332,9 +340,9 @@ Script paths are relative to `analysis/audit/` unless noted.
 | Matched-rank ablation (Sect. 6.2, Sect. S10); canonical capacity units; clustered confirmatory sensitivity (Sect. 6.3) | `canonical_rerun.py` (R11, R10, R12) |
 | Sect. 6.2, window/η ablations, stride variant, cost-aware rule, exchangeability martingales | `pac_window_grid.py`, `pac_stride_sensitivity.py` |
 | Table 2, confirmatory replay | `prepare_confirmatory_periods.py`, `confirmatory_replay.py` |
-| Table 3, strict 1% budget on the 200-service suite | `strict_budget_summary.py` (inputs from step 4) |
-| Table 4, external replication | `external_replication.py`, `plot_external_replication.py` |
-| Sect. 6.6, forecasters, offset, resource use | `recompute_final_closure_downstream.py`, `resource_axis_extension.py`, `resource_overload_envelope.py` |
+| Sect. 6.4, rank correction and strict budget with immediate actuation | `strict_budget_summary.py` (inputs from step 4), `external_replication.py` |
+| Sect. 6.4, forecasters, offset, resource use | `recompute_final_closure_downstream.py`, `resource_axis_extension.py`, `resource_overload_envelope.py` |
+| Sect. 7, Table 3, Figs. 4–5, Kubernetes testbed | `testbed/analyze.py`, `testbed/combine.py`, `analysis/testbed/` ([README](analysis/testbed/README.md)) |
 
 **Additional file 1**
 
@@ -349,10 +357,27 @@ Script paths are relative to `analysis/audit/` unless noted.
 | S6.6, matched margins, 200-service coverage and strata figures, strict-budget sensitivity, rank ablation | `recompute_margin_comparison.py`, `plot_verified_suite.py`, `recompute_verified_rank_ablation.py`, `delay_and_reactive_grid.py` (r2), `pretest_subset.py` |
 | S6.7, budget utilisation, cost-constrained comparisons | `budget_utilisation.py`, `recompute_verified_effects.py`, `recompute_verified_dependence.py`, `statistical_robustness.py` |
 | S6.8, resource axis, cost decomposition, scale strata | `resource_axis_extension.py`, `tables_resource_axis.py`, `plot_resource_axis.py` |
-| S7, external replication | `prepare_external_traces.py`, `external_replication.py`, `external_replication_summary.py` |
+| S6.9, strict budget and rank correction with immediate actuation | `strict_budget_summary.py`, `recompute_verified_rank_ablation.py`, `pretest_subset.py`, `recompute_final_closure_downstream.py`, `resource_axis_extension.py` |
+| S7, external replication | `prepare_external_traces.py`, `external_replication.py`, `external_replication_summary.py`, `plot_external_replication.py` |
 | S8, actuation delay and horizon-aligned calibration | `recompute_guardrail_actuation.py`, `experiments/src/run_ls_actuation_delay.py`, `delay_and_reactive_grid.py`, `external_delay.py`, `alibaba_delay.py`, `pac_rank_replay.py` |
 | S9, residual exchangeability diagnostics | `experiments/src/run_c4_exchangeability.py`, `pac_window_grid.py` |
 | S10, round-two analyses and moved figures (focused frontier and calibration, resource envelope, external replication) | `pac_window_grid.py`, `pac_stride_sensitivity.py`, `confirmatory_replay.py`, `plot_focused_figures.py`, `plot_resource_axis.py`, `plot_external_replication.py` |
+| S11, Kubernetes testbed: protocol, calibration, detailed results | `testbed/PROTOCOL.md`, `testbed/capacity.py`, `testbed/analyze.py`, `testbed/combine.py`, `analysis/testbed/build_tables.py`, `analysis/testbed/build_figures.py` |
+
+## Kubernetes testbed
+
+[`testbed/`](testbed/README.md) runs PAC-h, its standard-rank ablation, the reactive controller B1, and the Kubernetes HPA side by side on a Kubernetes cluster, replaying 12 functions of the confirmatory Huawei periods in real time. Its protocol ([`testbed/PROTOCOL.md`](testbed/PROTOCOL.md)), code, plan, capacity calibration, and actuator model were frozen before the main runs: `testbed/FREEZE.json` (commit `1211dc1`) stores the SHA-256 of all 123 inputs as committed in `0971244`. This check confirms that they are unchanged:
+
+```bash
+python3 testbed/freeze.py --verify
+```
+
+Everything written after the freeze is in [`analysis/testbed/`](analysis/testbed/README.md):
+
+- the analysis behind Sect. 7 and Sect. S11, with the reference tables;
+- the two operator scripts used during the campaign;
+- the deviations from the protocol;
+- the checksums of the raw data archive.
 
 ## Protocols and integrity checks
 
@@ -386,6 +411,10 @@ python3 analysis/reproducibility/check_trainer_provenance.py
 
 ## Citation and licence
 
-- **Citation.** See [`CITATION.cff`](CITATION.cff) or the "Cite this repository" button. The code version cited in the article is v1.2.0; https://doi.org/10.5281/zenodo.23125234 always points to the latest version. v1.1.0 (https://doi.org/10.5281/zenodo.23125637) has the same replay code without the start-method fixes, and v1.0.0 (https://doi.org/10.5281/zenodo.23125235) keeps the original file names. The article's DOI will be added on publication.
+- **Citation.** See [`CITATION.cff`](CITATION.cff) or the "Cite this repository" button. The article cites two versions:
+  - v1.2.0 (https://doi.org/10.5281/zenodo.23434772) for the trace-driven evaluation;
+  - v1.3.0, which adds the Kubernetes testbed and leaves the replay code unchanged, for Sect. 7.
+
+  https://doi.org/10.5281/zenodo.23125234 always points to the latest version. v1.1.0 (https://doi.org/10.5281/zenodo.23125637) has the same replay code without the start-method fixes, and v1.0.0 (https://doi.org/10.5281/zenodo.23125235) keeps the original file names. The article's DOI will be added on publication.
 - **Code licence.** The code is released under the MIT License ([`LICENSE`](LICENSE)).
-- **Trace data.** The traces are not covered by this licence: they are published by their owners under their own terms, and this repository redistributes none of them ([`docs/DATA.md`](docs/DATA.md)).
+- **Trace data.** The traces are not covered by this licence: they are published by their owners under their own terms ([`docs/DATA.md`](docs/DATA.md)). The only trace-derived data in this repository are in `testbed/plan/`: the testbed's scaled per-minute request counts of 12 Huawei Cloud functions and summary statistics of the candidate functions. The Huawei Cloud data release is licensed under CC BY 4.0, and these data are redistributed under the same licence ([`docs/DATA.md`](docs/DATA.md#huawei-cloud-2023-private-cloud-serverless-functions)).

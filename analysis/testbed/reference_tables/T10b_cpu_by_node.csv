@@ -1,0 +1,5 @@
+node,run1,run2,run3,run4,mean,calibration_phase2
+w1,4.28 (PAC-h),4.20 (HPA),4.18 (B1),4.08 (Conformal),4.186,4.145
+w2,4.18 (Conformal),4.33 (PAC-h),4.35 (HPA),3.82 (B1),4.17,3.452
+w3,4.11 (B1),4.17 (Conformal),4.19 (PAC-h),4.10 (HPA),4.142,3.89
+w4,3.42 (HPA),3.43 (B1),3.41 (Conformal),3.37 (PAC-h),3.408,3.455

@@ -57,3 +57,6 @@ analysis/review/*/
 
 # Canonical re-run outputs (canonical_rerun.py)
 analysis/audit/verified_results_canonical/
+
+# Testbed analysis outputs (analysis/testbed/README.md)
+analysis/testbed/output/

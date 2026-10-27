@@ -1,0 +1,5 @@
+run,node,mean_replicas_sum,max_replicas,share_at_maxReplicas,utilisation_over_target_mean,scale_changes,overload_lo,h2_violated,ready_pod_minutes,bad_pct,b1_overload_lo,b1_ready_pod_minutes
+run1,w4,34.9,8,0.0,0.682,342,247,3,50218,0.0067,71,47445
+run2,w1,46.6,11,0.0,0.707,857,1,0,66935,0.159,89,50070
+run3,w2,43.9,11,0.0,0.694,515,1,0,63170,0.2362,70,47463
+run4,w3,45.8,11,0.0,0.704,865,5,0,65712,0.3115,90,50087

@@ -1,0 +1,17 @@
+run,policy,node,cpu_ms_per_request,vs_common_calibration_pct,node_calibration_ms,vs_node_calibration_pct
+run1,PAC-h,w1,4.277,14.5,4.145,3.2
+run1,Conformal,w2,4.182,12.0,3.452,21.2
+run1,B1,w3,4.105,9.9,3.89,5.5
+run1,HPA,w4,3.419,-8.5,3.455,-1.0
+run2,PAC-h,w2,4.329,15.9,3.452,25.4
+run2,Conformal,w3,4.171,11.7,3.89,7.2
+run2,B1,w4,3.427,-8.2,3.455,-0.8
+run2,HPA,w1,4.198,12.4,4.145,1.3
+run3,PAC-h,w3,4.193,12.3,3.89,7.8
+run3,Conformal,w4,3.412,-8.6,3.455,-1.2
+run3,B1,w1,4.183,12.0,4.145,0.9
+run3,HPA,w2,4.352,16.5,3.452,26.1
+run4,PAC-h,w4,3.373,-9.7,3.455,-2.4
+run4,Conformal,w1,4.085,9.4,4.145,-1.5
+run4,B1,w2,3.819,2.3,3.452,10.7
+run4,HPA,w3,4.1,9.8,3.89,5.4

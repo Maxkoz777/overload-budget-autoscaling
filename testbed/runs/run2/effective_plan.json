@@ -1,0 +1,258 @@
+{
+ "delta": 0.01,
+ "eta": 0.05,
+ "tau": 1,
+ "mu_phys_per_minute": 240.0,
+ "seed": 1,
+ "warmup_minutes": 30,
+ "minutes": 1470,
+ "pod_cpu_millicores": 40,
+ "capacity": {
+  "mu_phys_per_minute": 240,
+  "rate_per_second": 4,
+  "cpu_utilisation_at_capacity": 0.3735,
+  "pod_cpu_millicores": 40,
+  "iter": 10400,
+  "verified": true,
+  "note": "",
+  "r_star": 6
+ },
+ "functions": [
+  {
+   "name": "f1",
+   "run": "C_days168_184",
+   "unit_id": "HW_164",
+   "function": 164,
+   "stratum": "low",
+   "burstiness": 1.262,
+   "mu_trace": 13453.4,
+   "scale": 0.01783935659387218,
+   "W": 2880,
+   "b1_threshold": 0.99,
+   "b1_cooldown": 1,
+   "hpa_target_cpu_percent": 37,
+   "initial_replicas_reactive": {
+    "10": 6,
+    "11": 7
+   },
+   "initial_replicas_reactive_pilot": 3
+  },
+  {
+   "name": "f2",
+   "run": "B_days147_165",
+   "unit_id": "HW_116",
+   "function": 116,
+   "stratum": "low",
+   "burstiness": 2.437,
+   "mu_trace": 121.0,
+   "scale": 1.9834710743801653,
+   "W": 1440,
+   "b1_threshold": 0.95,
+   "b1_cooldown": 1,
+   "hpa_target_cpu_percent": 35,
+   "initial_replicas_reactive": {
+    "10": 5,
+    "11": 5
+   },
+   "initial_replicas_reactive_pilot": 3
+  },
+  {
+   "name": "f3",
+   "run": "C_days168_184",
+   "unit_id": "HW_066",
+   "function": 66,
+   "stratum": "low",
+   "burstiness": 1.184,
+   "mu_trace": 19596.583333333336,
+   "scale": 0.012247032858619061,
+   "W": 2880,
+   "b1_threshold": 0.99,
+   "b1_cooldown": 1,
+   "hpa_target_cpu_percent": 37,
+   "initial_replicas_reactive": {
+    "10": 7,
+    "11": 8
+   },
+   "initial_replicas_reactive_pilot": 4
+  },
+  {
+   "name": "f4",
+   "run": "C_days168_184",
+   "unit_id": "HW_028",
+   "function": 28,
+   "stratum": "low",
+   "burstiness": 2.302,
+   "mu_trace": 12627.25,
+   "scale": 0.019006513690629393,
+   "W": 2880,
+   "b1_threshold": 0.95,
+   "b1_cooldown": 1,
+   "hpa_target_cpu_percent": 35,
+   "initial_replicas_reactive": {
+    "10": 5,
+    "11": 5
+   },
+   "initial_replicas_reactive_pilot": 2
+  },
+  {
+   "name": "f5",
+   "run": "C_days168_184",
+   "unit_id": "HW_067",
+   "function": 67,
+   "stratum": "mid",
+   "burstiness": 2.887,
+   "mu_trace": 287.0,
+   "scale": 0.8362369337979094,
+   "W": 2880,
+   "b1_threshold": 0.8,
+   "b1_cooldown": 1,
+   "hpa_target_cpu_percent": 30,
+   "initial_replicas_reactive": {
+    "10": 2,
+    "11": 2
+   },
+   "initial_replicas_reactive_pilot": 1
+  },
+  {
+   "name": "f6",
+   "run": "B_days147_165",
+   "unit_id": "HW_132",
+   "function": 132,
+   "stratum": "mid",
+   "burstiness": 2.85,
+   "mu_trace": 2039.4166666666663,
+   "scale": 0.11768070935316473,
+   "W": 1440,
+   "b1_threshold": 0.95,
+   "b1_cooldown": 3,
+   "hpa_target_cpu_percent": 35,
+   "initial_replicas_reactive": {
+    "10": 2,
+    "11": 2
+   },
+   "initial_replicas_reactive_pilot": 2
+  },
+  {
+   "name": "f7",
+   "run": "A_days000_018",
+   "unit_id": "HW_086",
+   "function": 86,
+   "stratum": "mid",
+   "burstiness": 2.749,
+   "mu_trace": 8015.5,
+   "scale": 0.029941987399413637,
+   "W": 1440,
+   "b1_threshold": 0.99,
+   "b1_cooldown": 1,
+   "hpa_target_cpu_percent": 37,
+   "initial_replicas_reactive": {
+    "10": 5,
+    "11": 5
+   },
+   "initial_replicas_reactive_pilot": 4
+  },
+  {
+   "name": "f8",
+   "run": "C_days168_184",
+   "unit_id": "HW_130",
+   "function": 130,
+   "stratum": "mid",
+   "burstiness": 2.973,
+   "mu_trace": 609.5,
+   "scale": 0.3937653814602133,
+   "W": 2880,
+   "b1_threshold": 0.95,
+   "b1_cooldown": 1,
+   "hpa_target_cpu_percent": 35,
+   "initial_replicas_reactive": {
+    "10": 4,
+    "11": 4
+   },
+   "initial_replicas_reactive_pilot": 2
+  },
+  {
+   "name": "f9",
+   "run": "A_days000_018",
+   "unit_id": "HW_127",
+   "function": 127,
+   "stratum": "high",
+   "burstiness": 4.688,
+   "mu_trace": 56.0,
+   "scale": 4.285714285714286,
+   "W": 1440,
+   "b1_threshold": 0.5,
+   "b1_cooldown": 1,
+   "hpa_target_cpu_percent": 19,
+   "initial_replicas_reactive": {
+    "10": 2,
+    "11": 3
+   },
+   "initial_replicas_reactive_pilot": 3
+  },
+  {
+   "name": "f10",
+   "run": "C_days168_184",
+   "unit_id": "HW_092",
+   "function": 92,
+   "stratum": "high",
+   "burstiness": 3.446,
+   "mu_trace": 5098.166666666666,
+   "scale": 0.0470757461832685,
+   "W": 2880,
+   "b1_threshold": 0.99,
+   "b1_cooldown": 1,
+   "hpa_target_cpu_percent": 37,
+   "initial_replicas_reactive": {
+    "10": 4,
+    "11": 4
+   },
+   "initial_replicas_reactive_pilot": 2
+  },
+  {
+   "name": "f11",
+   "run": "A_days000_018",
+   "unit_id": "HW_190",
+   "function": 190,
+   "stratum": "high",
+   "burstiness": 4.902,
+   "mu_trace": 1092.0,
+   "scale": 0.21978021978021978,
+   "W": 1440,
+   "b1_threshold": 0.6,
+   "b1_cooldown": 1,
+   "hpa_target_cpu_percent": 22,
+   "initial_replicas_reactive": {
+    "10": 2,
+    "11": 1
+   },
+   "initial_replicas_reactive_pilot": 1
+  },
+  {
+   "name": "f12",
+   "run": "C_days168_184",
+   "unit_id": "HW_088",
+   "function": 88,
+   "stratum": "high",
+   "burstiness": 4.806,
+   "mu_trace": 2072.0,
+   "scale": 0.11583011583011583,
+   "W": 2880,
+   "b1_threshold": 0.95,
+   "b1_cooldown": 1,
+   "hpa_target_cpu_percent": 35,
+   "initial_replicas_reactive": {
+    "10": 3,
+    "11": 3
+   },
+   "initial_replicas_reactive_pilot": 1
+  }
+ ],
+ "run": "run2",
+ "day": 11,
+ "assignment": {
+  "pach": "w2",
+  "conf": "w3",
+  "b1": "w4",
+  "hpa": "w1"
+ }
+}

@@ -1,0 +1,9 @@
+day,runs,policy,nodes,overload_lo,functions_identical_overload,mean_abs_diff_overload,ready_pod_minutes_diff_pct,bad_pct
+10,run1/run3,PAC-h,w1/w3,13/13,12,0.0,0.01,0.216/0.308
+10,run1/run3,Conformal,w2/w4,16/16,12,0.0,0.02,0.190/0.165
+10,run1/run3,B1,w3/w1,71/70,9,0.25,0.04,0.201/0.369
+10,run1/run3,HPA,w4/w2,247/1,1,20.5,25.79,0.007/0.236
+11,run2/run4,PAC-h,w2/w4,16/16,12,0.0,0.01,0.285/0.267
+11,run2/run4,Conformal,w3/w1,29/30,11,0.083,0.0,0.349/0.476
+11,run2/run4,B1,w4/w2,89/90,11,0.083,0.03,0.103/0.441
+11,run2/run4,HPA,w1/w3,1/5,9,0.333,-1.83,0.159/0.312

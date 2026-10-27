@@ -1,6 +1,6 @@
 # Data
 
-This repository contains no trace data, no preprocessed series, and no results. All three trace families are public. Download them from their owners and follow each owner's terms of use.
+This repository contains no raw traces, no preprocessed series, and no replay results. All three trace families are public. Download them from their owners and follow each owner's terms of use. The one exception is the input of the Kubernetes testbed, derived from the Huawei Cloud trace (see below).
 
 ## Folder layout
 
@@ -49,6 +49,12 @@ The Huawei and Azure preparation scripts look for `shared-data/` in the folder t
   | 0–18, 147–165, 168–184 | confirmatory replay, not touched by any earlier analysis | `analysis/audit/prepare_confirmatory_periods.py` |
 
 - **Expected layout.** `shared-data/huawei_2023/private/requests_minute/day_DDD.csv` and `shared-data/huawei_2023/private/instances_minute/day_DDD.csv`, with three-digit day numbers.
+- **Licence.** CC BY 4.0, as stated by the data release.
+- **Redistributed in this repository.** `testbed/plan/` holds the input of the Kubernetes testbed:
+  - the per-minute request counts of 12 functions from the three confirmatory periods, scaled so that one capacity unit is one pod of the testbed;
+  - summary statistics of the candidate functions.
+
+  `testbed/prepare.py` derives them from the confirmatory series. They are redistributed under CC BY 4.0, with attribution to the data release (Joosen et al., 2023). The testbed data archive ([`analysis/testbed/README.md`](../analysis/testbed/README.md)) contains the same requests as replayed.
 
 ## Azure Functions 2019
 

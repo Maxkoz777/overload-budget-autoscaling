@@ -1,0 +1,16 @@
+parameter,value
+Provider / service,"VK Cloud Managed Kubernetes, zone GZ1 (Moscow)"
+Kubernetes,v1.35.6
+Nodes,"5 x STD3-4-8 (Intel Xeon Icelake, 4 vCPU, 8 GB), 1 driver + 4 workers; allocatable 3920m CPU"
+Container runtime / OS,cri-o 1.35.5 / AlmaLinux 9.7; CNI Calico
+Functions,12 (Huawei 2023 confirmatory periods; terciles of burstiness)
+Test days,"10 and 11 (1,440 test minutes after 30 warm-up minutes)"
+Pod,CPU request = limit = 40m; ITER = 10400; warm-up 15 s; readiness probe 2 s
+Capacity mu,"4 requests/s per pod (240/min), verified under amendment A1; r* = 6"
+"CPU utilisation at mu, c",0.3735 (CPU per request implied: 3.735 ms)
+Risk level delta / budget,0.01 -> 14.4 overload minutes per function-run (H2: <= 14)
+PAC-h,"tau = 1, eta = 0.05, W = 1440 (periods A, B) or 2880 (C)"
+HPA,"default behaviour; target round(100 u c) = 19-37%; minReplicas 1, maxReplicas 40"
+Actuator model (pilot fit),"d_up = 18.04 s, d_down = 0.53 s (n = 160/190)"
+Bad request,"503, timeout (3 s), connection error, or successful response > 500 ms"
+Freeze,"local branch testbed-cloud, commits 0971244 / 1211dc1; 123 input hashes verified before every run"

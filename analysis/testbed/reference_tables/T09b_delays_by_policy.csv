@@ -1,0 +1,4 @@
+policy,n_up,endpoint_mid_med,endpoint_mid_p90,endpoint_mid_p99,first_served_med,n_down,removed_mid_med,removed_mid_p90
+PAC-h,3100,18.0,19.47,20.96,19.08,3112,0.45,0.92
+Conformal,3466,18.02,19.5,21.13,19.05,3474,0.48,0.84
+B1,3688,18.11,19.64,21.42,19.14,3700,0.51,0.88

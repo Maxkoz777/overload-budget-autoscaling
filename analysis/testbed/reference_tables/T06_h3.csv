@@ -1,0 +1,3 @@
+comparison,favouring_pach,against,undetermined,worst_case_counts,worst_p,worst_p_holm,best_case_counts,best_p,best_p_holm,mean_diff_lo,mean_diff_hi,bootstrap95_lo,bootstrap95_hi,conclusion
+PAC-h vs Conformal,5,0,2,5/2/5,0.2265625,0.2265625,7/0/5,0.0078125,0.0078125,-0.8333333333333334,-0.6041666666666666,-1.5,-0.0625,undetermined
+PAC-h vs B1,10,0,1,10/1/1,0.005859375,0.01171875,11/0/1,0.00048828125,0.0009765625,-6.25,-5.375,-8.5625,-3.1244791666666742,supported

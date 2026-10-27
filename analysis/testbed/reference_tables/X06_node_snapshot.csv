@@ -1,0 +1,6 @@
+role,node,cpu_model,mhz_reported,uptime_h,steal_since_boot_pct,steal_during_bench_pct,sha256_per_s_median,sha256_per_s_min,sha256_per_s_max,vs_mean_w1_w3_pct
+load,testbed-workers-0,Intel Xeon Processor (Icelake),2295,110.9,0.104,0.02,1430287,1332686,1442496,14.9
+w1,testbed-workers-4,Intel Xeon Processor (Icelake),1995,110.9,0.122,0.02,1253935,1241748,1256055,0.8
+w2,testbed-workers-2,Intel Xeon Processor (Icelake),2295,110.9,0.075,0.025,1232851,679781,1250645,-0.9
+w3,testbed-workers-1,Intel Xeon Processor (Icelake),1995,110.9,0.12,0.015,1246583,1227509,1248988,0.2
+w4,testbed-workers-3,Intel Xeon Processor (Icelake),2295,110.9,0.076,0.015,1443892,1437515,1444677,16.0

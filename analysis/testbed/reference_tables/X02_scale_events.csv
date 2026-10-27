@@ -1,0 +1,13 @@
+policy,kind,minutes,requests,bad,bad_pct,share_of_policy_bad
+B1,after scale-down,3278,1287462.0,7262.0,0.564,0.074
+B1,after scale-up,3186,1292106.0,2649.0,0.205,0.027
+B1,no change,62656,32600014.0,88021.0,0.27,0.899
+Conformal,after scale-down,3344,1238234.0,7361.0,0.594,0.07
+Conformal,after scale-up,3314,1264900.0,3093.0,0.245,0.029
+Conformal,no change,62462,32676448.0,95100.0,0.291,0.901
+HPA,after scale-down,1311,657105.0,1238.0,0.188,0.019
+HPA,after scale-up,1236,676523.0,1675.0,0.248,0.026
+HPA,no change,66573,33845954.0,60659.0,0.179,0.954
+PAC-h,after scale-down,2976,1152062.0,5775.0,0.501,0.061
+PAC-h,after scale-up,2948,1174918.0,2597.0,0.221,0.027
+PAC-h,no change,63196,32852602.0,86334.0,0.263,0.912

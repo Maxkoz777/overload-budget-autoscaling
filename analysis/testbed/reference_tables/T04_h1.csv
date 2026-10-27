@@ -1,0 +1,4 @@
+policy,function_runs,within,outside,undetermined,share_within,criterion_met,ready_ratio_min,ready_ratio_max,overload_model,overload_observed_lo,overload_observed_hi,overload_fifo_tau0,overload_fifo_tau1,h1_overload_within,h1_ready_within,fp_minutes,fn_minutes,f1_known_mean,capacity_mae_pods_mean
+PAC-h,48,48,0,0,1.0,True,0.9998,1.0,58,58,62,60,92,48,48,0,0,1.0,0.0011
+Conformal,48,48,0,0,1.0,True,0.9997,1.0,93,91,98,94,130,48,48,3,1,0.982,0.0012
+B1,48,44,0,4,0.917,True,0.9992,1.0,329,320,358,372,496,44,48,10,2,0.946,0.0013
