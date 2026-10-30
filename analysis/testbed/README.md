@@ -32,7 +32,7 @@ The policies rotated over the four workers so that each ran once on every worker
 
 The raw data of all calibration phases, the pilot, the four runs, and every failed or superseded attempt are archived separately:
 
-- **Archive:** `testbed-results-2026-10-26.zip`, DOI: _to be added after deposit_. 428 files; 0.77 GB packed, 5.2 GB unpacked.
+- **Archive:** `testbed-results-2026-10-26.zip`, https://doi.org/10.5281/zenodo.23818617. 428 files; 0.77 GB packed, 5.2 GB unpacked.
 - **Licence:** CC BY 4.0. The replayed requests are scaled per-minute counts of 12 functions of the Huawei Cloud 2023 data release, itself under CC BY 4.0 ([`docs/DATA.md`](../../docs/DATA.md)).
 - **Also in the deposit:**
   - the two archives of the local engineering stage of 18 October 2026, `testbed/local_stage/*.tar.gz`, whose checksums are in `testbed/local_stage/SHA256SUMS`;

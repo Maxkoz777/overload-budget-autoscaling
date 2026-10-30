@@ -8,7 +8,7 @@ Code for the article
 
 This repository contains the replay and analysis scripts and the Kubernetes testbed. It includes no raw traces, no preprocessed series, and no precomputed replay results. All three traces used in the article are public. Download them from their owners ([`docs/DATA.md`](docs/DATA.md)), and the scripts rebuild every number, table, and figure of the trace-driven evaluation from them.
 
-The testbed (Sect. 7 of the article) keeps its frozen inputs in [`testbed/`](testbed/README.md), including scaled per-minute request counts of 12 Huawei Cloud functions. Its raw run data are archived separately ([`analysis/testbed/README.md`](analysis/testbed/README.md)).
+The testbed (Sect. 7 of the article) keeps its frozen inputs in [`testbed/`](testbed/README.md), including scaled per-minute request counts of 12 Huawei Cloud functions. Its raw run data are archived separately on Zenodo, https://doi.org/10.5281/zenodo.23818617 ([`analysis/testbed/README.md`](analysis/testbed/README.md)).
 
 ## Contents
 
