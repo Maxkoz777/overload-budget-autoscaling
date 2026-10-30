@@ -413,7 +413,7 @@ python3 analysis/reproducibility/check_trainer_provenance.py
 
 - **Citation.** See [`CITATION.cff`](CITATION.cff) or the "Cite this repository" button. The article cites two versions:
   - v1.2.0 (https://doi.org/10.5281/zenodo.23434772) for the trace-driven evaluation;
-  - v1.3.0, which adds the Kubernetes testbed and leaves the replay code unchanged, for Sect. 7.
+  - v1.3.0 (https://doi.org/10.5281/zenodo.23701789), which adds the Kubernetes testbed and leaves the replay code unchanged, for Sect. 7.
 
   https://doi.org/10.5281/zenodo.23125234 always points to the latest version. v1.1.0 (https://doi.org/10.5281/zenodo.23125637) has the same replay code without the start-method fixes, and v1.0.0 (https://doi.org/10.5281/zenodo.23125235) keeps the original file names. The article's DOI will be added on publication.
 - **Code licence.** The code is released under the MIT License ([`LICENSE`](LICENSE)).
