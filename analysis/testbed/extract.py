@@ -20,7 +20,7 @@ def load_reduce(run: str) -> None:
     dt["target"] = "category"
     dt["lag_ms_max"] = "float32"
     ld = pd.read_csv(RES / run / "load.csv", usecols=cols, dtype=dt)
-    ld["policy"] = ld.target.str.split("-").str[0].astype("category")
+    ld["policy"] = ld.target.astype("object").str.split("-").str[0].astype("category")
     ld["bad"] = (ld.shed + ld.timeout + ld.failed + ld[SLOW].sum(axis=1)).astype("int32")
     test = (ld.second >= WARM * 60) & (ld.second < MINUTES * 60)
     t = ld[test]

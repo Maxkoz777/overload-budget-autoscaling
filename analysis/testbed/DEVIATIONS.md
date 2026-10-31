@@ -27,7 +27,11 @@
    - `ops/finish_fetch.sh`, outside the frozen inputs, retrieved the results with per-file SHA-256 verification against the driver pod (`results/run*/sha256_driver.txt`).
    - Measurements and analysis were not changed.
 6. **Attribution of one removed pod.** A derived quantity was corrected after the freeze ([`README.md`](README.md#corrections-after-the-freeze)). K1–K3 (protocol H1–H3) are unaffected.
-7. **Diagnostics not planned in the protocol.**
+7. **CPU samples in calibration phase 3.**
+   - The protocol (Sect. 4) requires at least four observations for each CPU estimate; `capacity.py analyze3` does not check this number.
+   - A check after the campaign found at least 16 CPU rows and 8 distinct snapshots in every one of the 36 worker × step combinations of the three phase-3 attempts, so the requirement was met.
+   - The utilisation c used for the HPA targets comes from phase 2.
+8. **Diagnostics not planned in the protocol.**
    - The node snapshot (`ops/node_snapshot.sh`).
    - Tables X01–X06 and figures F08, F10, and F11.
    - They are descriptive and exclude no request from the protocol's measures.

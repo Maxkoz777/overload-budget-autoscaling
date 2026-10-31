@@ -110,7 +110,8 @@ def f02_overload_by_function():
     over = PF[(PF.policy == "hpa") & (PF.overload_lo > 40)]
     for _, r in over.iterrows():
         i = FN.index(r.function)
-        ax.text(i + off["hpa"] - 0.08, 38.5, f"HPA run {r.run[-1]}: {int(r.overload_lo)} \u2191", fontsize=6.3 * FS, color=INK2, ha="right", va="top")
+        span = f"{int(r.overload_lo)}" if r.overload_hi == r.overload_lo else f"{int(r.overload_lo)}\u2013{int(r.overload_hi)}"
+        ax.text(i + off["hpa"] - 0.08, 38.5, f"HPA run {r.run[-1]}: {span} \u2191", fontsize=6.3 * FS, color=INK2, ha="right", va="top")
     if not PAPER:
         ax.set_title("Overload per function: mean of 4 runs (marker), unknown-minute interval (thick), range over runs (thin)", loc="left")
     policy_legend(ax, loc="upper right", ncol=2)

@@ -138,7 +138,7 @@ The steps follow the order in which the results were produced. Each step reads t
 **Three levels of reproduction.**
 
 1. **Integrity only (seconds).** Check the frozen code hashes of the confirmatory replay ([below](#protocols-and-integrity-checks)).
-2. **Replay with persistence forecasts (no model training).** Steps 1, 2 (series only), 4–7, and 7b rebuild every delay, PAC-h, strict-budget, and external-replication result, including Tables 1–4 and Figs. 2–3. "Series only" means building the service series without training any model:
+2. **Replay with persistence forecasts (no model training).** Steps 1, 2 (series only), 4–7, and 7b rebuild every delay, PAC-h, strict-budget, and external-replication result, including Tables 1–2, Figs. 2–3, and the trace-driven tables of Additional file 1. "Series only" means building the service series without training any model:
 
    ```bash
    python3 experiments/src/build_service_timeseries.py              # focused 20 services (from the repository root)
@@ -413,7 +413,7 @@ python3 analysis/reproducibility/check_trainer_provenance.py
 
 - **Citation.** See [`CITATION.cff`](CITATION.cff) or the "Cite this repository" button. The article cites two versions:
   - v1.2.0 (https://doi.org/10.5281/zenodo.23434772) for the trace-driven evaluation;
-  - v1.3.0 (https://doi.org/10.5281/zenodo.23701789), which adds the Kubernetes testbed and leaves the replay code unchanged, for Sect. 7.
+  - v1.3.1 for Sect. 7. v1.3.0 (https://doi.org/10.5281/zenodo.23701789) added the Kubernetes testbed and left the replay code unchanged; v1.3.1 makes the testbed analysis run with the pinned pandas 3 and changes no result.
 
   https://doi.org/10.5281/zenodo.23125234 always points to the latest version. v1.1.0 (https://doi.org/10.5281/zenodo.23125637) has the same replay code without the start-method fixes, and v1.0.0 (https://doi.org/10.5281/zenodo.23125235) keeps the original file names. The article's DOI will be added on publication.
 - **Code licence.** The code is released under the MIT License ([`LICENSE`](LICENSE)).

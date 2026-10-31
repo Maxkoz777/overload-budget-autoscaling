@@ -67,7 +67,7 @@ diff -r reference_tables output/tables -x '*.tex' && echo "tables identical"
 
 [`reference_tables/`](reference_tables/) holds the tables behind the numbers of the article. We rebuilt them from the archive with Python 3.10.12, NumPy 2.2.6, pandas 2.3.3, and Matplotlib 3.10.9:
 
-- **Tables.** All 22 were identical byte for byte, and an independent rebuild in another environment confirmed this.
+- **Tables.** All 22 were identical byte for byte. Independent rebuilds with pandas 2.2.3 and, from v1.3.1 on, with the pinned Python 3.14.7, NumPy 2.4.6, and pandas 3.0.3 gave the same 22 tables. In v1.3.0, `extract.py` failed with pandas 3: splitting the categorical request targets did not return the policy names.
 - **Derived data files.** In our rebuild, the decompressed contents of all 41 files in `output/data/` were identical. In another environment, the gzip headers differed and five files differed in the last digits of floating-point values (at most about 1e-12). The derived data are therefore numerically, not byte for byte, reproducible.
 
 **T and X tables.** Tables **T** report quantities that the protocol defines; their K1–K3 counts equal `combined.json`. Tables **X** are diagnostics added after the runs (synchrony of bad requests, scale events, drift, hourly CPU per request, node snapshot): they exclude no request and establish no cause. There is no T11.
