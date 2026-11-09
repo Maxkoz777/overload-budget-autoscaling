@@ -12,6 +12,8 @@ cp -R "$HERE/adaptive" "$HERE/run.py" "$HERE/tests.py" "$HERE/manifest_v1.json" 
 cd "$WORK"
 python3 --version | tee environment.txt
 python3 -c "import numpy, pandas, scipy; print('numpy', numpy.__version__, 'pandas', pandas.__version__, 'scipy', scipy.__version__)" | tee -a environment.txt
+python3 -c "import importlib.util as u; print('pyarrow', __import__('pyarrow').__version__ if u.find_spec('pyarrow') else 'not installed')" | tee -a environment.txt
+python3 -c "from adaptive.data import READER; print('parquet reader', READER)" 2>/dev/null | tee -a environment.txt
 python3 "$HERE/verify_manifest.py" | tee preflight.log
 python3 run.py cal | tee cal.log
 mv out_v1/cal_traces.csv out_v1/cal_traces_rerun.csv

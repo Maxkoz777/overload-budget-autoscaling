@@ -16,9 +16,9 @@ Every controller, including PAC-h, is replayed under a common resource bound `M_
 | `protocol_v1.json` | protocol of the v1 run, including the gamma rule and its revision R1 |
 | `manifest_v1.json`, `manifest_v1.sha256` | SHA-256 freeze written before the v1 test run (self-recorded) |
 | `tests.py`, `tests.log` | checks run before the v1 test run (frozen) |
-| `tests_portable.py`, `tests_release_2026-11-09.log` | the same checks with portable paths (68 passed) |
+| `tests_portable.py`, `tests_release_2026-11-09.log` | the same checks with portable paths (68 passed in the packaging check with `OBA_V0_DIR` set; 67 passed and the v0 check skipped on macOS) |
 | `reproduce.sh`, `compare_outputs.py` | re-run in a separate folder and comparison with the frozen outputs |
-| `reproduction_macos_2026-11-09/` | complete re-run on the authors' Mac (Python 3.14.7, NumPy 2.4.6, pandas 3.0.3, SciPy 1.17.1, pyarrow 24.0.0): every per-unit result identical |
+| `test_compare_outputs.py` | checks that `compare_outputs.py` rejects missing, duplicated, changed or non-finite results |
 | `manifest_release.json` | SHA-256 of every file of this folder as released |
 | `run.py` | `cal` (gamma selection on days 8-9), `test` (three traces), `confirm` (Huawei periods, post hoc) |
 | `summarise.py` | cell summaries from the per-unit results (reporting only) |
@@ -39,7 +39,7 @@ python3 tests_portable.py       # the checks of tests.py with portable paths
 bash reproduce.sh               # cal, test and confirm in a new folder rerun_<time>/, then compare_outputs.py
 ```
 
-`reproduce.sh` re-runs the step-size selection, keeps it for comparison, and runs the test and the Huawei periods with the frozen calibration files, because `run.py` refuses to start when a frozen code or calibration file differs from the manifest. `compare_outputs.py` then checks that every unit-level result matches the frozen `out_v1/` (counts exactly, values within a relative tolerance of 1e-9). `summarise.py` and `make_tables.py` rebuild the summaries and the tables of Additional file 1, Sect. S12, from `out_v1/`.
+`reproduce.sh` re-runs the step-size selection, keeps it for comparison, and runs the test and the Huawei periods with the frozen calibration files, because `run.py` refuses to start when a frozen code or calibration file differs from the manifest. `compare_outputs.py` then compares the re-run with the frozen `out_v1/`: it requires all four result files, the same columns and unique keys, the same rows, equal missing-value masks and text values in every column, numeric values within a relative tolerance of 1e-9, finite outcome metrics, and equal counts of units within budget in every cell. `test_compare_outputs.py` checks that it rejects incomplete or altered results. `summarise.py` and `make_tables.py` rebuild the summaries and the tables of Additional file 1, Sect. S12, from `out_v1/`.
 
 The parquet files are read with pyarrow when it is installed, otherwise with `adaptive/pq.py`, which `reader_qa.py` checks against pyarrow (200 files x 4 columns, no difference). `tests.py` is the frozen version that ran before the v1 test replay; its last check reads the exploratory outputs from the session path of that run, so use `tests_portable.py` elsewhere (set `OBA_V0_DIR=exploratory_v0` to include that check).
 
