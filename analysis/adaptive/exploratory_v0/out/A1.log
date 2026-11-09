@@ -1,0 +1,214 @@
+alibaba200 d=0.01 tau=0 P                        within 200/200 mean 0.455 med 0.333
+alibaba200 d=0.01 tau=0 V1_c_small               within 200/200 mean 0.454 med 0.333
+alibaba200 d=0.01 tau=0 V2_c_large               within 200/200 mean 0.457 med 0.333
+alibaba200 d=0.01 tau=0 V3_no_limit              within 200/200 mean 0.457 med 0.333
+alibaba200 d=0.01 tau=0 V4_hpa_limit             within 200/200 mean 0.456 med 0.333
+alibaba200 d=0.01 tau=0 V5_A_missed              within 199/200 mean 0.451 med 0.333
+alibaba200 d=0.01 tau=0 V6_no_trigger            within 196/200 mean 0.467 med 0.343
+alibaba200 d=0.01 tau=0 V7_no_limit_no_trigger   within 196/200 mean 0.469 med 0.343
+alibaba200 d=0.01 tau=0 V8_hpa_limit_no_trigger  within 196/200 mean 0.473 med 0.343
+   ACI: max err 0.0104 (target 0.0100, delta 0.01); units with err>delta 46; overload in saturated minutes: units 3
+   ACI-G: max err 0.0088 (target 0.0086, delta 0.01); units with err>delta 0; overload in saturated minutes: units 3
+   [6s]
+alibaba200 d=0.01 tau=1 P                        within 198/200 mean 0.470 med 0.352
+alibaba200 d=0.01 tau=1 V1_c_small               within 198/200 mean 0.474 med 0.346
+alibaba200 d=0.01 tau=1 V2_c_large               within 198/200 mean 0.992 med 0.353
+alibaba200 d=0.01 tau=1 V3_no_limit              within 199/200 mean 0.468 med 0.352
+alibaba200 d=0.01 tau=1 V4_hpa_limit             within 199/200 mean 0.468 med 0.352
+alibaba200 d=0.01 tau=1 V5_A_missed              within 199/200 mean 0.460 med 0.345
+alibaba200 d=0.01 tau=1 V6_no_trigger            within 196/200 mean 0.471 med 0.356
+alibaba200 d=0.01 tau=1 V7_no_limit_no_trigger   within 196/200 mean 0.475 med 0.356
+alibaba200 d=0.01 tau=1 V8_hpa_limit_no_trigger  within 195/200 mean 0.476 med 0.356
+   ACI: max err 0.0111 (target 0.0100, delta 0.01); units with err>delta 56; overload in saturated minutes: units 3
+   ACI-G: max err 0.0074 (target 0.0072, delta 0.01); units with err>delta 0; overload in saturated minutes: units 3
+   [6s]
+alibaba200 d=0.01 tau=5 P                        within 198/200 mean 2.439 med 0.375
+alibaba200 d=0.01 tau=5 V1_c_small               within 199/200 mean 2.442 med 0.384
+alibaba200 d=0.01 tau=5 V2_c_large               within 196/200 mean 1.923 med 0.370
+alibaba200 d=0.01 tau=5 V3_no_limit              within 198/200 mean 0.485 med 0.375
+alibaba200 d=0.01 tau=5 V4_hpa_limit             within 198/200 mean 0.483 med 0.374
+alibaba200 d=0.01 tau=5 V5_A_missed              within 198/200 mean 2.433 med 0.372
+alibaba200 d=0.01 tau=5 V6_no_trigger            within 189/200 mean 0.479 med 0.378
+alibaba200 d=0.01 tau=5 V7_no_limit_no_trigger   within 189/200 mean 0.483 med 0.383
+alibaba200 d=0.01 tau=5 V8_hpa_limit_no_trigger  within 188/200 mean 0.482 med 0.383
+   ACI: max err 0.0123 (target 0.0100, delta 0.01); units with err>delta 106; overload in saturated minutes: units 2
+   ACI-G: max err 0.0028 (target 0.0017, delta 0.01); units with err>delta 0; overload in saturated minutes: units 3
+   [6s]
+alibaba200 d=0.05 tau=0 P                        within 200/200 mean 0.437 med 0.333
+alibaba200 d=0.05 tau=0 V1_c_small               within 200/200 mean 0.438 med 0.333
+alibaba200 d=0.05 tau=0 V2_c_large               within 200/200 mean 0.437 med 0.333
+alibaba200 d=0.05 tau=0 V3_no_limit              within 200/200 mean 0.438 med 0.333
+alibaba200 d=0.05 tau=0 V4_hpa_limit             within 200/200 mean 0.438 med 0.333
+alibaba200 d=0.05 tau=0 V5_A_missed              within 200/200 mean 0.435 med 0.308
+alibaba200 d=0.05 tau=0 V6_no_trigger            within 200/200 mean 0.450 med 0.333
+alibaba200 d=0.05 tau=0 V7_no_limit_no_trigger   within 200/200 mean 0.451 med 0.333
+alibaba200 d=0.05 tau=0 V8_hpa_limit_no_trigger  within 199/200 mean 0.451 med 0.333
+   ACI: max err 0.0519 (target 0.0500, delta 0.05); units with err>delta 63; overload in saturated minutes: units 3
+   ACI-G: max err 0.0387 (target 0.0382, delta 0.05); units with err>delta 0; overload in saturated minutes: units 3
+   [10s]
+alibaba200 d=0.05 tau=1 P                        within 199/200 mean 0.447 med 0.333
+alibaba200 d=0.05 tau=1 V1_c_small               within 200/200 mean 0.448 med 0.333
+alibaba200 d=0.05 tau=1 V2_c_large               within 200/200 mean 0.445 med 0.333
+alibaba200 d=0.05 tau=1 V3_no_limit              within 199/200 mean 0.447 med 0.333
+alibaba200 d=0.05 tau=1 V4_hpa_limit             within 199/200 mean 0.447 med 0.333
+alibaba200 d=0.05 tau=1 V5_A_missed              within 200/200 mean 0.440 med 0.333
+alibaba200 d=0.05 tau=1 V6_no_trigger            within 198/200 mean 0.453 med 0.333
+alibaba200 d=0.05 tau=1 V7_no_limit_no_trigger   within 198/200 mean 0.454 med 0.333
+alibaba200 d=0.05 tau=1 V8_hpa_limit_no_trigger  within 198/200 mean 0.455 med 0.333
+   ACI: max err 0.0530 (target 0.0500, delta 0.05); units with err>delta 72; overload in saturated minutes: units 3
+   ACI-G: max err 0.0273 (target 0.0264, delta 0.05); units with err>delta 0; overload in saturated minutes: units 3
+   [10s]
+alibaba200 d=0.05 tau=5 P                        within 200/200 mean 0.464 med 0.343
+alibaba200 d=0.05 tau=5 V1_c_small               within 199/200 mean 0.466 med 0.345
+alibaba200 d=0.05 tau=5 V2_c_large               within 200/200 mean 0.465 med 0.345
+alibaba200 d=0.05 tau=5 V3_no_limit              within 200/200 mean 0.459 med 0.348
+alibaba200 d=0.05 tau=5 V4_hpa_limit             within 200/200 mean 0.459 med 0.348
+alibaba200 d=0.05 tau=5 V5_A_missed              within 200/200 mean 0.462 med 0.334
+alibaba200 d=0.05 tau=5 V6_no_trigger            within 198/200 mean 0.458 med 0.343
+alibaba200 d=0.05 tau=5 V7_no_limit_no_trigger   within 198/200 mean 0.460 med 0.343
+alibaba200 d=0.05 tau=5 V8_hpa_limit_no_trigger  within 198/200 mean 0.459 med 0.343
+   ACI: max err 0.0551 (target 0.0500, delta 0.05); units with err>delta 50; overload in saturated minutes: units 2
+   [10s]
+huawei2023 d=0.01 tau=0 P                        within 64/64 mean 16.930 med 1.354
+huawei2023 d=0.01 tau=0 V1_c_small               within 64/64 mean 9.135 med 1.361
+huawei2023 d=0.01 tau=0 V2_c_large               within 64/64 mean 5.876 med 1.323
+huawei2023 d=0.01 tau=0 V3_no_limit              within 64/64 mean 2.754 med 1.354
+huawei2023 d=0.01 tau=0 V4_hpa_limit             within 64/64 mean 2.710 med 1.354
+huawei2023 d=0.01 tau=0 V5_A_missed              within 64/64 mean 19.177 med 1.285
+huawei2023 d=0.01 tau=0 V6_no_trigger            within 64/64 mean 2.381 med 1.553
+huawei2023 d=0.01 tau=0 V7_no_limit_no_trigger   within 64/64 mean 2.669 med 1.553
+huawei2023 d=0.01 tau=0 V8_hpa_limit_no_trigger  within 63/64 mean 2.449 med 1.572
+   ACI: max err 0.0101 (target 0.0100, delta 0.01); units with err>delta 16; overload in saturated minutes: units 5
+   ACI-G: max err 0.0094 (target 0.0094, delta 0.01); units with err>delta 0; overload in saturated minutes: units 5
+   [52s]
+huawei2023 d=0.01 tau=1 P                        within 64/64 mean 20.637 med 1.476
+huawei2023 d=0.01 tau=1 V1_c_small               within 64/64 mean 12.905 med 1.492
+huawei2023 d=0.01 tau=1 V2_c_large               within 64/64 mean 11.077 med 1.471
+huawei2023 d=0.01 tau=1 V3_no_limit              within 63/64 mean 3.245 med 1.476
+huawei2023 d=0.01 tau=1 V4_hpa_limit             within 63/64 mean 3.180 med 1.476
+huawei2023 d=0.01 tau=1 V5_A_missed              within 64/64 mean 19.466 med 1.444
+huawei2023 d=0.01 tau=1 V6_no_trigger            within 63/64 mean 2.433 med 1.606
+huawei2023 d=0.01 tau=1 V7_no_limit_no_trigger   within 63/64 mean 2.621 med 1.606
+huawei2023 d=0.01 tau=1 V8_hpa_limit_no_trigger  within 63/64 mean 2.498 med 1.606
+   ACI: max err 0.0101 (target 0.0100, delta 0.01); units with err>delta 23; overload in saturated minutes: units 4
+   ACI-G: max err 0.0088 (target 0.0087, delta 0.01); units with err>delta 0; overload in saturated minutes: units 5
+   [53s]
+huawei2023 d=0.01 tau=5 P                        within 64/64 mean 37.516 med 1.692
+huawei2023 d=0.01 tau=5 V1_c_small               within 64/64 mean 32.793 med 1.781
+huawei2023 d=0.01 tau=5 V2_c_large               within 64/64 mean 32.867 med 1.598
+huawei2023 d=0.01 tau=5 V3_no_limit              within 63/64 mean 4.780 med 1.678
+huawei2023 d=0.01 tau=5 V4_hpa_limit             within 63/64 mean 4.541 med 1.678
+huawei2023 d=0.01 tau=5 V5_A_missed              within 64/64 mean 29.241 med 1.653
+huawei2023 d=0.01 tau=5 V6_no_trigger            within 63/64 mean 2.705 med 1.580
+huawei2023 d=0.01 tau=5 V7_no_limit_no_trigger   within 63/64 mean 3.049 med 1.580
+huawei2023 d=0.01 tau=5 V8_hpa_limit_no_trigger  within 62/64 mean 2.763 med 1.580
+   ACI: max err 0.0103 (target 0.0100, delta 0.01); units with err>delta 12; overload in saturated minutes: units 3
+   ACI-G: max err 0.0063 (target 0.0062, delta 0.01); units with err>delta 0; overload in saturated minutes: units 4
+   [54s]
+huawei2023 d=0.05 tau=0 P                        within 64/64 mean 7.265 med 1.166
+huawei2023 d=0.05 tau=0 V1_c_small               within 64/64 mean 4.638 med 1.209
+huawei2023 d=0.05 tau=0 V2_c_large               within 64/64 mean 3.667 med 1.202
+huawei2023 d=0.05 tau=0 V3_no_limit              within 64/64 mean 1.826 med 1.166
+huawei2023 d=0.05 tau=0 V4_hpa_limit             within 64/64 mean 1.814 med 1.166
+huawei2023 d=0.05 tau=0 V5_A_missed              within 64/64 mean 2.179 med 1.122
+huawei2023 d=0.05 tau=0 V6_no_trigger            within 64/64 mean 1.807 med 1.348
+huawei2023 d=0.05 tau=0 V7_no_limit_no_trigger   within 64/64 mean 1.888 med 1.348
+huawei2023 d=0.05 tau=0 V8_hpa_limit_no_trigger  within 64/64 mean 1.813 med 1.365
+   ACI: max err 0.0502 (target 0.0500, delta 0.05); units with err>delta 20; overload in saturated minutes: units 2
+   ACI-G: max err 0.0485 (target 0.0485, delta 0.05); units with err>delta 0; overload in saturated minutes: units 5
+   [52s]
+huawei2023 d=0.05 tau=1 P                        within 64/64 mean 8.030 med 1.305
+huawei2023 d=0.05 tau=1 V1_c_small               within 64/64 mean 8.155 med 1.324
+huawei2023 d=0.05 tau=1 V2_c_large               within 64/64 mean 6.090 med 1.280
+huawei2023 d=0.05 tau=1 V3_no_limit              within 64/64 mean 2.130 med 1.305
+huawei2023 d=0.05 tau=1 V4_hpa_limit             within 64/64 mean 2.103 med 1.305
+huawei2023 d=0.05 tau=1 V5_A_missed              within 64/64 mean 2.707 med 1.158
+huawei2023 d=0.05 tau=1 V6_no_trigger            within 64/64 mean 1.853 med 1.430
+huawei2023 d=0.05 tau=1 V7_no_limit_no_trigger   within 64/64 mean 1.907 med 1.430
+huawei2023 d=0.05 tau=1 V8_hpa_limit_no_trigger  within 64/64 mean 1.872 med 1.443
+   ACI: max err 0.0503 (target 0.0500, delta 0.05); units with err>delta 25; overload in saturated minutes: units 2
+   ACI-G: max err 0.0470 (target 0.0469, delta 0.05); units with err>delta 0; overload in saturated minutes: units 4
+   [52s]
+huawei2023 d=0.05 tau=5 P                        within 64/64 mean 14.268 med 1.441
+huawei2023 d=0.05 tau=5 V1_c_small               within 64/64 mean 27.752 med 1.495
+huawei2023 d=0.05 tau=5 V2_c_large               within 64/64 mean 16.798 med 1.399
+huawei2023 d=0.05 tau=5 V3_no_limit              within 64/64 mean 2.966 med 1.449
+huawei2023 d=0.05 tau=5 V4_hpa_limit             within 64/64 mean 2.915 med 1.449
+huawei2023 d=0.05 tau=5 V5_A_missed              within 64/64 mean 5.881 med 1.267
+huawei2023 d=0.05 tau=5 V6_no_trigger            within 64/64 mean 2.023 med 1.502
+huawei2023 d=0.05 tau=5 V7_no_limit_no_trigger   within 64/64 mean 2.147 med 1.502
+huawei2023 d=0.05 tau=5 V8_hpa_limit_no_trigger  within 64/64 mean 2.032 med 1.502
+   ACI: max err 0.0505 (target 0.0500, delta 0.05); units with err>delta 21; overload in saturated minutes: units 1
+   ACI-G: max err 0.0409 (target 0.0408, delta 0.05); units with err>delta 0; overload in saturated minutes: units 4
+   [53s]
+azure2019 d=0.01 tau=0 P                        within 2827/2839 mean 43.066 med 3.266
+azure2019 d=0.01 tau=0 V1_c_small               within 2559/2839 mean 61.528 med 3.891
+azure2019 d=0.01 tau=0 V2_c_large               within 2836/2839 mean 29.782 med 2.350
+azure2019 d=0.01 tau=0 V3_no_limit              within 2315/2839 mean 9.787 med 3.210
+azure2019 d=0.01 tau=0 V4_hpa_limit             within 2285/2839 mean 8.782 med 3.209
+azure2019 d=0.01 tau=0 V5_A_missed              within 2824/2839 mean 42.258 med 3.160
+azure2019 d=0.01 tau=0 V6_no_trigger            within 2420/2839 mean 6.460 med 3.631
+azure2019 d=0.01 tau=0 V7_no_limit_no_trigger   within 2175/2839 mean 7.542 med 3.762
+azure2019 d=0.01 tau=0 V8_hpa_limit_no_trigger  within 2029/2839 mean 5.643 med 3.487
+   ACI: max err 0.0104 (target 0.0100, delta 0.01); units with err>delta 364; overload in saturated minutes: units 31
+   ACI-G: max err 0.0064 (target 0.0064, delta 0.01); units with err>delta 0; overload in saturated minutes: units 55
+   [95s]
+azure2019 d=0.01 tau=1 P                        within 2822/2839 mean 72.319 med 3.564
+azure2019 d=0.01 tau=1 V1_c_small               within 2568/2839 mean 100.095 med 4.476
+azure2019 d=0.01 tau=1 V2_c_large               within 2833/2839 mean 52.767 med 2.447
+azure2019 d=0.01 tau=1 V3_no_limit              within 2335/2839 mean 10.556 med 3.394
+azure2019 d=0.01 tau=1 V4_hpa_limit             within 2302/2839 mean 9.474 med 3.354
+azure2019 d=0.01 tau=1 V5_A_missed              within 2819/2839 mean 73.778 med 3.539
+azure2019 d=0.01 tau=1 V6_no_trigger            within 2401/2839 mean 6.500 med 3.701
+azure2019 d=0.01 tau=1 V7_no_limit_no_trigger   within 2198/2839 mean 7.585 med 3.869
+azure2019 d=0.01 tau=1 V8_hpa_limit_no_trigger  within 2032/2839 mean 5.651 med 3.605
+   ACI: max err 0.0108 (target 0.0100, delta 0.01); units with err>delta 389; overload in saturated minutes: units 28
+   ACI-G: max err 0.0028 (target 0.0027, delta 0.01); units with err>delta 0; overload in saturated minutes: units 55
+   [92s]
+azure2019 d=0.01 tau=5 P                        within 2788/2839 mean 209.541 med 4.846
+azure2019 d=0.01 tau=5 V1_c_small               within 2579/2839 mean 262.545 med 6.240
+azure2019 d=0.01 tau=5 V2_c_large               within 2807/2839 mean 142.521 med 2.943
+azure2019 d=0.01 tau=5 V3_no_limit              within 2259/2839 mean 17.278 med 4.314
+azure2019 d=0.01 tau=5 V4_hpa_limit             within 2212/2839 mean 16.232 med 4.444
+azure2019 d=0.01 tau=5 V5_A_missed              within 2787/2839 mean 228.070 med 4.901
+azure2019 d=0.01 tau=5 V6_no_trigger            within 2330/2839 mean 6.668 med 3.795
+azure2019 d=0.01 tau=5 V7_no_limit_no_trigger   within 2126/2839 mean 7.793 med 3.971
+azure2019 d=0.01 tau=5 V8_hpa_limit_no_trigger  within 1992/2839 mean 5.737 med 3.622
+   ACI: max err 0.0123 (target 0.0100, delta 0.01); units with err>delta 500; overload in saturated minutes: units 24
+   [87s]
+azure2019 d=0.05 tau=0 P                        within 2839/2839 mean 18.871 med 2.014
+azure2019 d=0.05 tau=0 V1_c_small               within 2820/2839 mean 37.553 med 2.176
+azure2019 d=0.05 tau=0 V2_c_large               within 2839/2839 mean 8.425 med 1.837
+azure2019 d=0.05 tau=0 V3_no_limit              within 2728/2839 mean 6.211 med 1.973
+azure2019 d=0.05 tau=0 V4_hpa_limit             within 2719/2839 mean 5.811 med 1.970
+azure2019 d=0.05 tau=0 V5_A_missed              within 2839/2839 mean 20.294 med 1.864
+azure2019 d=0.05 tau=0 V6_no_trigger            within 2737/2839 mean 4.486 med 2.295
+azure2019 d=0.05 tau=0 V7_no_limit_no_trigger   within 2608/2839 mean 5.389 med 2.314
+azure2019 d=0.05 tau=0 V8_hpa_limit_no_trigger  within 2572/2839 mean 4.086 med 2.342
+   ACI: max err 0.0516 (target 0.0500, delta 0.05); units with err>delta 175; overload in saturated minutes: units 7
+   ACI-G: max err 0.0415 (target 0.0411, delta 0.05); units with err>delta 0; overload in saturated minutes: units 29
+   [78s]
+azure2019 d=0.05 tau=1 P                        within 2838/2839 mean 32.640 med 2.182
+azure2019 d=0.05 tau=1 V1_c_small               within 2837/2839 mean 44.900 med 2.357
+azure2019 d=0.05 tau=1 V2_c_large               within 2837/2839 mean 14.374 med 1.918
+azure2019 d=0.05 tau=1 V3_no_limit              within 2760/2839 mean 6.705 med 2.109
+azure2019 d=0.05 tau=1 V4_hpa_limit             within 2749/2839 mean 6.174 med 2.109
+azure2019 d=0.05 tau=1 V5_A_missed              within 2836/2839 mean 38.331 med 1.989
+azure2019 d=0.05 tau=1 V6_no_trigger            within 2747/2839 mean 4.470 med 2.293
+azure2019 d=0.05 tau=1 V7_no_limit_no_trigger   within 2643/2839 mean 5.393 med 2.335
+azure2019 d=0.05 tau=1 V8_hpa_limit_no_trigger  within 2599/2839 mean 4.086 med 2.302
+   ACI: max err 0.0530 (target 0.0500, delta 0.05); units with err>delta 177; overload in saturated minutes: units 6
+   ACI-G: max err 0.0330 (target 0.0323, delta 0.05); units with err>delta 0; overload in saturated minutes: units 26
+   [74s]
+azure2019 d=0.05 tau=5 P                        within 2836/2839 mean 97.903 med 2.982
+azure2019 d=0.05 tau=5 V1_c_small               within 2833/2839 mean 169.400 med 3.391
+azure2019 d=0.05 tau=5 V2_c_large               within 2837/2839 mean 40.977 med 2.389
+azure2019 d=0.05 tau=5 V3_no_limit              within 2737/2839 mean 12.428 med 2.720
+azure2019 d=0.05 tau=5 V4_hpa_limit             within 2724/2839 mean 12.082 med 2.746
+azure2019 d=0.05 tau=5 V5_A_missed              within 2838/2839 mean 122.271 med 2.631
+azure2019 d=0.05 tau=5 V6_no_trigger            within 2735/2839 mean 4.655 med 2.420
+azure2019 d=0.05 tau=5 V7_no_limit_no_trigger   within 2633/2839 mean 5.609 med 2.463
+azure2019 d=0.05 tau=5 V8_hpa_limit_no_trigger  within 2587/2839 mean 4.214 med 2.390
+   ACI: max err 0.0557 (target 0.0500, delta 0.05); units with err>delta 204; overload in saturated minutes: units 4
+   [73s]
+DONE

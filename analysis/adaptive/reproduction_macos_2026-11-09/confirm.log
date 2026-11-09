@@ -1,0 +1,21 @@
+A_days000_018 d=0.01 tau=0 done [26s]
+A_days000_018 d=0.01 tau=1 done [26s]
+A_days000_018 d=0.01 tau=5 done [25s]
+A_days000_018 d=0.05 tau=0 done [54s]
+A_days000_018 d=0.05 tau=1 done [54s]
+A_days000_018 d=0.05 tau=5 done [52s]
+B_days147_165 d=0.01 tau=0 done [33s]
+B_days147_165 d=0.01 tau=1 done [33s]
+B_days147_165 d=0.01 tau=5 done [32s]
+B_days147_165 d=0.05 tau=0 done [67s]
+B_days147_165 d=0.05 tau=1 done [68s]
+B_days147_165 d=0.05 tau=5 done [67s]
+C_days168_184 d=0.01 tau=0 done [55s]
+C_days168_184 d=0.01 tau=1 done [55s]
+  C_days168_184 d=0.01 tau=5: primary gamma 0.05 has alpha*<=0 (not applicable); R1 gamma 0.1
+C_days168_184 d=0.01 tau=5 done [55s]
+C_days168_184 d=0.05 tau=0 done [28s]
+C_days168_184 d=0.05 tau=1 done [28s]
+  C_days168_184 d=0.05 tau=5: primary gamma 0.01 has alpha*<=0 (not applicable); R1 gamma 0.02
+C_days168_184 d=0.05 tau=5 done [27s]
+DONE confirm

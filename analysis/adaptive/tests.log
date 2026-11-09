@@ -1,0 +1,69 @@
+PASS PAC-h v1 == frozen evaluator alibaba200 tau=0
+PASS PAC-h v1 == frozen evaluator alibaba200 tau=1
+PASS PAC-h published count alibaba200  [200]
+PASS PAC-h v1 == frozen evaluator alibaba200 tau=5
+PASS PAC-h v1 == frozen evaluator huawei2023 tau=0
+PASS PAC-h v1 == frozen evaluator huawei2023 tau=1
+PASS PAC-h published count huawei2023  [64]
+PASS PAC-h v1 == frozen evaluator huawei2023 tau=5
+PASS PAC-h v1 == frozen evaluator azure2019 tau=0
+PASS PAC-h v1 == frozen evaluator azure2019 tau=1
+PASS PAC-h published count azure2019  [2829]
+PASS PAC-h v1 == frozen evaluator azure2019 tau=5
+PASS queue alignment non-warm tau=0
+PASS queue alignment non-warm tau=1
+PASS queue alignment non-warm tau=5
+PASS queue alignment warm
+PASS ACI vectorised == scalar oracle tau=0 gamma=0.005
+PASS ACI vectorised == scalar oracle tau=0 gamma=0.2
+PASS ACI vectorised == scalar oracle tau=1 gamma=0.005
+PASS ACI vectorised == scalar oracle tau=1 gamma=0.2
+PASS ACI vectorised == scalar oracle tau=5 gamma=0.005
+PASS ACI vectorised == scalar oracle tau=5 gamma=0.2
+PASS ACI-G lane bound, err<=delta, branch conventions alibaba200 tau=0  [max gap/bound 0.345]
+PASS ACI overload implies formal error outside exceptions alibaba200 tau=0  [0]
+PASS ACI-G lane bound, err<=delta, branch conventions alibaba200 tau=1  [max gap/bound 0.347]
+PASS ACI overload implies formal error outside exceptions alibaba200 tau=1  [0]
+PASS ACI-G lane bound, err<=delta, branch conventions alibaba200 tau=5  [max gap/bound 0.344]
+PASS ACI overload implies formal error outside exceptions alibaba200 tau=5  [0]
+PASS ACI-G lane bound, err<=delta, branch conventions huawei2023 tau=0  [max gap/bound 0.943]
+PASS ACI overload implies formal error outside exceptions huawei2023 tau=0  [0]
+PASS ACI-G lane bound, err<=delta, branch conventions huawei2023 tau=1  [max gap/bound 0.936]
+PASS ACI overload implies formal error outside exceptions huawei2023 tau=1  [0]
+PASS ACI-G lane bound, err<=delta, branch conventions huawei2023 tau=5  [max gap/bound 0.688]
+PASS ACI overload implies formal error outside exceptions huawei2023 tau=5  [0]
+PASS ACI-G lane bound, err<=delta, branch conventions azure2019 tau=0  [max gap/bound 0.943]
+PASS ACI overload implies formal error outside exceptions azure2019 tau=0  [0]
+PASS ACI-G lane bound, err<=delta, branch conventions azure2019 tau=1  [max gap/bound 0.936]
+PASS ACI overload implies formal error outside exceptions azure2019 tau=1  [0]
+PASS ACI-G lane bound, err<=delta, branch conventions azure2019 tau=5  [max gap/bound 0.688]
+PASS ACI overload implies formal error outside exceptions azure2019 tau=5  [0]
+PASS no lookahead ACI/BACC/PAC-h tau=0
+PASS perturbation reaches later decisions tau=0
+PASS no lookahead ACI/BACC/PAC-h tau=1
+PASS perturbation reaches later decisions tau=1
+PASS no lookahead ACI/BACC/PAC-h tau=5
+PASS perturbation reaches later decisions tau=5
+PASS constant workload: no overload tau=0
+PASS zero workload: no overload tau=0
+PASS burst: BACC-r trigger respects limit 100 tau=0  [max step 100.0]
+PASS burst: limit 10 respected tau=0  [10.0]
+PASS constant workload: no overload tau=1
+PASS zero workload: no overload tau=1
+PASS burst: BACC-r trigger respects limit 100 tau=1  [max step 100.0]
+PASS burst: limit 10 respected tau=1  [10.0]
+PASS constant workload: no overload tau=5
+PASS zero workload: no overload tau=5
+PASS burst: BACC-r trigger respects limit 100 tau=5  [max step 100.0]
+PASS burst: limit 10 respected tau=5  [10.0]
+PASS Azure BACC-r |change| <= 100 for every issued target tau=0  [100.0]
+PASS Azure BACC-r hpa limit up <= max(4, planned) tau=0
+PASS Azure BACC-r targets within [1, M] tau=0
+PASS Azure BACC-r |change| <= 100 for every issued target tau=1  [100.0]
+PASS Azure BACC-r hpa limit up <= max(4, planned) tau=1
+PASS Azure BACC-r targets within [1, M] tau=1
+PASS Azure BACC-r |change| <= 100 for every issued target tau=5  [100.0]
+PASS Azure BACC-r hpa limit up <= max(4, planned) tau=5
+PASS Azure BACC-r targets within [1, M] tau=5
+PASS v0 exploratory BACC-r output reproduced
+ALL CHECKS PASSED

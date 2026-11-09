@@ -1,0 +1,25 @@
+{
+  "name": "Adaptive comparators for PAC-h, v1 (corrected re-run)",
+  "written": "2026-11-09, after the exploratory v0 runs (protocol_baselines.json, addendum A1) and an independent review of them; before any v1 calibration or test run",
+  "v0_status": "v0 outputs are kept unchanged as exploratory; v1 replaces them for any reporting",
+  "corrections_from_review": {
+    "bacc_limit": "the per-decision change limit applies to every issued target, including early (trigger) updates, measured from the last issued target",
+    "bacc_replan": "Sect. III-E 'minimum sizing workload' read literally: sizing workload = max(calibrated peak of the latest regular decision, y_early); the v0 multiplicative reading is a sensitivity (V9)",
+    "bacc_hold": "an early increase is held until Ready (decision index + tau); regular decisions before then do not go below it",
+    "aci_event_time": "all ACI quantities indexed by actual test target minutes 0..T-1; infinite and empty sets recorded as masks, not inferred from capacity",
+    "resource_bound": "common resource bound M_u = max(1, ceil(2 max pre-period demand / mu)) applied to every controller (also the BACC replica bound and the ACI infinite-set substitute); PAC-h reported with and without the bound",
+    "aci_bound": "ACI_BOUND.md: interleaved finite-horizon bound of the implemented algorithm; formal set errors, actual overload and exceptional overload (infinite set, bound binding, Alibaba initial prefix) reported separately",
+    "gamma_rule": "primary: unchanged transfer rule (calibration days, tau = 0, gamma with positive alpha* for the calibration period; most units within budget, then lower mean cost); test cells whose selected gamma gives alpha* <= 0 are reported as not applicable for that gamma. Revision R1 (written after v0 results were known, labelled as such): for each test cell, the best-ranked calibration gamma among those with alpha* > 0 for that cell's tau and T"
+  },
+  "controllers": {
+    "PAC-h": "published configuration (pre-test window, eta = 0.05, horizon-aligned scores)",
+    "ACI": "gamma = 0.005, alpha* = delta, W = PAC-h window, interleaved lanes",
+    "ACI-G": "gamma by the rule above, alpha* = delta - (tau+1)(1+gamma)/(gamma T)",
+    "BACC-r": "SOURCE_MAPPING.md; primary: c = mu, limit 100, A_k over all planned minutes, trigger on, replan floor, h = 5"
+  },
+  "bacc_sensitivities": {"V1": "c = 0.1 mu", "V2": "c = 10 mu", "V3": "no change limit", "V4": "HPA-style limit (up at most max(4, planned), down unlimited)", "V5": "A_k over missed minutes only (ablation)", "V6": "trigger off", "V9": "multiplicative replan (v0 reading)"},
+  "cells": "alibaba200, huawei2023, azure2019; delta in {0.01, 0.05}; tau in {0, 1, 5}",
+  "post_hoc_temporal_validation": "same rules on the three Huawei confirmatory periods (days 0-18, 147-165, 168-184; 195 unit-runs): PAC-h with its published per-period windows, ACI, ACI-G (gamma chosen on each period's days 8-9 by the same rule), BACC-r primary; labelled as a post hoc baseline analysis, not confirmatory",
+  "reporting": "per unit: overload fraction, relative cost and its parts (resource, churn, penalty); per cell: units within budget, units where both comply, paired median cost ratio, ratio of mean costs, upper tail of cost ratios, exceptional events; no single summary claim across budgets or cost statistics",
+  "freeze": "manifest_v1.json lists SHA-256 of this protocol, the code, tests log, data inputs, selected gamma and package versions; it is self-recorded, not an external preregistration"
+}

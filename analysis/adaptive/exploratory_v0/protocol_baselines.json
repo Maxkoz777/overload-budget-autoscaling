@@ -1,0 +1,40 @@
+{
+  "name": "Adaptive comparators for PAC-h: BACC-style budget pacing and theorem-matching ACI",
+  "written_utc": "2026-11-09T00:00:00Z (see sha256 file timestamp)",
+  "status": "written after the published PAC-h results were reproduced (regression check only) and before any comparator was run on calibration or test days",
+  "environment": "same closed-loop replay as PAC-h (pac_window_grid.load/evaluate semantics): capacity at minute t is the decision issued at t-tau using data through t-tau-1; overload if demand > mu*capacity; cost = (capacity sum + 0.05 churn + 10 overload minutes)/observed-or-clairvoyant denominator; persistence forecasts for every controller",
+  "datasets": ["alibaba200 (200 services, test days 10-12)", "huawei2023 (64 functions)", "azure2019 (2,839 applications)"],
+  "budgets": [0.01, 0.05],
+  "taus": [0, 1, 5],
+  "primary_cell": "tau=1, delta=0.01; compliance = per-unit test overload fraction <= delta",
+  "comparators": {
+    "ACI-G": {
+      "description": "adaptive conformal inference (Gibbs & Candes 2021) with delayed feedback handled by tau+1 interleaved ACI sequences; score = signed (tau+1)-step persistence residual; quantile = order statistic of the last W scores at rank ceil((W+1)(1-alpha_t)); alpha_t<=0 or rank>W -> infinite margin (capacity M_u); alpha_t>=1 -> empty set (margin -inf, capacity 1, miscoverage counted as 1); no clipping",
+      "update": "alpha_{j} = alpha_{j-tau-1} + gamma*(alpha_star - err_{j-tau-1}), err = 1{y > forecast + margin}",
+      "target": "alpha_star = delta - (1+gamma)(tau+1)/(gamma*T), with T the length of the evaluated period; this makes the deterministic finite-horizon ACI bound imply overload fraction <= delta for every unit whenever no overload occurs at capacity M_u",
+      "gamma_grid": [0.005, 0.01, 0.02, 0.05, 0.1, 0.2, 0.5],
+      "gamma_selection": "per trace and budget, on calibration days with tau=0 and alpha_star computed for the calibration period: only gamma with alpha_star>0; choose most units within budget, ties by lower mean calibration cost (same rule as the PAC-h window); evaluated once on test with alpha_star recomputed for the test T and tau",
+      "window": "W = PAC-h pre-test window for the same trace and budget",
+      "M_u": "max(1, ceil(2 * max demand before the evaluated period / mu)); report saturated minutes and overloads in them",
+      "initial_alpha": "alpha_star"
+    },
+    "ACI": {
+      "description": "same as ACI-G but alpha_star = delta and gamma = 0.005 (Gibbs & Candes default); long-run calibration only, no finite-horizon target",
+      "selection": "none"
+    },
+    "BACC-r": {
+      "description": "re-implementation of BACC (Liu et al., arXiv:2606.20575v2) from the paper text with its published defaults; no tuning",
+      "mapping": "one accounting unit per minute; violation = overload minute; epsilon = delta; accounting period T = evaluated test period of the unit; profile is a step at mu so lambda_safe = mu and x = max(1, ceil(y_tilde_max/mu)); startup delay d = tau",
+      "parameters": {"h": 5, "w_minutes": 1440, "calibration_history_minutes": 720, "score_clip": [0.05, 20], "c": "mu of the unit (one replica of capacity)", "a_pace_bounds": ["0.2*epsilon", 0.9], "eta_tighten": 1.0, "eta_relax": 0.2, "a_cal_min": "0.1*epsilon", "kappa_clip": [0.1, 10], "jeffreys": 0.5, "max_change_per_decision": 100},
+      "forecast": "persistence: yhat_max = last observed demand",
+      "score": "s_k = (y_max + c)/(yhat_max + c) over the service window of h minutes starting d minutes after the decision; added when the window completes",
+      "rank": "j = min(m, ceil((m+1)(1-a_k))), q = s_(j); q = 1 if no score",
+      "pacing_and_ceiling": "Eqs. (9)-(12) of the paper with minute units; A_k = sum over minutes with plans of the plan's a; i=1 minutes are those whose demand exceeded the calibrated demand of the plan in force",
+      "trigger": "each non-regular minute: if demand exceeds the calibrated demand of the plan in force and any of the latest, rolling or cumulative violation rates exceeds epsilon, issue max(current target, ceil(((y_early + c) q - c)/mu)) with y_early = y + (1+d) max(y - y_prev, 0); increase only",
+      "warm_start": "score history pre-filled from the 720 minutes before the evaluated period; pacing and budget state start at the period start",
+      "sensitivity": "BACC-r with h=1 (decision every minute), labelled as a sensitivity"
+    }
+  },
+  "reporting": "all cells reported regardless of direction: units within budget, mean and median relative cost, paired per-unit comparison with PAC-h (units where both comply: cost ratio), saturation counts for ACI variants; deviations listed",
+  "not_done": "no comparator parameter is changed after test results are seen; any later change is a labelled post hoc analysis"
+}

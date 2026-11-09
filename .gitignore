@@ -60,3 +60,7 @@ analysis/audit/verified_results_canonical/
 
 # Testbed analysis outputs (analysis/testbed/README.md)
 analysis/testbed/output/
+
+# Re-runs of the adaptive comparison (analysis/adaptive/reproduce.sh)
+analysis/adaptive/rerun_*/
+analysis/adaptive/tests_mac.log

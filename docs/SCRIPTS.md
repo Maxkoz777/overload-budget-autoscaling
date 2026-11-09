@@ -97,7 +97,7 @@ Imported by the experiment and analysis scripts.
 | `analysis/audit/recompute_guardrail_actuation.py` | Offset mechanism, recovery, and closed-loop delay. |
 | `analysis/audit/recompute_external_validity.py` | Service characteristics used to scope external-validity claims. |
 | `analysis/review/strict_budget_crosscheck.py` | Independent re-implementation of the strict-budget replay rows. |
-| `analysis/audit/strict_budget_summary.py` | Strict 1% budget comparison (Table 3). |
+| `analysis/audit/strict_budget_summary.py` | Strict 1% budget comparison (Additional file 1, Sect. S6.7). |
 | `analysis/audit/budget_utilisation.py` | Budget utilisation of the frozen 1% replays. |
 | `analysis/audit/resource_axis_extension.py` | Resource axis, scale strata, cost decomposition. |
 | `analysis/audit/resource_overload_envelope.py` | Exact resource–overload envelope. |
@@ -157,6 +157,23 @@ Imported by the experiment and analysis scripts.
 | `analysis/reproducibility/SEEDS.md` | Every random seed and where it is set. |
 | `analysis/reproducibility/check_trainer_provenance.py` | Checks the recorded trainer hashes and that the public trainers contain the same code. |
 | `analysis/reproducibility/historical_trainers/` | `train_xgb.py` and `train_lstm.py` exactly as they were when the canonical fits ran. |
+
+## Adaptive comparators (`analysis/adaptive/`)
+
+Run from inside `analysis/adaptive/`; [`analysis/adaptive/README.md`](../analysis/adaptive/README.md) gives the status of each analysis.
+
+| Script | Purpose |
+|---|---|
+| `adaptive/data.py` | Loads the three traces and the Huawei periods through the frozen loaders of `analysis/audit/`; common resource bound. |
+| `adaptive/env.py` | Closed-loop actuation queue and cost parts shared by all controllers. |
+| `adaptive/policies.py` | PAC-h, ACI and ACI-G (interleaved lanes), BACC-r. |
+| `adaptive/pq.py` | Fallback parquet reader, used only when pyarrow is missing. |
+| `run.py` | `cal`, `test`, `confirm`; refuses to run if frozen files changed. |
+| `tests.py` | Checks run before the frozen test replay. |
+| `manifest.py`, `verify_manifest.py` | Writes and checks the SHA-256 manifest. |
+| `reader_qa.py` | Compares `adaptive/pq.py` with pyarrow on all 200 Alibaba files. |
+| `summarise.py`, `make_tables.py` | Cell summaries and the tables of Additional file 1, Sect. S12. |
+| `exploratory_v0/` | The superseded exploratory runs, kept unchanged. |
 
 ## Kubernetes testbed
 

@@ -1,0 +1,143 @@
+   dataset  budget  gamma    astar  within  mean_cost  sat_mean
+alibaba200    0.01   0.20 0.007917     200   0.834023  2049.310
+alibaba200    0.01   0.10 0.006181     198   0.795698  1845.360
+alibaba200    0.01   0.05 0.002708     198   0.803922  1901.500
+alibaba200    0.01   0.50 0.008958     198   0.904090  2354.425
+   dataset  budget  gamma    astar  within  mean_cost  sat_mean
+alibaba200    0.05   0.02 0.032292     200   0.452114   105.465
+alibaba200    0.05   0.01 0.014931     200   0.460590   126.855
+alibaba200    0.05   0.05 0.042708     200   0.484150   282.825
+alibaba200    0.05   0.10 0.046181     200   0.547086   608.650
+alibaba200    0.05   0.20 0.047917     200   0.635466  1066.760
+alibaba200    0.05   0.50 0.048958     200   0.772246  1720.910
+   dataset  budget  gamma    astar  within  mean_cost    sat_mean
+huawei2023    0.01   0.05 0.002708      64  11.793238 1682.718750
+huawei2023    0.01   0.10 0.006181      64  13.512556 1630.046875
+huawei2023    0.01   0.20 0.007917      64  16.648729 1885.078125
+huawei2023    0.01   0.50 0.008958      64  20.723056 2244.375000
+   dataset  budget  gamma    astar  within  mean_cost    sat_mean
+huawei2023    0.05   0.02 0.032292      64   2.579237   99.500000
+huawei2023    0.05   0.01 0.014931      64   2.677641  124.218750
+huawei2023    0.05   0.05 0.042708      64   3.858278  273.828125
+huawei2023    0.05   0.10 0.046181      64   6.133177  572.968750
+huawei2023    0.05   0.20 0.047917      64   9.717037 1024.250000
+huawei2023    0.05   0.50 0.048958      64  16.070129 1669.625000
+  dataset  budget  gamma    astar  within  mean_cost    sat_mean
+azure2019    0.01   0.05 0.002708    2826  24.585494 1223.625572
+azure2019    0.01   0.10 0.006181    2820  23.130467 1164.220500
+azure2019    0.01   0.20 0.007917    2817  26.362276 1381.218387
+azure2019    0.01   0.50 0.008958    2806  32.026619 1731.976400
+  dataset  budget  gamma    astar  within  mean_cost    sat_mean
+azure2019    0.05   0.02 0.032292    2838   2.882136   50.025009
+azure2019    0.05   0.01 0.014931    2838   3.864334   79.163086
+azure2019    0.05   0.05 0.042708    2831   4.149201  132.124340
+azure2019    0.05   0.10 0.046181    2827   7.107285  304.495597
+azure2019    0.05   0.20 0.047917    2822  12.399646  604.655513
+azure2019    0.05   0.50 0.048958    2813  21.496717 1134.825291
+SELECTED {('alibaba200', 0.01): 0.2, ('alibaba200', 0.05): 0.02, ('huawei2023', 0.01): 0.05, ('huawei2023', 0.05): 0.02, ('azure2019', 0.01): 0.05, ('azure2019', 0.05): 0.02}
+alibaba200 d=0.01 tau=0 PAC-h       within 200/200 cost mean 0.453 med 0.340
+alibaba200 d=0.01 tau=0 ACI         within 200/200 cost mean 0.470 med 0.359 sat 173.1
+alibaba200 d=0.01 tau=0 ACI-G       within 200/200 cost mean 0.879 med 0.796 sat 3057.1
+alibaba200 d=0.01 tau=0 BACC-r      within 200/200 cost mean 0.455 med 0.333
+alibaba200 d=0.01 tau=0 BACC-r h=1  within 198/200 cost mean 0.457 med 0.333
+   [10s]
+alibaba200 d=0.01 tau=1 PAC-h       within 200/200 cost mean 0.462 med 0.364
+alibaba200 d=0.01 tau=1 ACI         within 199/200 cost mean 0.486 med 0.406 sat 199.1
+alibaba200 d=0.01 tau=1 ACI-G       within 200/200 cost mean 0.901 med 0.834 sat 3174.6
+alibaba200 d=0.01 tau=1 BACC-r      within 198/200 cost mean 0.470 med 0.352
+alibaba200 d=0.01 tau=1 BACC-r h=1  within 189/200 cost mean 0.470 med 0.344
+   [10s]
+alibaba200 d=0.01 tau=5 PAC-h       within 194/200 cost mean 0.471 med 0.375
+alibaba200 d=0.01 tau=5 ACI         within 191/200 cost mean 0.524 med 0.439 sat 330.0
+alibaba200 d=0.01 tau=5 ACI-G       within 200/200 cost mean 0.965 med 0.865 sat 3528.1
+alibaba200 d=0.01 tau=5 BACC-r      within 198/200 cost mean 2.439 med 0.375
+alibaba200 d=0.01 tau=5 BACC-r h=1  within 184/200 cost mean 0.480 med 0.374
+   [11s]
+alibaba200 d=0.05 tau=0 PAC-h       within 200/200 cost mean 0.431 med 0.294
+alibaba200 d=0.05 tau=0 ACI         within 200/200 cost mean 0.431 med 0.295 sat 1.1
+alibaba200 d=0.05 tau=0 ACI-G       within 200/200 cost mean 0.447 med 0.332 sat 101.9
+alibaba200 d=0.05 tau=0 BACC-r      within 200/200 cost mean 0.437 med 0.333
+alibaba200 d=0.05 tau=0 BACC-r h=1  within 199/200 cost mean 0.434 med 0.298
+   [16s]
+alibaba200 d=0.05 tau=1 PAC-h       within 200/200 cost mean 0.434 med 0.315
+alibaba200 d=0.05 tau=1 ACI         within 200/200 cost mean 0.434 med 0.310 sat 0.5
+alibaba200 d=0.05 tau=1 ACI-G       within 200/200 cost mean 0.469 med 0.350 sat 210.2
+alibaba200 d=0.05 tau=1 BACC-r      within 199/200 cost mean 0.447 med 0.333
+alibaba200 d=0.05 tau=1 BACC-r h=1  within 199/200 cost mean 0.440 med 0.333
+   [16s]
+alibaba200 d=0.05 tau=5 PAC-h       within 200/200 cost mean 0.439 med 0.334
+alibaba200 d=0.05 tau=5 ACI         within 199/200 cost mean 0.438 med 0.334 sat 0.2
+alibaba200 d=0.05 tau=5 BACC-r      within 200/200 cost mean 0.464 med 0.343
+alibaba200 d=0.05 tau=5 BACC-r h=1  within 195/200 cost mean 0.451 med 0.334
+   [16s]
+huawei2023 d=0.01 tau=0 PAC-h       within 64/64 cost mean 2.145 med 1.273
+huawei2023 d=0.01 tau=0 ACI         within 64/64 cost mean 2.511 med 1.326 sat 748.2
+huawei2023 d=0.01 tau=0 ACI-G       within 64/64 cost mean 7.127 med 2.391 sat 10798.8
+huawei2023 d=0.01 tau=0 BACC-r      within 64/64 cost mean 16.930 med 1.354
+huawei2023 d=0.01 tau=0 BACC-r h=1  within 64/64 cost mean 2.382 med 1.402
+   [94s]
+huawei2023 d=0.01 tau=1 PAC-h       within 64/64 cost mean 2.471 med 1.310
+huawei2023 d=0.01 tau=1 ACI         within 64/64 cost mean 2.811 med 1.352 sat 719.4
+huawei2023 d=0.01 tau=1 ACI-G       within 64/64 cost mean 7.130 med 2.541 sat 10966.5
+huawei2023 d=0.01 tau=1 BACC-r      within 64/64 cost mean 20.637 med 1.476
+huawei2023 d=0.01 tau=1 BACC-r h=1  within 63/64 cost mean 2.565 med 1.468
+   [93s]
+huawei2023 d=0.01 tau=5 PAC-h       within 64/64 cost mean 2.671 med 1.422
+huawei2023 d=0.01 tau=5 ACI         within 64/64 cost mean 3.095 med 1.483 sat 807.1
+huawei2023 d=0.01 tau=5 ACI-G       within 64/64 cost mean 10.235 med 3.093 sat 14155.3
+huawei2023 d=0.01 tau=5 BACC-r      within 64/64 cost mean 37.516 med 1.692
+huawei2023 d=0.01 tau=5 BACC-r h=1  within 63/64 cost mean 2.915 med 1.667
+   [96s]
+huawei2023 d=0.05 tau=0 PAC-h       within 64/64 cost mean 1.261 med 1.114
+huawei2023 d=0.05 tau=0 ACI         within 64/64 cost mean 1.323 med 1.109 sat 12.5
+huawei2023 d=0.05 tau=0 ACI-G       within 64/64 cost mean 2.011 med 1.223 sat 542.9
+huawei2023 d=0.05 tau=0 BACC-r      within 64/64 cost mean 7.265 med 1.166
+huawei2023 d=0.05 tau=0 BACC-r h=1  within 64/64 cost mean 1.567 med 1.240
+   [92s]
+huawei2023 d=0.05 tau=1 PAC-h       within 64/64 cost mean 1.280 med 1.136
+huawei2023 d=0.05 tau=1 ACI         within 64/64 cost mean 1.322 med 1.134 sat 10.5
+huawei2023 d=0.05 tau=1 ACI-G       within 64/64 cost mean 2.093 med 1.219 sat 585.0
+huawei2023 d=0.05 tau=1 BACC-r      within 64/64 cost mean 8.030 med 1.305
+huawei2023 d=0.05 tau=1 BACC-r h=1  within 64/64 cost mean 1.621 med 1.243
+   [92s]
+huawei2023 d=0.05 tau=5 PAC-h       within 64/64 cost mean 1.331 med 1.165
+huawei2023 d=0.05 tau=5 ACI         within 64/64 cost mean 1.330 med 1.155 sat 11.6
+huawei2023 d=0.05 tau=5 ACI-G       within 64/64 cost mean 2.107 med 1.279 sat 711.9
+huawei2023 d=0.05 tau=5 BACC-r      within 64/64 cost mean 14.268 med 1.441
+huawei2023 d=0.05 tau=5 BACC-r h=1  within 64/64 cost mean 1.790 med 1.299
+   [99s]
+azure2019 d=0.01 tau=0 PAC-h       within 2835/2839 cost mean 3.469 med 2.263
+azure2019 d=0.01 tau=0 ACI         within 2693/2839 cost mean 3.747 med 2.182 sat 98.1
+azure2019 d=0.01 tau=0 ACI-G       within 2824/2839 cost mean 19.306 med 3.662 sat 1634.5
+azure2019 d=0.01 tau=0 BACC-r      within 2827/2839 cost mean 43.066 med 3.266
+azure2019 d=0.01 tau=0 BACC-r h=1  within 2554/2839 cost mean 6.404 med 3.755
+   [181s]
+azure2019 d=0.01 tau=1 PAC-h       within 2829/2839 cost mean 3.832 med 2.231
+azure2019 d=0.01 tau=1 ACI         within 2688/2839 cost mean 4.107 med 2.213 sat 108.4
+azure2019 d=0.01 tau=1 ACI-G       within 2826/2839 cost mean 30.519 med 4.622 sat 2529.7
+azure2019 d=0.01 tau=1 BACC-r      within 2822/2839 cost mean 72.319 med 3.564
+azure2019 d=0.01 tau=1 BACC-r h=1  within 2491/2839 cost mean 6.435 med 3.998
+   [175s]
+azure2019 d=0.01 tau=5 PAC-h       within 2801/2839 cost mean 4.042 med 2.264
+azure2019 d=0.01 tau=5 ACI         within 2604/2839 cost mean 5.094 med 2.294 sat 143.9
+azure2019 d=0.01 tau=5 BACC-r      within 2788/2839 cost mean 209.541 med 4.846
+azure2019 d=0.01 tau=5 BACC-r h=1  within 2340/2839 cost mean 6.975 med 4.526
+   [189s]
+azure2019 d=0.05 tau=0 PAC-h       within 2839/2839 cost mean 2.025 med 1.720
+azure2019 d=0.05 tau=0 ACI         within 2811/2839 cost mean 1.772 med 1.535 sat 0.5
+azure2019 d=0.05 tau=0 ACI-G       within 2839/2839 cost mean 2.373 med 1.720 sat 50.6
+azure2019 d=0.05 tau=0 BACC-r      within 2839/2839 cost mean 18.871 med 2.014
+azure2019 d=0.05 tau=0 BACC-r h=1  within 2742/2839 cost mean 4.109 med 1.847
+   [124s]
+azure2019 d=0.05 tau=1 PAC-h       within 2839/2839 cost mean 2.068 med 1.713
+azure2019 d=0.05 tau=1 ACI         within 2815/2839 cost mean 1.788 med 1.520 sat 0.2
+azure2019 d=0.05 tau=1 ACI-G       within 2839/2839 cost mean 3.028 med 1.866 sat 91.2
+azure2019 d=0.05 tau=1 BACC-r      within 2838/2839 cost mean 32.640 med 2.182
+azure2019 d=0.05 tau=1 BACC-r h=1  within 2750/2839 cost mean 4.005 med 1.893
+   [130s]
+azure2019 d=0.05 tau=5 PAC-h       within 2838/2839 cost mean 2.166 med 1.744
+azure2019 d=0.05 tau=5 ACI         within 2811/2839 cost mean 1.858 med 1.561 sat 0.4
+azure2019 d=0.05 tau=5 BACC-r      within 2836/2839 cost mean 97.903 med 2.982
+azure2019 d=0.05 tau=5 BACC-r h=1  within 2711/2839 cost mean 4.380 med 2.073
+   [134s]
+DONE

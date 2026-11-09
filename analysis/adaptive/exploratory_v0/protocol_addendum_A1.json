@@ -1,0 +1,21 @@
+{
+  "name": "Addendum A1 to protocol_baselines.json (sha256 d0ec4b6b2f5ba152a852b28d5372078c3891c73113224c5ac54f92447948c479)",
+  "written": "2026-11-09, after the primary BACC-r, ACI and ACI-G test results and one post hoc BACC-r variant without the change limit had been seen; before any run listed here",
+  "source_pinned": "BACC as described in arXiv:2606.20575v2 (13 October 2026); no public code at the time of writing; the comparator is called BACC-r (our re-implementation of the v2 description), not BACC",
+  "purpose": "sensitivity of BACC-r to the details the v2 text leaves unspecified or that depend on the scale of its own experiments; all variants are reported",
+  "primary_unchanged": "BACC-r primary = c = mu, max change 100 capacity units per decision, A_k summed over all minutes with plans, trigger on, h = 5",
+  "variants": {
+    "V1_c_small": "c = 0.1 mu",
+    "V2_c_large": "c = 10 mu",
+    "V3_no_limit": "no limit on the change per decision (in the v2 experiments, with 3-77 replicas, the 100-replica limit rarely binds)",
+    "V4_hpa_limit": "scale-up per decision at most max(4, planned count) (HPA default policy), scale-down unlimited",
+    "V5_A_missed": "alternative reading of Step 3: A_k summed only over minutes whose demand exceeded the calibrated demand of the plan in force",
+    "V6_no_trigger": "budget-aware trigger off (the paper's own ablation removes it)",
+    "V7_no_limit_no_trigger": "V3 and V6 together",
+    "V8_hpa_limit_no_trigger": "V4 and V6 together"
+  },
+  "cells": "three traces x delta in {0.01, 0.05} x tau in {0, 1, 5}; same environment, forecasts and cost as the primary protocol",
+  "robustness_criterion": "per trace at the primary cell (tau=1, delta=0.01), the comparison with PAC-h is called robust if, in every variant, BACC-r keeps no more units within budget than PAC-h, or, where it keeps more, its median per-unit cost ratio to PAC-h over units where both comply is above 1; otherwise the variant that reverses the comparison is reported as such",
+  "aci_diagnostics": "no new ACI configuration; for the already selected ACI-G and for ACI, report per-unit ACI miscoverage (err fraction) and overload minutes outside saturated minutes, to check that the finite-horizon bound holds as implemented",
+  "not_done": "no AutoARIMA forecaster (not available offline in this environment); persistence for every controller, as before"
+}

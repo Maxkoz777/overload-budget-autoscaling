@@ -1,0 +1,23 @@
+alibaba200 d=0.01 tau=0 done [8s]
+alibaba200 d=0.01 tau=1 done [8s]
+  alibaba200 d=0.01 tau=5: primary gamma 0.1 has alpha*<=0 (not applicable); R1 gamma 0.2
+alibaba200 d=0.01 tau=5 done [8s]
+alibaba200 d=0.05 tau=0 done [15s]
+alibaba200 d=0.05 tau=1 done [14s]
+  alibaba200 d=0.05 tau=5: primary gamma 0.02 has alpha*<=0 (not applicable); R1 gamma 0.05
+alibaba200 d=0.05 tau=5 done [15s]
+huawei2023 d=0.01 tau=0 done [93s]
+huawei2023 d=0.01 tau=1 done [94s]
+huawei2023 d=0.01 tau=5 done [96s]
+huawei2023 d=0.05 tau=0 done [94s]
+huawei2023 d=0.05 tau=1 done [93s]
+huawei2023 d=0.05 tau=5 done [99s]
+azure2019 d=0.01 tau=0 done [150s]
+azure2019 d=0.01 tau=1 done [150s]
+  azure2019 d=0.01 tau=5: primary gamma 0.05 has alpha*<=0 (not applicable); R1 gamma 0.2
+azure2019 d=0.01 tau=5 done [153s]
+azure2019 d=0.05 tau=0 done [100s]
+azure2019 d=0.05 tau=1 done [97s]
+  azure2019 d=0.05 tau=5: primary gamma 0.01 has alpha*<=0 (not applicable); R1 gamma 0.05
+azure2019 d=0.05 tau=5 done [96s]
+DONE test

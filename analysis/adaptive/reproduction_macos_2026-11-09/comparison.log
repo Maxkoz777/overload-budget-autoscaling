@@ -1,0 +1,17 @@
+MATCH calibration cal_traces.csv
+MATCH calibration cal_periods.csv
+MATCH test_per_unit.csv.gz rows  [235956 vs 235956]
+MATCH test_per_unit.csv.gz overload_fraction  [max rel diff 0.00e+00]
+MATCH test_per_unit.csv.gz relative_cost  [max rel diff 0.00e+00]
+MATCH test_per_unit.csv.gz resource  [max rel diff 0.00e+00]
+MATCH test_per_unit.csv.gz churn  [max rel diff 0.00e+00]
+MATCH test_per_unit.csv.gz penalty  [max rel diff 0.00e+00]
+MATCH test_per_unit.csv.gz units within budget per cell  [0 cells differ]
+MATCH confirm_per_unit.csv.gz rows  [6878 vs 6878]
+MATCH confirm_per_unit.csv.gz overload_fraction  [max rel diff 0.00e+00]
+MATCH confirm_per_unit.csv.gz relative_cost  [max rel diff 0.00e+00]
+MATCH confirm_per_unit.csv.gz resource  [max rel diff 0.00e+00]
+MATCH confirm_per_unit.csv.gz churn  [max rel diff 0.00e+00]
+MATCH confirm_per_unit.csv.gz penalty  [max rel diff 0.00e+00]
+MATCH confirm_per_unit.csv.gz units within budget per cell  [0 cells differ]
+RESULT REPRODUCED

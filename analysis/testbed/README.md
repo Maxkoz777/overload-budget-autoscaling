@@ -74,7 +74,7 @@ diff -r reference_tables output/tables -x '*.tex' && echo "tables identical"
 
 | Article | Source |
 |---|---|
-| Table 3 | `T04_h1`, `T05_h2`, `T07_cost`, `T08_users` |
+| Table 4 | `T04_h1`, `T05_h2`, `T07_cost`, `T08_users` |
 | Fig. 4, actuation delays | `F01_actuation_delays` (`T09_delays`) |
 | Fig. 5, overload per function-run | `F02_overload_by_function` (`T05_h2`, `function_runs.csv`) |
 | Sect. 7.2, K3 sign tests and bootstrap | `T06_h3`, `T06b_h3_by_function` |

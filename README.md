@@ -6,7 +6,7 @@ Code for the article
 
 > M. Kozhinov, M. Mazzara. *How Much Headroom Is Enough? Overload Budgets for Predictive Autoscaling under Actuation Delay.* Manuscript, 2026.
 
-This repository contains the replay and analysis scripts and the Kubernetes testbed. It includes no raw traces, no preprocessed series, and no precomputed replay results. All three traces used in the article are public. Download them from their owners ([`docs/DATA.md`](docs/DATA.md)), and the scripts rebuild every number, table, and figure of the trace-driven evaluation from them.
+This repository contains the replay and analysis scripts and the Kubernetes testbed. It includes no raw traces, no preprocessed series, and no precomputed replay results, except the per-unit results of the adaptive comparison in [`analysis/adaptive/out_v1/`](analysis/adaptive/README.md), kept so that Sect. 6.4 can be checked against the frozen run. All three traces used in the article are public. Download them from their owners ([`docs/DATA.md`](docs/DATA.md)), and the scripts rebuild every number, table, and figure of the trace-driven evaluation from them.
 
 The testbed (Sect. 7 of the article) keeps its frozen inputs in [`testbed/`](testbed/README.md), including scaled per-minute request counts of 12 Huawei Cloud functions. Its raw run data are archived separately on Zenodo, https://doi.org/10.5281/zenodo.23818617 ([`analysis/testbed/README.md`](analysis/testbed/README.md)).
 
@@ -79,6 +79,7 @@ overload-budget-autoscaling/
 │   │   └── verified_results/     protocol files written before the corresponding runs
 │   ├── review/                   independent re-implementation used by one summary step
 │   ├── reproducibility/          random seeds; runner for the canonical learned-forecaster fits
+│   ├── adaptive/                 adaptive comparators (BACC-r, ACI, ACI-G): code, frozen manifest, per-unit results
 │   └── testbed/                  Kubernetes testbed after the freeze: analysis, deviations, data checksums
 ├── scripts/
 │   └── run_all.sh                focused-tier pipeline: series → forecasters → replay
@@ -326,6 +327,22 @@ python3 audit/focused_fill_sensitivity.py
 python3 audit/verify_series_upstream.py                   # 200 series against processed/final
 ```
 
+### 9. Adaptive comparators (Sect. 6.4, Sect. S12)
+
+The prepared series must be in `experiments/data/`: `service_timeseries_200_verified/` (`rebuild_verified_service_series.py`) and `external_traces/` (steps 6 and 7).
+
+```bash
+cd analysis/adaptive
+export OBA_REPO="$(cd ../.. && pwd)"
+python3 verify_manifest.py     # frozen code, protocol, parameters and data inputs against the manifest
+python3 tests_portable.py      # checks run before the frozen test replay, with portable paths
+bash reproduce.sh              # cal, test and confirm in a new folder, then comparison with the frozen out_v1/
+python3 summarise.py
+python3 make_tables.py         # tables of Sect. S12
+```
+
+[`analysis/adaptive/README.md`](analysis/adaptive/README.md) describes the controllers, the common resource bound, the frozen manifest, and the status of each analysis.
+
 ## Where each result in the article comes from
 
 Script paths are relative to `analysis/audit/` unless noted.
@@ -340,11 +357,14 @@ Script paths are relative to `analysis/audit/` unless noted.
 | Matched-rank ablation (Sect. 6.2, Sect. S10); canonical capacity units; clustered confirmatory sensitivity (Sect. 6.3) | `canonical_rerun.py` (R11, R10, R12) |
 | Sect. 6.2, window/η ablations, stride variant, cost-aware rule, exchangeability martingales | `pac_window_grid.py`, `pac_stride_sensitivity.py` |
 | Table 2, confirmatory replay | `prepare_confirmatory_periods.py`, `confirmatory_replay.py` |
-| Sect. 6.4, rank correction and strict budget with immediate actuation | `strict_budget_summary.py` (inputs from step 4), `external_replication.py` |
-| Sect. 6.4, forecasters, offset, resource use | `recompute_final_closure_downstream.py`, `resource_axis_extension.py`, `resource_overload_envelope.py` |
-| Sect. 7, Table 3, Figs. 4–5, Kubernetes testbed | `testbed/analyze.py`, `testbed/combine.py`, `analysis/testbed/` ([README](analysis/testbed/README.md)) |
+| Sect. 6.5, rank correction and strict budget with immediate actuation | `strict_budget_summary.py` (inputs from step 4), `external_replication.py` |
+| Table 3 and Sect. 6.4, adaptive comparators | `analysis/adaptive/` ([README](analysis/adaptive/README.md)) |
+| Sect. 6.5, forecasters and offset | `recompute_final_closure_downstream.py` |
+| Sect. 7, Table 4, Figs. 4–5, Kubernetes testbed | `testbed/analyze.py`, `testbed/combine.py`, `analysis/testbed/` ([README](analysis/testbed/README.md)) |
 
 **Additional file 1**
+
+Some listed scripts also write figures and tables of earlier versions that the current Additional file 1 no longer contains, such as the resource-axis envelopes and the budget-utilisation tables.
 
 | Section | Script |
 |---|---|
@@ -354,15 +374,14 @@ Script paths are relative to `analysis/audit/` unless noted.
 | S6.3, contribution of each layer; guard characterisation | `experiments/src/run_supplemental_experiments.py` (EXP-5), `recompute_guardrail_actuation.py`, `plot_resource_axis.py` |
 | S6.4, predictor agnosticism and overhead | `recompute_overhead_accounting.py` |
 | S6.5, violation clustering | `experiments/src/run_supplemental_experiments.py` (EXP-7) |
-| S6.6, matched margins, 200-service coverage and strata figures, strict-budget sensitivity, rank ablation | `recompute_margin_comparison.py`, `plot_verified_suite.py`, `recompute_verified_rank_ablation.py`, `delay_and_reactive_grid.py` (r2), `pretest_subset.py` |
-| S6.7, budget utilisation, cost-constrained comparisons | `budget_utilisation.py`, `recompute_verified_effects.py`, `recompute_verified_dependence.py`, `statistical_robustness.py` |
-| S6.8, resource axis, cost decomposition, scale strata | `resource_axis_extension.py`, `tables_resource_axis.py`, `plot_resource_axis.py` |
-| S6.9, strict budget and rank correction with immediate actuation | `strict_budget_summary.py`, `recompute_verified_rank_ablation.py`, `pretest_subset.py`, `recompute_final_closure_downstream.py`, `resource_axis_extension.py` |
+| S6.6, matched margins, strict-budget sensitivity, rank ablation | `recompute_margin_comparison.py`, `plot_verified_suite.py`, `recompute_verified_rank_ablation.py`, `delay_and_reactive_grid.py` (r2), `pretest_subset.py` |
+| S6.7, strict budget and rank correction with immediate actuation | `strict_budget_summary.py`, `recompute_verified_rank_ablation.py`, `pretest_subset.py`, `recompute_final_closure_downstream.py`, `resource_axis_extension.py`, `recompute_verified_effects.py`, `recompute_verified_dependence.py`, `statistical_robustness.py` |
 | S7, external replication | `prepare_external_traces.py`, `external_replication.py`, `external_replication_summary.py`, `plot_external_replication.py` |
 | S8, actuation delay and horizon-aligned calibration | `recompute_guardrail_actuation.py`, `experiments/src/run_ls_actuation_delay.py`, `delay_and_reactive_grid.py`, `external_delay.py`, `alibaba_delay.py`, `pac_rank_replay.py` |
 | S9, residual exchangeability diagnostics | `experiments/src/run_c4_exchangeability.py`, `pac_window_grid.py` |
-| S10, round-two analyses and moved figures (focused frontier and calibration, resource envelope, external replication) | `pac_window_grid.py`, `pac_stride_sensitivity.py`, `confirmatory_replay.py`, `plot_focused_figures.py`, `plot_resource_axis.py`, `plot_external_replication.py` |
+| S10, window choice, confidence level, non-overlapping scores, conservativeness, exchangeability tests, confirmatory details, matched-rank ablation | `pac_window_grid.py`, `pac_stride_sensitivity.py`, `confirmatory_replay.py`, `canonical_rerun.py` |
 | S11, Kubernetes testbed: protocol, calibration, detailed results | `testbed/PROTOCOL.md`, `testbed/capacity.py`, `testbed/analyze.py`, `testbed/combine.py`, `analysis/testbed/build_tables.py`, `analysis/testbed/build_figures.py` |
+| S12, adaptive comparators: source mapping, ACI-G bound, protocol and corrections, full grid, variants, Huawei periods | `analysis/adaptive/run.py`, `summarise.py`, `make_tables.py` |
 
 ## Kubernetes testbed
 
@@ -411,10 +430,13 @@ python3 analysis/reproducibility/check_trainer_provenance.py
 
 ## Citation and licence
 
-- **Citation.** See [`CITATION.cff`](CITATION.cff) or the "Cite this repository" button. The article cites two versions:
+- **Citation.** See [`CITATION.cff`](CITATION.cff) or the "Cite this repository" button. The article cites three versions:
   - v1.2.0 (https://doi.org/10.5281/zenodo.23434772) for the trace-driven evaluation;
-  - v1.3.1 (https://doi.org/10.5281/zenodo.23844102) for Sect. 7. v1.3.0 (https://doi.org/10.5281/zenodo.23701789) added the Kubernetes testbed and left the replay code unchanged; v1.3.1 makes the testbed analysis run with the pinned pandas 3 and changes no result.
+  - v1.3.1 (https://doi.org/10.5281/zenodo.23844102) for Sect. 7;
+  - v1.4.0 for the adaptive comparators of Sect. 6.4 (`analysis/adaptive/`), which leaves the earlier code unchanged.
+
+  For Sect. 7: v1.3.0 (https://doi.org/10.5281/zenodo.23701789) added the Kubernetes testbed and left the replay code unchanged; v1.3.1 makes the testbed analysis run with the pinned pandas 3 and changes no result.
 
   https://doi.org/10.5281/zenodo.23125234 always points to the latest version. v1.1.0 (https://doi.org/10.5281/zenodo.23125637) has the same replay code without the start-method fixes, and v1.0.0 (https://doi.org/10.5281/zenodo.23125235) keeps the original file names. The article's DOI will be added on publication.
 - **Code licence.** The code is released under the MIT License ([`LICENSE`](LICENSE)).
-- **Trace data.** The traces are not covered by this licence: they are published by their owners under their own terms ([`docs/DATA.md`](docs/DATA.md)). The only trace-derived data in this repository are in `testbed/plan/`: the testbed's scaled per-minute request counts of 12 Huawei Cloud functions and summary statistics of the candidate functions. The Huawei Cloud data release is licensed under CC BY 4.0, and these data are redistributed under the same licence ([`docs/DATA.md`](docs/DATA.md#huawei-cloud-2023-private-cloud-serverless-functions)).
+- **Trace data.** The traces are not covered by this licence: they are published by their owners under their own terms ([`docs/DATA.md`](docs/DATA.md)). The per-unit results in `analysis/adaptive/out_v1/` contain policy outcomes (overload fractions and relative costs), not trace values. The only trace-derived data in this repository are in `testbed/plan/`: the testbed's scaled per-minute request counts of 12 Huawei Cloud functions and summary statistics of the candidate functions. The Huawei Cloud data release is licensed under CC BY 4.0, and these data are redistributed under the same licence ([`docs/DATA.md`](docs/DATA.md#huawei-cloud-2023-private-cloud-serverless-functions)).

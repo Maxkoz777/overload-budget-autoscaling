@@ -1,0 +1,6 @@
+POSTHOC alibaba200 d=0.01 tau=1 BACC-r no-limit within 199/200 cost mean 0.468 med 0.352
+POSTHOC alibaba200 d=0.05 tau=1 BACC-r no-limit within 199/200 cost mean 0.447 med 0.333
+POSTHOC huawei2023 d=0.01 tau=1 BACC-r no-limit within 63/64 cost mean 3.245 med 1.476
+POSTHOC huawei2023 d=0.05 tau=1 BACC-r no-limit within 64/64 cost mean 2.130 med 1.305
+POSTHOC azure2019 d=0.01 tau=1 BACC-r no-limit within 2335/2839 cost mean 10.556 med 3.394
+POSTHOC azure2019 d=0.05 tau=1 BACC-r no-limit within 2760/2839 cost mean 6.705 med 2.109

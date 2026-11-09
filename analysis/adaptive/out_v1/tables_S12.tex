@@ -1,0 +1,116 @@
+\begin{table*}[!htbp]\centering\footnotesize\setlength{\tabcolsep}{4pt}
+\caption{Adaptive comparators at $\delta=1\%$: units within budget / paired median cost ratio / ratio of mean costs, both relative to PAC-h under the common resource bound.}
+\label{tab:adaptive_grid_1}
+\begin{tabular}{@{}llcccc@{}}\toprule
+$\tau$ & Policy & Alibaba (200) & Huawei (64) & Azure (2,839) & Huawei periods (195) \\ \midrule
+0 & PAC-h, no bound & 200 & 64 & 2,835 & 194 \\
+ & PAC-h & 200 & 64 & 2,822 & 194 \\
+ & ACI & 200 / 1.02 / 1.04 & 64 / 1.03 / 1.17 & 2,689 / 0.96 / 1.09 & 193 / 1.03 / 1.35 \\
+ & ACI-G & 200 / 1.71 / 1.80 & 64 / 1.86 / 3.32 & 2,824 / 1.63 / 5.61 & 195 / 2.08 / 4.69 \\
+ & BACC-r & 200 / 1.00 / 1.00 & 64 / 1.00 / 1.03 & 2,389 / 1.03 / 1.26 & 194 / 0.99 / 0.94 \\
+\addlinespace
+1 & PAC-h, no bound & 200 & 64 & 2,829 & 194 \\
+ & PAC-h & 200 & 64 & 2,814 & 194 \\
+ & ACI & 199 / 1.02 / 1.05 & 64 / 1.02 / 1.14 & 2,682 / 0.94 / 1.08 & 193 / 1.03 / 1.25 \\
+ & ACI-G & 200 / 1.79 / 1.89 & 64 / 1.85 / 2.88 & 2,826 / 2.08 / 8.08 & 195 / 2.19 / 4.53 \\
+ & BACC-r & 196 / 1.00 / 1.00 & 63 / 1.02 / 0.95 & 2,418 / 1.05 / 1.20 & 190 / 1.00 / 0.88 \\
+\addlinespace
+5 & PAC-h, no bound & 194 & 64 & 2,801 & 194 \\
+ & PAC-h & 194 & 64 & 2,786 & 194 \\
+ & ACI & 191 / 1.03 / 1.11 & 64 / 1.02 / 1.16 & 2,597 / 0.96 / 1.27 & 192 / 1.02 / 1.23 \\
+ & ACI-G & n/a & 64 / 2.09 / 3.83 & n/a & 124\textsuperscript{a} / 2.98 / 10.49 \\
+ & ACI-G, rule R1 & 200 / 1.87 / 2.05 & 64 / 2.09 / 3.83 & 2,826 / 2.34 / 9.41 & 195 / 3.02 / 9.34 \\
+ & BACC-r & 198 / 1.00 / 1.00 & 63 / 1.04 / 0.98 & 2,385 / 1.14 / 1.25 & 190 / 1.03 / 0.93 \\
+\bottomrule
+\end{tabular}\par\vspace{3pt}
+\begin{minipage}{\textwidth}\footnotesize\raggedright PAC-h rows give units within budget only. Ratios are over units where both the policy and bounded PAC-h comply. n/a: the primary step-size rule gives $\alpha^\star\le0$ for this cell. Units whose budget is attainable at constant capacity $M_u$: Alibaba (200) 200, Huawei (64) 64, Azure (2,839) 2,829, Huawei periods (195) 195. \textsuperscript{a}Periods A and B (124 unit-runs); for period C the primary rule gives $\alpha^\star\le0$.\end{minipage}
+\end{table*}
+
+\begin{table*}[!htbp]\centering\footnotesize\setlength{\tabcolsep}{4pt}
+\caption{Adaptive comparators at $\delta=5\%$: units within budget / paired median cost ratio / ratio of mean costs, both relative to PAC-h under the common resource bound.}
+\label{tab:adaptive_grid_5}
+\begin{tabular}{@{}llcccc@{}}\toprule
+$\tau$ & Policy & Alibaba (200) & Huawei (64) & Azure (2,839) & Huawei periods (195) \\ \midrule
+0 & PAC-h, no bound & 200 & 64 & 2,839 & 195 \\
+ & PAC-h & 200 & 64 & 2,831 & 195 \\
+ & ACI & 200 / 1.00 / 1.00 & 64 / 1.00 / 1.05 & 2,797 / 0.95 / 0.88 & 194 / 1.00 / 1.07 \\
+ & ACI-G & 200 / 1.03 / 1.04 & 64 / 1.05 / 1.59 & 2,831 / 1.00 / 1.08 & 195 / 1.04 / 1.80 \\
+ & BACC-r & 200 / 1.00 / 1.01 & 64 / 1.04 / 1.27 & 2,737 / 1.03 / 1.40 & 194 / 1.05 / 1.22 \\
+\addlinespace
+1 & PAC-h, no bound & 200 & 64 & 2,839 & 195 \\
+ & PAC-h & 200 & 64 & 2,831 & 195 \\
+ & ACI & 200 / 1.00 / 1.00 & 64 / 1.00 / 1.03 & 2,804 / 0.94 / 0.86 & 194 / 1.00 / 1.04 \\
+ & ACI-G & 200 / 1.07 / 1.08 & 64 / 1.06 / 1.63 & 2,833 / 1.07 / 2.02 & 195 / 1.07 / 1.93 \\
+ & BACC-r & 199 / 1.00 / 1.02 & 64 / 1.08 / 1.33 & 2,766 / 1.08 / 1.45 & 194 / 1.08 / 1.28 \\
+\addlinespace
+5 & PAC-h, no bound & 200 & 64 & 2,838 & 195 \\
+ & PAC-h & 200 & 64 & 2,830 & 195 \\
+ & ACI & 199 / 1.00 / 1.00 & 64 / 1.00 / 1.00 & 2,801 / 0.94 / 0.86 & 193 / 1.00 / 0.98 \\
+ & ACI-G & n/a & 64 / 1.09 / 1.58 & n/a & 124\textsuperscript{a} / 1.20 / 2.75 \\
+ & ACI-G, rule R1 & 200 / 1.29 / 1.31 & 64 / 1.09 / 1.58 & 2,831 / 1.23 / 3.85 & 195 / 1.26 / 2.78 \\
+ & BACC-r & 200 / 1.00 / 1.04 & 64 / 1.19 / 1.49 & 2,791 / 1.28 / 1.64 & 194 / 1.22 / 1.50 \\
+\bottomrule
+\end{tabular}\par\vspace{3pt}
+\begin{minipage}{\textwidth}\footnotesize\raggedright PAC-h rows give units within budget only. Ratios are over units where both the policy and bounded PAC-h comply. n/a: the primary step-size rule gives $\alpha^\star\le0$ for this cell. Units whose budget is attainable at constant capacity $M_u$: Alibaba (200) 200, Huawei (64) 64, Azure (2,839) 2,834, Huawei periods (195) 195. \textsuperscript{a}Periods A and B (124 unit-runs); for period C the primary rule gives $\alpha^\star\le0$.\end{minipage}
+\end{table*}
+
+\begin{table*}[!htbp]\centering\footnotesize\setlength{\tabcolsep}{4pt}
+\caption{BACC-r sensitivity variants at $\tau=1$: units within budget; for Azure also paired median cost ratio / ratio of mean costs relative to bounded PAC-h.}
+\label{tab:bacc_variants}
+\begin{tabular}{@{}lcccccccc@{}}\toprule
+ & \multicolumn{4}{c}{$\delta=1\%$} & \multicolumn{4}{c}{$\delta=5\%$} \\ \cmidrule(lr){2-5}\cmidrule(l){6-9}
+Variant & Alibaba & Huawei & Azure & Azure cost & Alibaba & Huawei & Azure & Azure cost \\ \midrule
+primary & 196 & 63 & 2,418 & 1.05 / 1.20 & 199 & 64 & 2,766 & 1.08 / 1.45 \\
+$c=0.1\mu$ & 198 & 63 & 1,943 & 1.00 / 1.29 & 200 & 64 & 2,465 & 1.05 / 1.74 \\
+$c=10\mu$ & 197 & 64 & 2,790 & 1.01 / 0.98 & 200 & 64 & 2,829 & 1.03 / 1.21 \\
+no change limit & 199 & 63 & 2,318 & 1.03 / 1.29 & 199 & 64 & 2,749 & 1.09 / 1.59 \\
+HPA-style limit & 198 & 63 & 2,209 & 1.04 / 1.10 & 199 & 64 & 2,721 & 1.08 / 1.43 \\
+$A_k$ over missed minutes & 198 & 63 & 2,418 & 1.04 / 1.20 & 200 & 64 & 2,767 & 1.04 / 1.45 \\
+no trigger & 196 & 63 & 2,266 & 1.11 / 1.24 & 199 & 64 & 2,676 & 1.17 / 1.64 \\
+multiplicative replan & 196 & 63 & 2,433 & 1.05 / 1.23 & 199 & 64 & 2,775 & 1.09 / 1.51 \\
+\midrule bounded PAC-h & 200 & 64 & 2,814 & 1 / 1 & 200 & 64 & 2,831 & 1 / 1 \\ \bottomrule
+\end{tabular}\end{table*}
+
+\begin{table*}[!htbp]\centering\footnotesize\setlength{\tabcolsep}{4pt}
+\caption{ACI and ACI-G diagnostics at $\tau=1$. max: largest formal miscoverage of a unit; $>\delta$: units whose formal miscoverage exceeds $\delta$; infinite: share of unit-minutes with an infinite set (capacity $M_u$); exc.: units over budget although their formal miscoverage is within $\delta$, because of overload in exceptional minutes.}
+\label{tab:aci_diag}
+\begin{tabular}{@{}llcccccccc@{}}\toprule
+ & & \multicolumn{4}{c}{ACI} & \multicolumn{4}{c}{ACI-G} \\ \cmidrule(lr){3-6}\cmidrule(l){7-10}
+$\delta$ & Trace & max & $>\delta$ & infinite & exc. & max & $>\delta$ & infinite & exc. \\ \midrule
+1\% & Alibaba (200) & 0.0111 & 62 & 4.6\% & 0 & 0.0051 & 0 & 69.4\% & 0 \\
+ & Huawei (64) & 0.0101 & 24 & 2.2\% & 0 & 0.0088 & 0 & 33.1\% & 0 \\
+ & Azure (2,839) & 0.0108 & 391 & 1.9\% & 14 & 0.0028 & 0 & 43.9\% & 13 \\
+ & Huawei periods (195) & 0.0102 & 82 & 2.5\% & 0 & 0.0068 & 0 & 40.3\% & 0 \\
+\addlinespace
+5\% & Alibaba (200) & 0.0530 & 81 & 0.0\% & 0 & 0.0273 & 0 & 4.9\% & 0 \\
+ & Huawei (64) & 0.0503 & 26 & 0.0\% & 0 & 0.0470 & 0 & 1.8\% & 0 \\
+ & Azure (2,839) & 0.0530 & 187 & 0.0\% & 10 & 0.0156 & 0 & 2.6\% & 6 \\
+ & Huawei periods (195) & 0.0511 & 103 & 0.0\% & 0 & 0.0424 & 0 & 2.1\% & 0 \\
+\bottomrule
+\end{tabular}\end{table*}
+
+\begin{table}[!htbp]\centering\footnotesize\setlength{\tabcolsep}{4pt}
+\caption{Huawei periods (post hoc baseline analysis), $\tau=1$: unit-runs within budget per period (days 0--18, 147--165, 168--184).}
+\label{tab:adaptive_periods}
+\begin{tabular}{@{}lcccccc@{}}\toprule
+ & \multicolumn{3}{c}{$\delta=1\%$} & \multicolumn{3}{c}{$\delta=5\%$} \\ \cmidrule(lr){2-4}\cmidrule(l){5-7}
+Policy & A (57) & B (67) & C (71) & A & B & C \\ \midrule
+PAC-h, no bound & 57 & 67 & 70 & 57 & 67 & 71 \\
+PAC-h & 57 & 67 & 70 & 57 & 67 & 71 \\
+ACI & 57 & 66 & 70 & 57 & 66 & 71 \\
+ACI-G & 57 & 67 & 71 & 57 & 67 & 71 \\
+BACC-r & 55 & 66 & 69 & 57 & 67 & 70 \\
+\bottomrule\end{tabular}\end{table}
+
+\begin{table}[!htbp]\centering\footnotesize\setlength{\tabcolsep}{4pt}
+\caption{Step size of ACI-G chosen on calibration days 8--9 (primary rule) and target level $\alpha^\star$ on the test period by delay; R1 gives the step size used where $\alpha^\star\le0$.}
+\label{tab:aci_gamma}
+\begin{tabular}{@{}llcccc@{}}\toprule
+Trace & $\delta$ & $\gamma$ & $\alpha^\star$, $\tau=0$ & $\alpha^\star$, $\tau=1$ & $\alpha^\star$, $\tau=5$ (R1 $\gamma$) \\ \midrule
+Alibaba (200) & 1\% & 0.1 & 0.0075 & 0.0049 & n/a (0.2: 0.0017) \\
+ & 5\% & 0.02 & 0.0382 & 0.0264 & n/a (0.05: 0.0208) \\
+Huawei (64) & 1\% & 0.05 & 0.0094 & 0.0087 & 0.0062 \\
+ & 5\% & 0.02 & 0.0485 & 0.0469 & 0.0408 \\
+Azure (2,839) & 1\% & 0.05 & 0.0064 & 0.0027 & n/a (0.2: 0.0038) \\
+ & 5\% & 0.01 & 0.0325 & 0.0149 & n/a (0.05: 0.0281) \\
+\bottomrule\end{tabular}\end{table}
