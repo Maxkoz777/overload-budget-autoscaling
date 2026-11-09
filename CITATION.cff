@@ -20,6 +20,9 @@ identifiers:
     value: 10.5281/zenodo.23125234
     description: "Concept DOI (all versions)"
   - type: doi
+    value: 10.5281/zenodo.24082097
+    description: "Version v1.4.0, cited in the article for the adaptive comparators"
+  - type: doi
     value: 10.5281/zenodo.23844102
     description: "Version v1.3.1, cited in the article for the Kubernetes testbed"
   - type: doi
