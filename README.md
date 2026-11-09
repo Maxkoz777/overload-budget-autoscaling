@@ -433,7 +433,7 @@ python3 analysis/reproducibility/check_trainer_provenance.py
 - **Citation.** See [`CITATION.cff`](CITATION.cff) or the "Cite this repository" button. The article cites three versions:
   - v1.2.0 (https://doi.org/10.5281/zenodo.23434772) for the trace-driven evaluation;
   - v1.3.1 (https://doi.org/10.5281/zenodo.23844102) for Sect. 7;
-  - v1.4.0 (https://doi.org/10.5281/zenodo.24082097) for the adaptive comparators of Sect. 6.4 (`analysis/adaptive/`), which leaves the earlier code unchanged.
+  - v1.4.1 (https://doi.org/10.5281/zenodo.24082542) for the adaptive comparators of Sect. 6.4 (`analysis/adaptive/`). v1.4.0 (https://doi.org/10.5281/zenodo.24082097) added them and left the earlier code unchanged; v1.4.1 makes the reproduction check stricter and changes no result.
 
   For Sect. 7: v1.3.0 (https://doi.org/10.5281/zenodo.23701789) added the Kubernetes testbed and left the replay code unchanged; v1.3.1 makes the testbed analysis run with the pinned pandas 3 and changes no result.
 
